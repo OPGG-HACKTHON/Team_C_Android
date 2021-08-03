@@ -40,7 +40,6 @@
                 app:fab_cradle_rounded_corner_radius="16dp"
                 app:fab_size="50dp"
                 app:itemIconTint="@color/gray300"
-                app:itemRippleColor="@android:color/transparent"
                 app:labelVisibilityMode="unlabeled"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
