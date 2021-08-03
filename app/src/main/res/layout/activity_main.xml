@@ -35,13 +35,17 @@
                 android:layout_height="64dp"
                 android:outlineAmbientShadowColor="@color/gray400"
                 android:outlineSpotShadowColor="@color/gray400"
+                android:paddingHorizontal="16dp"
                 app:fab_cradle_margin="8dp"
                 app:fab_cradle_rounded_corner_radius="16dp"
                 app:fab_size="50dp"
-                app:itemIconTint="@android:color/white"
+                app:itemIconTint="@color/gray300"
+                app:itemRippleColor="@android:color/transparent"
+                app:labelVisibilityMode="unlabeled"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:menu="@menu/main_menu" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -51,6 +55,7 @@
             android:layout_gravity="bottom|center_horizontal"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@android:color/white"
+            android:elevation="20dp"
             android:outlineAmbientShadowColor="@color/gray400"
             android:outlineSpotShadowColor="@color/gray400"
             android:src="@drawable/ic_send"
