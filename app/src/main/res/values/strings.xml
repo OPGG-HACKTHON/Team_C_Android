@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">Milestone</string>
+    <string name="app_name">Sweep</string>
+    <string name="schedule">일정</string>
+    <string name="history">히스토리</string>
 </resources>
