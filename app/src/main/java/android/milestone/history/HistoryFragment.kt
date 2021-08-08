@@ -29,4 +29,7 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>(R.layout.fragment_h
             binding.layoutRefresh.isRefreshing = false
         }
     }
+
+    override fun initViews() {
+    }
 }

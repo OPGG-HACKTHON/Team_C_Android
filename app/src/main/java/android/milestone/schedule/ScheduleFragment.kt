@@ -14,4 +14,8 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding>(R.layout.fragment
         super.onViewCreated(view, savedInstanceState)
 
     }
+
+    override fun initViews() {
+
+    }
 }

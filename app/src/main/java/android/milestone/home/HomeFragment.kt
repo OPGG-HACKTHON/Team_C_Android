@@ -5,5 +5,6 @@ import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentHomeBinding
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
-
+    override fun initViews() {
+    }
 }
