@@ -37,5 +37,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/iv_my" />
 
+        <include
+            android:id="@+id/item_home_score"
+            layout="@layout/item_home_score"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintDimensionRatio="H, 1:0.25"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_my" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

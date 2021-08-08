@@ -2,4 +2,5 @@
     <string name="app_name">Sweep</string>
     <string name="schedule">일정</string>
     <string name="history">히스토리</string>
+    <string name="vs">vs</string>
 </resources>
