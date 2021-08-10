@@ -50,8 +50,8 @@ class CurvedBottomNavigationView @JvmOverloads constructor(
         background = materialShapeDrawable
     }
 
-    fun transform(fab: FloatingActionButton) {
-        if (fab.isVisible) {
+    fun transform(fab: FloatingActionButton, isVisible: Boolean) {
+        if (isVisible) {
             fab.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
                 override fun onHidden(fab: FloatingActionButton?) {
                     super.onHidden(fab)

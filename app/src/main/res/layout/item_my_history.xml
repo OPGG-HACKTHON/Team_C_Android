@@ -2,26 +2,27 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    
+
     <data>
-        
+
         <variable
             name="item"
             type="String" />
     </data>
-    
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="8dp"
         android:elevation="0dp"
+        app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="16dp">
-        
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            
+
             <ImageView
                 android:id="@+id/iv_history_order"
                 android:layout_width="20dp"
@@ -30,7 +31,7 @@
                 android:src="@drawable/ic_history_order"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-            
+
             <TextView
                 android:id="@+id/tv_history_order"
                 android:layout_width="wrap_content"
@@ -41,7 +42,7 @@
                 app:layout_constraintEnd_toEndOf="@id/iv_history_order"
                 app:layout_constraintStart_toStartOf="@id/iv_history_order"
                 app:layout_constraintTop_toTopOf="parent" />
-            
+
             <TextView
                 android:id="@+id/tv_content"
                 android:layout_width="match_parent"
@@ -57,7 +58,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="ㅇ아아므이ㅏㅁ자으미ㅏ즈" />
-            
+
             <ImageView
                 android:id="@+id/iv_reaction"
                 android:layout_width="40dp"
@@ -68,7 +69,7 @@
                 android:src="@drawable/icon_reaction"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
-            
+
             <TextView
                 android:id="@+id/tv_count"
                 android:layout_width="wrap_content"
@@ -79,7 +80,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/iv_reaction"
                 app:layout_constraintStart_toEndOf="@id/iv_reaction"
                 app:layout_constraintTop_toTopOf="@+id/iv_reaction" />
-            
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
