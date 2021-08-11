@@ -6,7 +6,9 @@ import android.milestone.databinding.FragmentHistoryBinding
 import android.milestone.history.adapter.HistoryRecyclerViewAdapter
 import android.os.Bundle
 import android.view.View
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HistoryFragment : BaseFragment<FragmentHistoryBinding>(R.layout.fragment_history) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
