@@ -1,4 +1,3 @@
-
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -51,7 +50,6 @@ dependencies {
     implementation(Dependencies.material)
     implementation(Dependencies.constraintLayout)
     implementation(Dependencies.swipeRefreshLayout)
-
     // test
     testImplementation(Dependencies.junit)
     androidTestImplementation(Dependencies.testJunit)
@@ -69,4 +67,9 @@ dependencies {
     implementation(Dependencies.retrofit)
     implementation(Dependencies.retrofitMoshiConverter)
     implementation(Dependencies.okhttp3)
+    implementation(Dependencies.moshi)
+    implementation(Dependencies.moshiKotlin)
+    implementation(Dependencies.moshiCodegen)
+    implementation(Dependencies.gsonConverter)
+    implementation(Dependencies.gson)
 }

@@ -5,6 +5,8 @@ object Versions {
     const val retrofit = "2.9.0"
     const val hilt = "2.38.1"
     const val okhttp3 = "4.9.1"
+    const val gson = "2.8.6"
+    const val moshi = "1.12.0"
     const val kotlinStdlib = "1.5.21"
     const val coreKtx = "1.6.0"
     const val appcompat = "1.3.1"

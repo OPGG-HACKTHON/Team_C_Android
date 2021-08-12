@@ -24,7 +24,13 @@ object Dependencies {
     // network
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val retrofitMoshiConverter = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
+    const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
+    const val gson = "com.google.code.gson:gson:$${Versions.gson}"
     const val okhttp3 = "com.squareup.okhttp3:okhttp:${Versions.okhttp3}"
+    const val moshi =  "com.squareup.moshi:moshi:${Versions.moshi}"
+    const val moshiKotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
+    const val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
+
 
     // hilt
     const val hiltGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
