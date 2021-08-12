@@ -1,12 +1,18 @@
 package android.milestone.di
 
+import android.milestone.repository.LoginRepository
+import android.milestone.repository.LoginRepositoryImpl
+import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
 abstract class RepositoryModule {
 
-    // TODO: 2021-08-11 repo별 모듈 구현
+    @Singleton
+    @Binds
+    abstract fun bindLoginRepository(impl: LoginRepositoryImpl): LoginRepository
 }

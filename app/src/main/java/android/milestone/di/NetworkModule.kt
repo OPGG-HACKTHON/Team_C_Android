@@ -1,12 +1,13 @@
 package android.milestone.di
 
+import android.milestone.network.Api
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -23,16 +24,36 @@ object NetworkModule {
         OkHttpClient.Builder()
             .build()
 
+//    @Provides
+//    @Singleton
+//    fun provideKotlinJsonAdapterFactory(): KotlinJsonAdapterFactory = KotlinJsonAdapterFactory()
+//
+//    @Provides
+//    @Singleton
+//    fun provideMoshi(kotlinJsonAdapterFactory: KotlinJsonAdapterFactory): Moshi = Moshi.Builder()
+//        .add(kotlinJsonAdapterFactory)
+//        .build()
+//
+//    @Provides
+//    @Singleton
+//    fun provideMoshiConverterFactory(moshi: Moshi): MoshiConverterFactory =
+//        MoshiConverterFactory.create(moshi)
+
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit =
+    fun provideRetrofit(
+        okHttpClient: OkHttpClient,
+        baseUrl: String
+    ): Retrofit =
         Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(baseUrl)
             .client(okHttpClient)
             .build()
 
-    // TODO: 2021-08-11 Api 마다 모듈 작성
+    @Provides
+    @Singleton
+    fun provideApiService(retrofit: Retrofit): Api = retrofit.create(Api::class.java)
 
     private const val BASE_URL = "http://3.37.194.249"
 }
