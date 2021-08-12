@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/login">
+
+    <fragment
+        android:id="@+id/login"
+        android:name="android.milestone.ui.login.LoginFragment"
+        android:label="@string/login"
+        tools:layout="@layout/fragment_login">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/team_select"
+        android:name="android.teamselect.TeamSelectFragment"
+        android:label="@string/team_select"
+        tools:layout="@layout/fragment_team_select">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nickname"
+        android:name="android.milestone.ui.nickname.NicknameFragment"
+        android:label="@string/nickname"
+        tools:layout="@layout/fragment_nickname">
+
+    </fragment>
+</navigation>
