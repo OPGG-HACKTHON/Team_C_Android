@@ -1,12 +1,14 @@
-package android.milestone.history
+package android.milestone.ui.history
 
 import android.milestone.R
 import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentHistoryBinding
-import android.milestone.history.adapter.HistoryRecyclerViewAdapter
+import android.milestone.ui.history.adapter.HistoryRecyclerViewAdapter
 import android.os.Bundle
 import android.view.View
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HistoryFragment : BaseFragment<FragmentHistoryBinding>(R.layout.fragment_history) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,5 +30,8 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>(R.layout.fragment_h
             // 새로고침
             binding.layoutRefresh.isRefreshing = false
         }
+    }
+
+    override fun initViews() {
     }
 }

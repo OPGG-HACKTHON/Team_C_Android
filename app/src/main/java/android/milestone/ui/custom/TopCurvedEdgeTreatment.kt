@@ -1,4 +1,4 @@
-package android.milestone.ui
+package android.milestone.ui.custom
 
 import com.google.android.material.shape.EdgeTreatment
 import com.google.android.material.shape.ShapePath

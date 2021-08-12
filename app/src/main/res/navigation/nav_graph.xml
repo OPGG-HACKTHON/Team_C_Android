@@ -6,21 +6,24 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="android.milestone.home.HomeFragment"
+        android:name="android.milestone.ui.home.HomeFragment"
+        android:label="@string/home"
         tools:layout="@layout/fragment_home">
 
     </fragment>
 
     <fragment
         android:id="@+id/menu_schedule"
-        android:name="android.milestone.schedule.ScheduleFragment"
+        android:name="android.milestone.ui.schedule.ScheduleFragment"
+        android:label="@string/schedule"
         tools:layout="@layout/fragment_schedule">
 
     </fragment>
 
     <fragment
         android:id="@+id/menu_history"
-        android:name="android.milestone.history.HistoryFragment"
+        android:name="android.milestone.ui.history.HistoryFragment"
+        android:label="@string/history"
         tools:layout="@layout/fragment_history">
 
     </fragment>

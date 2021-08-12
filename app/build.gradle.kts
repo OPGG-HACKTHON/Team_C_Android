@@ -3,15 +3,16 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 30
 
     defaultConfig {
         applicationId = "android.milestone"
-        minSdkVersion(23)
-        targetSdkVersion(30)
+        minSdk = 23
+        targetSdk = 30
         versionCode = 1
         versionName = "0.1"
 
@@ -28,11 +29,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures {
         dataBinding = true
@@ -40,21 +41,35 @@ android {
 }
 
 dependencies {
-    val nav_version = "2.3.5"
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.20")
-    implementation("androidx.core:core-ktx:1.6.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
+    implementation(Dependencies.kotlinStdlib)
+    implementation(Dependencies.coreKtx)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    // ui
+    implementation(Dependencies.appcompat)
+    implementation(Dependencies.material)
+    implementation(Dependencies.constraintLayout)
+    implementation(Dependencies.swipeRefreshLayout)
+    // test
+    testImplementation(Dependencies.junit)
+    androidTestImplementation(Dependencies.testJunit)
+    androidTestImplementation(Dependencies.testEspressoCore)
 
     // navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
-    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+    implementation(Dependencies.navigationFragmentKtx)
+    implementation(Dependencies.navigationUiKtx)
 
+    // hilt
+    implementation(Dependencies.hiltAndroid)
+    kapt(Dependencies.hiltCompiler)
+
+    // network
+    implementation(Dependencies.retrofit)
+    implementation(Dependencies.retrofitMoshiConverter)
+    implementation(Dependencies.okhttp3)
+    implementation(Dependencies.moshi)
+    implementation(Dependencies.moshiKotlin)
+    implementation(Dependencies.moshiCodegen)
+    implementation(Dependencies.gsonConverter)
+    implementation(Dependencies.gson)
 }
