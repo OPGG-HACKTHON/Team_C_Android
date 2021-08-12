@@ -1,4 +1,4 @@
-package android.milestone.home
+package android.milestone.ui.home
 
 import android.milestone.R
 import android.milestone.base.BaseFragment

@@ -1,9 +1,9 @@
-package android.milestone.history
+package android.milestone.ui.history
 
 import android.milestone.R
 import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentHistoryBinding
-import android.milestone.history.adapter.HistoryRecyclerViewAdapter
+import android.milestone.ui.history.adapter.HistoryRecyclerViewAdapter
 import android.os.Bundle
 import android.view.View
 import dagger.hilt.android.AndroidEntryPoint

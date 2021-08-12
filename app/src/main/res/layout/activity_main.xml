@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <data>
 
@@ -29,7 +29,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:navGraph="@navigation/nav_graph" />
 
-            <android.milestone.ui.CurvedBottomNavigationView
+            <android.milestone.ui.custom.CurvedBottomNavigationView
                 android:id="@+id/navigation"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"

@@ -1,4 +1,4 @@
-package android.milestone.ui
+package android.milestone.ui.custom
 
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
@@ -8,7 +8,6 @@ import android.milestone.R
 import android.util.AttributeSet
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import com.google.android.material.bottomappbar.BottomAppBarTopEdgeTreatment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton

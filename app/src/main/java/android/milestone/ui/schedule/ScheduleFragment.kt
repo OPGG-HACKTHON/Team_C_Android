@@ -1,12 +1,8 @@
-package android.milestone.schedule
+package android.milestone.ui.schedule
 
 import android.milestone.R
 import android.milestone.base.BaseFragment
-import android.milestone.databinding.FragmentHistoryBinding
 import android.milestone.databinding.FragmentScheduleBinding
-import android.os.Bundle
-import android.view.View
-import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
