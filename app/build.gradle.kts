@@ -72,4 +72,7 @@ dependencies {
     implementation(Dependencies.moshiCodegen)
     implementation(Dependencies.gsonConverter)
     implementation(Dependencies.gson)
+
+    // kakao
+    implementation(Dependencies.kakaoUser)
 }

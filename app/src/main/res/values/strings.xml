@@ -1,4 +1,7 @@
 <resources>
+    <string name="kakao_app_key">8f279e09f792982eb73a1f03f22226f3</string>
+
+
     <string name="app_name">Sweep</string>
     <string name="schedule">일정</string>
     <string name="history">히스토리</string>
