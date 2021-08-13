@@ -14,7 +14,7 @@
 
     <fragment
         android:id="@+id/team_select"
-        android:name="android.teamselect.TeamSelectFragment"
+        android:name="android.milestone.ui.teamselect.TeamSelectFragment"
         android:label="@string/team_select"
         tools:layout="@layout/fragment_team_select">
 
