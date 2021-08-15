@@ -75,4 +75,11 @@ dependencies {
 
     // kakao
     implementation(Dependencies.kakaoUser)
+
+    // lifecycle
+    implementation(Dependencies.lifecycleLivedataKtx)
+
+    // glide
+    implementation(Dependencies.glide)
+    annotationProcessor(Dependencies.glideCompiler)
 }

@@ -38,4 +38,11 @@ object Dependencies {
 
     // kakao
     const val kakaoUser = "com.kakao.sdk:v2-user:${Versions.kakaoUser}"
+
+    // lifecycle
+    const val lifecycleLivedataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
+
+    // glide
+    const val glide ="com.github.bumptech.glide:glide:${Versions.glide}"
+    const val glideCompiler =  "com.github.bumptech.glide:compiler:${Versions.glide}"
 }

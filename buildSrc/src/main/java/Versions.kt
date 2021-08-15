@@ -17,4 +17,6 @@ object Versions {
     const val testJunit = "1.1.3"
     const val testEspressoCore = "3.4.0"
     const val kakaoUser = "2.6.0"
+    const val lifecycle = "2.4.0-alpha02"
+    const val glide = "4.12.0"
 }
