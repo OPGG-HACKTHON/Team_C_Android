@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -5,6 +7,8 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("dagger.hilt.android.plugin")
 }
+
+val kakaoKey :String = gradleLocalProperties(rootDir).getProperty("kakao_app_key")
 
 android {
     compileSdk = 30
@@ -26,6 +30,9 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        getByName("debug"){
+            buildConfigField("String","kakao_app_key",kakaoKey)
         }
     }
     compileOptions {
@@ -72,4 +79,14 @@ dependencies {
     implementation(Dependencies.moshiCodegen)
     implementation(Dependencies.gsonConverter)
     implementation(Dependencies.gson)
+
+    // kakao
+    implementation(Dependencies.kakaoUser)
+
+    // lifecycle
+    implementation(Dependencies.lifecycleLivedataKtx)
+
+    // glide
+    implementation(Dependencies.glide)
+    annotationProcessor(Dependencies.glideCompiler)
 }

@@ -31,9 +31,18 @@ object Dependencies {
     const val moshiKotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
     const val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
 
-
     // hilt
     const val hiltGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
     const val hiltAndroid = "com.google.dagger:hilt-android:${Versions.hilt}"
     const val hiltCompiler = "com.google.dagger:hilt-compiler:${Versions.hilt}"
+
+    // kakao
+    const val kakaoUser = "com.kakao.sdk:v2-user:${Versions.kakaoUser}"
+
+    // lifecycle
+    const val lifecycleLivedataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
+
+    // glide
+    const val glide ="com.github.bumptech.glide:glide:${Versions.glide}"
+    const val glideCompiler =  "com.github.bumptech.glide:compiler:${Versions.glide}"
 }
