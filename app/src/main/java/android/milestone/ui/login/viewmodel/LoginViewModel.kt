@@ -20,8 +20,12 @@ class LoginViewModel
 @Inject
 constructor(private val loginRepository: LoginRepository) : BaseViewModel() {
 
-    val teamInfo : LiveData<TeamInfoResponse> = loginRepository.getTeamInfo().asLiveData(coroutineExceptionHandler)
+    val teamInfo: LiveData<TeamInfoResponse> =
+        loginRepository.getTeamInfo().asLiveData(coroutineExceptionHandler)
+
     private val kakaoId = MutableStateFlow(0)
+
+    private val teamId = MutableStateFlow(0)
 
     private val _accessToken = MutableStateFlow("")
     val accessToken: StateFlow<String> get() = _accessToken
@@ -47,7 +51,9 @@ constructor(private val loginRepository: LoginRepository) : BaseViewModel() {
             }
     }
 
-    fun postSignUp(signUpRequest: SignUpRequest) = liveData<SignUpResponse>(coroutineExceptionHandler){
+    fun setTeamId(id: Int) {
+        teamId.value = id
+    }
 
     fun setKakaoId(id: Int) {
         kakaoId.value = id
