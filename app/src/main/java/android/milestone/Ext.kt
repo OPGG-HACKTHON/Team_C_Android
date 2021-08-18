@@ -1,5 +1,7 @@
 package android.milestone
 
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import java.util.regex.Pattern
 
 fun CharSequence.isValidName(): Boolean {
@@ -9,4 +11,8 @@ fun CharSequence.isValidName(): Boolean {
     } else {
         !this.first().isWhitespace() && patternString.matcher(this).matches()
     }
+}
+
+fun Fragment.toastShort(message: String) {
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
