@@ -3,15 +3,14 @@ package android.milestone.ui.login.viewmodel
 import android.milestone.base.BaseViewModel
 import android.milestone.network.request.LoginRequest
 import android.milestone.network.request.SignUpRequest
-import android.milestone.network.response.LoginResponse
-import android.milestone.network.response.SignUpResponse
 import android.milestone.network.response.TeamInfoResponse
 import android.milestone.repository.LoginRepository
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
@@ -48,8 +47,27 @@ constructor(private val loginRepository: LoginRepository) : BaseViewModel() {
             }
     }
 
-            }
-    }
+    fun postSignUp(nickname: String) =
+        liveData(coroutineExceptionHandler) {
+            val signUpRequest = SignUpRequest(
+                id = kakaoId.value,
+                nickname = nickname,
+                teamId = if (teamId.value != 0) teamId.value else null,
+                provider = "kakao"
+            )
+            loginRepository.postSignUp(signUpRequest)
+                .collect { response ->
+                    val header = response.headers()
+                    val body = response.body()
+                    body?.let { signUpResponse ->
+                        if (signUpResponse.success) {
+                            _accessToken.value = header["accesstoken"].toString()
+                            _refreshToken.value = header["refreshtoken"].toString()
+                        }
+                        emit(signUpResponse)
+                    }
+                }
+        }
 
     fun setTeamId(id: Int) {
         teamId.value = id
