@@ -59,21 +59,19 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     }
 
     private fun postLogin(id: Long) {
-        viewModel.run {
-            postLogin(LoginRequest(id.toInt())).observe(viewLifecycleOwner, {
-                when (it) {
-                    200 -> {
-                        val intent = Intent(requireContext(), MainActivity::class.java)
-                        startActivity(intent)
-                    }
-                    401 -> {
-                        setKakaoId(id.toInt())
-                        view?.findNavController()
-                            ?.navigate(R.id.action_login_to_team_select)
-                    }
+        viewModel.postLogin(LoginRequest(id)).observe(viewLifecycleOwner, {
+            when (it) {
+                200 -> {
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    startActivity(intent)
                 }
-            })
-        }
+                401 -> {
+                    viewModel.setKakaoId(id.toInt())
+                    view?.findNavController()
+                        ?.navigate(R.id.action_login_to_team_select)
+                }
+            }
+        })
     }
 
     private fun initViewModels() {
