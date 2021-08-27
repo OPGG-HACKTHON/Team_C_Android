@@ -2,6 +2,7 @@ package android.milestone
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.content.edit
 
 object PrefUtil {
     private const val DEF_PREF_NAME = "Sweep"
@@ -16,9 +17,10 @@ object PrefUtil {
             context,
             DEF_PREF_NAME
         )
-        val editor = pref.edit()
-        editor.putString(name, value)
-        editor.apply()
+        pref.edit {
+            putString(name,value)
+            apply()
+        }
     }
 
     fun getStringValue(context: Context, name: String, defValue: String): String? {
