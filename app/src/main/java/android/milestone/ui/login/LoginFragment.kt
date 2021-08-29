@@ -51,27 +51,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                     toastShort(userError.message.toString())
                 } else {
                     user?.id?.let { id ->
-                        postLogin(id)
+                        viewModel.postLogin(LoginRequest(id))
                     }
                 }
             }
         }
-    }
-
-    private fun postLogin(id: Long) {
-        viewModel.postLogin(LoginRequest(id)).observe(viewLifecycleOwner, {
-            when (it) {
-                200 -> {
-                    val intent = Intent(requireContext(), MainActivity::class.java)
-                    startActivity(intent)
-                }
-                401 -> {
-                    viewModel.setKakaoId(id.toInt())
-                    view?.findNavController()
-                        ?.navigate(R.id.action_login_to_team_select)
-                }
-            }
-        })
     }
 
     private fun initViewModels() {
@@ -84,10 +68,23 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                     setToken(REFRESH_TOKEN, refreshToken)
                 }
             }
+            loginResponse.observe(viewLifecycleOwner, {
+                when (it.status) {
+                    200 -> {
+                        val intent = Intent(requireContext(), MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                    401 -> {
+                        setKakaoId(id)
+                        view?.findNavController()
+                            ?.navigate(R.id.action_login_to_team_select)
+                    }
+                }
+            })
         }
     }
 
     private fun setToken(key: String, value: String) {
-        PrefUtil.setStringValue(requireContext(), key, value)
+        PrefUtil.setStringValue(key, value)
     }
 }

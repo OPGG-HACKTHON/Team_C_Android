@@ -30,7 +30,7 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE -> {
                         if (v.text.isValidName()) {
-                            postSignUp(v.text.toString())
+                            viewModel.postSignUp(v.text.toString())
                         } else {
                             toastShort(ERROR_MASSAGE)
                         }
@@ -40,19 +40,6 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
                 return@setOnEditorActionListener false
             }
         }
-    }
-
-    private fun postSignUp(nickname: String) {
-        viewModel.postSignUp(nickname = nickname)
-            .observe(viewLifecycleOwner, { signUpResponse ->
-                if (signUpResponse.success) {
-                    val intent =
-                        Intent(requireContext(), MainActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    toastShort(signUpResponse.data)
-                }
-            })
     }
 
     private fun initViewModels() {
@@ -65,11 +52,21 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
                     setToken(REFRESH_TOKEN, refreshToken)
                 }
             }
+            singUpResponse
+                .observe(viewLifecycleOwner, { signUpResponse ->
+                    if (signUpResponse.success) {
+                        val intent =
+                            Intent(requireContext(), MainActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        toastShort(signUpResponse.data)
+                    }
+                })
         }
     }
 
     private fun setToken(key: String, value: String) {
-        PrefUtil.setStringValue(requireContext(), key, value)
+        PrefUtil.setStringValue(key, value)
     }
 
     companion object {
