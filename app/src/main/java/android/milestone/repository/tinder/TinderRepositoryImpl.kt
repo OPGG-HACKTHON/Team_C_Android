@@ -3,14 +3,14 @@ package android.milestone.repository.tinder
 import android.milestone.network.request.*
 import android.milestone.network.response.RootResponse
 import android.milestone.network.response.tinder.TinderResponse
-import android.milestone.network.source.RemoteDateSource
+import android.milestone.network.source.RemoteDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import retrofit2.Response
 import javax.inject.Inject
 
 class TinderRepositoryImpl
-@Inject constructor(private val remoteDataSource: RemoteDateSource) : TinderRepository {
+@Inject constructor(private val remoteDataSource: RemoteDataSource) : TinderRepository {
     override fun createTinder(createTinderRequest: CreateTinderRequest): Flow<Response<RootResponse>> =
         flow {
             emit(remoteDataSource.createTinder(createTinderRequest))

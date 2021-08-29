@@ -10,9 +10,9 @@ import retrofit2.Response
 import javax.inject.Inject
 
 
-class RemoteDateSourceImpl
+class RemoteDataSourceImpl
 @Inject
-constructor(private val api: Api) : RemoteDateSource {
+constructor(private val api: Api) : RemoteDataSource {
     override suspend fun getTeamInfo(): TeamInfoResponse = api.getTeamInfo()
 
     override suspend fun postLogin(loginRequest: LoginRequest): Response<LoginResponse> =

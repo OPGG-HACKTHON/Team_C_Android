@@ -8,7 +8,7 @@ import android.milestone.network.response.tinder.TinderResponse
 import retrofit2.Response
 import retrofit2.http.*
 
-interface RemoteDateSource {
+interface RemoteDataSource {
 
     suspend fun getTeamInfo(): TeamInfoResponse
 
