@@ -16,5 +16,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initViews(){
         val binding = DataBindingUtil.setContentView<ActivityLoginBinding>(this,R.layout.activity_login)
+        binding.lifecycleOwner = this
     }
 }

@@ -10,6 +10,9 @@
         android:label="@string/login"
         tools:layout="@layout/fragment_login">
 
+        <action
+            android:id="@+id/action_login_to_team_select"
+            app:destination="@id/team_select" />
     </fragment>
 
     <fragment
@@ -18,6 +21,12 @@
         android:label="@string/team_select"
         tools:layout="@layout/fragment_team_select">
 
+        <action
+            android:id="@+id/action_team_select_to_nickname"
+            app:destination="@id/nickname" />
+        <action
+            android:id="@+id/action_team_select_to_login"
+            app:destination="@id/login" />
     </fragment>
 
     <fragment

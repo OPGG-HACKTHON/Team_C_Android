@@ -1,5 +1,6 @@
-package android.milestone.network.response
+package android.milestone.network.response.auth
 
+import android.milestone.network.model.auth.TeamInfoModel
 import com.google.gson.annotations.SerializedName
 
 data class TeamInfoResponse(
@@ -9,10 +10,4 @@ data class TeamInfoResponse(
     val status: Int,
     @SerializedName("success")
     val success: Boolean
-) {
-    data class TeamInfoModel(
-        val icon: String,
-        val id: Int,
-        val name: String
-    )
-}
+)
