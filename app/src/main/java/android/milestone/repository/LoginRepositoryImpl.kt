@@ -2,9 +2,9 @@ package android.milestone.repository
 
 import android.milestone.network.request.LoginRequest
 import android.milestone.network.request.SignUpRequest
-import android.milestone.network.response.LoginResponse
-import android.milestone.network.response.SignUpResponse
-import android.milestone.network.response.TeamInfoResponse
+import android.milestone.network.response.RootResponse
+import android.milestone.network.response.auth.LoginResponse
+import android.milestone.network.response.auth.TeamInfoResponse
 import android.milestone.network.source.RemoteDateSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -21,7 +21,7 @@ class LoginRepositoryImpl
         emit(remoteDataSource.postLogin(loginRequest))
     }
 
-    override fun postSignUp(signUpRequest: SignUpRequest): Flow<Response<SignUpResponse>> = flow {
+    override fun postSignUp(signUpRequest: SignUpRequest): Flow<Response<RootResponse>> = flow {
         emit(remoteDataSource.postSignUp(signUpRequest))
     }
 }

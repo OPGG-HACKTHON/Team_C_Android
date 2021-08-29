@@ -41,21 +41,5 @@ object NetworkModule {
     @Singleton
     fun provideApiService(retrofit: Retrofit): Api = retrofit.create(Api::class.java)
 
-
-    //    @Provides
-//    @Singleton
-//    fun provideKotlinJsonAdapterFactory(): KotlinJsonAdapterFactory = KotlinJsonAdapterFactory()
-//
-//    @Provides
-//    @Singleton
-//    fun provideMoshi(kotlinJsonAdapterFactory: KotlinJsonAdapterFactory): Moshi = Moshi.Builder()
-//        .add(kotlinJsonAdapterFactory)
-//        .build()
-//
-//    @Provides
-//    @Singleton
-//    fun provideMoshiConverterFactory(moshi: Moshi): MoshiConverterFactory =
-//        MoshiConverterFactory.create(moshi)
-
     private const val BASE_URL = "http://3.37.194.249"
 }

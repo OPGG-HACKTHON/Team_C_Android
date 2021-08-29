@@ -13,6 +13,8 @@ import retrofit2.http.POST
 
 interface Api {
 
+    // auth
+
     @GET("/info/teamInfo")
     suspend fun getTeamInfo(): TeamInfoResponse
 
@@ -20,5 +22,5 @@ interface Api {
     suspend fun postLogin(@Body loginRequest: LoginRequest): Response<LoginResponse>
 
     @POST("/auth/signup")
-    suspend fun postSignUp(@Body signUpRequest: SignUpRequest): Response<SignUpResponse>
+    suspend fun postSignUp(@Body signUpRequest: SignUpRequest): Response<RootResponse>
 }
