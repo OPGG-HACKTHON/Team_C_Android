@@ -2,8 +2,8 @@ package android.milestone.network
 
 import android.milestone.network.request.LoginRequest
 import android.milestone.network.request.SignUpRequest
-import android.milestone.network.response.LoginResponse
-import android.milestone.network.response.SignUpResponse
+import android.milestone.network.response.auth.LoginResponse
+import android.milestone.network.response.auth.TeamInfoResponse
 import android.milestone.network.response.TeamInfoResponse
 import org.checkerframework.framework.qual.PostconditionAnnotation
 import retrofit2.Response

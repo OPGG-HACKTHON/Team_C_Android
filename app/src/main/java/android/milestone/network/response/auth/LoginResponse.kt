@@ -1,4 +1,4 @@
-package android.milestone.network.response
+package android.milestone.network.response.auth
 
 import com.google.gson.annotations.SerializedName
 

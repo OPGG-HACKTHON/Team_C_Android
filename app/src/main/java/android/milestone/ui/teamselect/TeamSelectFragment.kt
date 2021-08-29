@@ -3,7 +3,7 @@ package android.milestone.ui.teamselect
 import android.milestone.R
 import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentTeamSelectBinding
-import android.milestone.network.response.TeamInfoResponse
+import android.milestone.network.model.auth.TeamInfoModel
 import android.milestone.ui.login.viewmodel.LoginViewModel
 import android.milestone.ui.teamselect.adapter.TeamSelectAdapter
 import androidx.fragment.app.activityViewModels
@@ -39,7 +39,7 @@ class TeamSelectFragment : BaseFragment<FragmentTeamSelectBinding>(R.layout.frag
         }
     }
 
-    private fun goNextPage(team: TeamInfoResponse.TeamInfoModel) {
+    private fun goNextPage(team: TeamInfoModel) {
         viewModel.setTeamId(team.id)
         view?.findNavController()?.navigate(R.id.action_team_select_to_nickname)
     }

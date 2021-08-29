@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="android.milestone.network.response.TeamInfoResponse.TeamInfoModel" />
+            type="android.milestone.network.model.auth.TeamInfoModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
