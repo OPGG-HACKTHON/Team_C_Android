@@ -45,4 +45,10 @@ object Dependencies {
     // glide
     const val glide ="com.github.bumptech.glide:glide:${Versions.glide}"
     const val glideCompiler =  "com.github.bumptech.glide:compiler:${Versions.glide}"
+
+    // cardStackView
+    const val cardStackView = "com.github.yuyakaido:cardstackview:${Versions.cardStackView}"
+
+    // lottie
+    const val lottie = "com.airbnb.android:lottie:${Versions.lottie}"
 }

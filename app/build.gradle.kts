@@ -8,7 +8,7 @@ plugins {
     id("dagger.hilt.android.plugin")
 }
 
-val kakaoKey :String = gradleLocalProperties(rootDir).getProperty("kakao_app_key")
+val kakaoKey: String = gradleLocalProperties(rootDir).getProperty("kakao_app_key")
 
 android {
     compileSdk = 30
@@ -31,8 +31,8 @@ android {
                 "proguard-rules.pro"
             )
         }
-        getByName("debug"){
-            buildConfigField("String","kakao_app_key",kakaoKey)
+        getByName("debug") {
+            buildConfigField("String", "kakao_app_key", kakaoKey)
         }
     }
     compileOptions {
@@ -89,4 +89,10 @@ dependencies {
     // glide
     implementation(Dependencies.glide)
     annotationProcessor(Dependencies.glideCompiler)
+
+    // cardStackView
+    implementation(Dependencies.cardStackView)
+
+    // lottie
+    implementation(Dependencies.lottie)
 }
