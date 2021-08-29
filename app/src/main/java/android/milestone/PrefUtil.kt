@@ -16,6 +16,7 @@ object PrefUtil {
         }
     }
 
-    fun getStringValue(name: String, defValue: String): String? = prefUtil.getString(name, defValue)
+    fun getStringValue(name: String, defValue: String): String =
+        prefUtil.getString(name, defValue) ?: ""
 
 }
