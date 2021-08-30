@@ -34,4 +34,9 @@
     <color name="yellow400">#fabc57</color>
     <color name="green500">#4caf50</color>
     <color name="green400">#6ec071</color>
+
+    <color name="grayDBDBDB">#DBDBDB</color>
+    <color name="redEB4E4E">#EB4E4E</color>
+    <color name="blue4169E1">#4169E1</color>
+    <color name="green23CF72">#23CF72</color>
 </resources>
