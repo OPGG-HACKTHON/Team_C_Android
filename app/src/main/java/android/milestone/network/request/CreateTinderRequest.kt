@@ -1,6 +1,6 @@
 package android.milestone.network.request
 
 data class CreateTinderRequest(
-    private val msg: String,
-    private val gameId: Int?
+    val msg: String,
+    val gameId: Int? = null
 )
