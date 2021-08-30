@@ -7,12 +7,13 @@ import android.milestone.ui.home.viewholder.HomeViewHolder
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 
-class HomeAdapter() : ListAdapter<TinderModel, HomeViewHolder>(BaseDiffUtil<TinderModel>()) {
+class HomeAdapter(private val onReportAction: (Int) -> Unit) :
+    ListAdapter<TinderModel, HomeViewHolder>(BaseDiffUtil<TinderModel>()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder =
         HomeViewHolder(R.layout.item_tinder, parent)
 
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), onReportAction)
     }
 }

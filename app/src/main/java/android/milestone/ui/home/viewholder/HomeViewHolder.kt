@@ -18,11 +18,11 @@ class HomeViewHolder(
 ) {
     val binding: ItemTinderBinding = DataBindingUtil.bind(itemView)!!
 
-    fun bind(item: TinderModel) {
+    fun bind(item: TinderModel, onReportAction: (Int) -> Unit) {
         binding.run {
             setVariable(BR.item, item)
             ivMore.setOnClickListener {
-                // TODO: 2021-08-30 신고기능
+                onReportAction(item.id)
             }
             tvCount.text = (item.dislike + item.like + item.superlike).toString()
 

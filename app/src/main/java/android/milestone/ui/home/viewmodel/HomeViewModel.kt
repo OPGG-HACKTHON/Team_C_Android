@@ -1,7 +1,9 @@
 package android.milestone.ui.home.viewmodel
 
 import android.milestone.base.BaseViewModel
+import android.milestone.network.request.CreateReportRequest
 import android.milestone.network.request.UpdateLikeRequest
+import android.milestone.network.response.RootResponse
 import android.milestone.network.response.tinder.TinderResponse
 import android.milestone.repository.tinder.TinderRepository
 import android.util.Log
@@ -20,6 +22,9 @@ constructor(private val tinderRepository: TinderRepository) : BaseViewModel() {
 
     private val _tinderResponse = MutableLiveData<TinderResponse>()
     val tinderResponse: LiveData<TinderResponse> get() = _tinderResponse
+
+    private val _rootResponse = MutableLiveData<RootResponse>()
+    val rootResponse : LiveData<RootResponse> get() = _rootResponse
 
     init {
         getTinder()
@@ -41,6 +46,18 @@ constructor(private val tinderRepository: TinderRepository) : BaseViewModel() {
                 .collect {
                     it.body()?.let {
                         // TODO: 2021-08-30 에러 및 성공 처리
+                    }
+                }
+        }
+    }
+
+    fun createReport(createReportRequest: CreateReportRequest){
+        viewModelScope.launch(coroutineExceptionHandler) {
+            tinderRepository.createReport(createReportRequest)
+                .collect {
+                    it.body()?.let { rootResponse ->
+                        // TODO: 2021-08-31 에러 및 성공 처리
+                        _rootResponse.value = rootResponse
                     }
                 }
         }
