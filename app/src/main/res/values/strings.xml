@@ -1,7 +1,24 @@
 <resources>
-
-
     <string name="app_name">Sweep</string>
+    <string name="not_started">예정</string>
+    <string name="progress">진행</string>
+    <string name="finish">종료</string>
+    <string name="no_data">데이터가 없습니다.</string>
+    <string name="no_match">이번 달은 경기가 없어요!</string>
+    <string name="support">응원하기</string>
+    <string name="mog">MOG 10</string>
+    <string name="ranking">순위</string>
+    <string name="mvp">MVP</string>
+    <string name="team">팀</string>
+    <string name="position">포지션</string>
+    <string name="player">플레이어</string>
+    <string name="team_ranking">팀 순위</string>
+    <string name="win">승</string>
+    <string name="lose">패</string>
+    <string name="win_rate">승률</string>
+    <string name="point">포인트</string>
+    <string name="percentage">%d &#37;</string>
+    <string name="full_name">%s %s</string>
     <string name="schedule">일정</string>
     <string name="history">히스토리</string>
     <string name="vs">vs</string>
