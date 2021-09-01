@@ -1,5 +1,6 @@
 
 object Dependencies {
+    const val coreLibrary = "com.android.tools:desugar_jdk_libs:${Versions.coreLibrary}"
     const val gradle = "com.android.tools.build:gradle:${Versions.gradle}"
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlinGradlePlugin}"
     const val kotlinStdlib= "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlinStdlib}"
@@ -27,7 +28,8 @@ object Dependencies {
     const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     const val gson = "com.google.code.gson:gson:$${Versions.gson}"
     const val okhttp3 = "com.squareup.okhttp3:okhttp:${Versions.okhttp3}"
-    const val moshi =  "com.squareup.moshi:moshi:${Versions.moshi}"
+    const val okhttp3_logger = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp3}"
+    const val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
     const val moshiKotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
     const val moshiCodegen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
 

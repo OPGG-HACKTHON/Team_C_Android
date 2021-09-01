@@ -1,4 +1,5 @@
 object Versions {
+    const val coreLibrary = "1.1.5"
     const val gradle = "7.0.0"
     const val kotlinGradlePlugin = "1.5.21"
     const val navigation = "2.3.5"
