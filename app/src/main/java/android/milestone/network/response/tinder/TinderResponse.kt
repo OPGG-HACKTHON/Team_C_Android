@@ -1,15 +1,13 @@
-package android.milestone.network.response
+package android.milestone.network.response.tinder
 
+import android.milestone.network.model.tinder.TinderModel
 import com.google.gson.annotations.SerializedName
 
-data class RootResponse(
+data class TinderResponse(
     @SerializedName("data")
-    val data: String,
-    @SerializedName("msg")
-    val msg: String,
+    val data: List<TinderModel>,
     @SerializedName("status")
     val status: Int,
     @SerializedName("success")
     val success: Boolean
-
 )

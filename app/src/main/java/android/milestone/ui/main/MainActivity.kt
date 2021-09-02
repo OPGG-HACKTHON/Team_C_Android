@@ -1,7 +1,11 @@
-package android.milestone.ui
+package android.milestone.ui.main
 
 import android.milestone.R
 import android.milestone.databinding.ActivityMainBinding
+import android.milestone.network.request.CreateTinderRequest
+import android.milestone.toastShort
+import android.milestone.ui.dialog.WriteTinderDialog
+import android.milestone.ui.main.viewmodel.MainViewModel
 import android.milestone.ui.ranking.RankingViewModel
 import android.milestone.ui.schedule.ScheduleViewModel
 import android.os.Bundle
@@ -21,19 +25,24 @@ class MainActivity : AppCompatActivity() {
 
     private val rankingViewModel: RankingViewModel by viewModels()
 
+    private val viewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViews()
+        initViewModels()
         scheduleViewModel.updateData()
         rankingViewModel.initData()
     }
+
 
     private fun initViews() {
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(
             this,
             R.layout.activity_main
         )
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 
         binding.navigation.setupWithNavController(navHostFragment.navController)
 
@@ -48,14 +57,24 @@ class MainActivity : AppCompatActivity() {
         initNavigation(binding, navHostFragment)
     }
 
+    private fun initViewModels() {
+        viewModel.run {
+            tinderState.observe(this@MainActivity, { state ->
+                when (state) {
+                    200 -> {
+                        toastShort("메세지 전송성공")
+                    }
+                }
+            })
+        }
+    }
+
     private fun initNavigation(
         binding: ActivityMainBinding,
         navHostFragment: NavHostFragment
     ) {
         binding.fab.setOnClickListener {
-            navHostFragment.findNavController().navigate(R.id.menu_home)
-        }
-        binding.navigation.menu.findItem(R.id.menu_home).apply {
+            showWriteTinderDialog()
         }
 
         binding.navigation.setOnItemSelectedListener {
@@ -63,6 +82,8 @@ class MainActivity : AppCompatActivity() {
                 isEnabled = it.itemId != R.id.menu_home
                 setIcon(if (it.itemId != R.id.menu_home) R.drawable.ic_home else R.drawable.ic_trans)
                 title = (if (it.itemId != R.id.menu_home) getString(R.string.home) else "")
+                isEnabled = it.itemId != R.id.menu_home
+                setIcon(if (it.itemId != R.id.menu_home) R.drawable.ic_history else R.drawable.ic_trans)
                 binding.navigation.transform(binding.fab, it.itemId != R.id.menu_home)
             }
 
@@ -79,5 +100,13 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+    }
+
+    private fun showWriteTinderDialog() {
+        val dialog = WriteTinderDialog.instance { msg ->
+            viewModel.createTinder(CreateTinderRequest(msg))
+        }
+
+        dialog.show(supportFragmentManager, "")
     }
 }

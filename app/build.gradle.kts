@@ -92,4 +92,10 @@ dependencies {
     // glide
     implementation(Dependencies.glide)
     annotationProcessor(Dependencies.glideCompiler)
+
+    // cardStackView
+    implementation(Dependencies.cardStackView)
+
+    // lottie
+    implementation(Dependencies.lottie)
 }

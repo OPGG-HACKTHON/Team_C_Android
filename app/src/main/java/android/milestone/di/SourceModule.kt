@@ -1,7 +1,7 @@
 package android.milestone.di
 
-import android.milestone.network.source.RemoteDateSource
-import android.milestone.network.source.RemoteDateSourceImpl
+import android.milestone.network.source.RemoteDataSource
+import android.milestone.network.source.RemoteDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,6 +14,6 @@ abstract class SourceModule {
 
     @Singleton
     @Binds
-    abstract fun bindRemoteDataSource(impl: RemoteDateSourceImpl): RemoteDateSource
+    abstract fun bindRemoteDataSource(impl: RemoteDataSourceImpl): RemoteDataSource
 
 }

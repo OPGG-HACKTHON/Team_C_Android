@@ -8,8 +8,8 @@ import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentNicknameBinding
 import android.milestone.isValidName
 import android.milestone.toastShort
-import android.milestone.ui.MainActivity
 import android.milestone.ui.login.viewmodel.LoginViewModel
+import android.milestone.ui.main.MainActivity
 import android.milestone.util.PrefUtil
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.activityViewModels

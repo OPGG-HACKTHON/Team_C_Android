@@ -8,8 +8,8 @@ import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentLoginBinding
 import android.milestone.network.request.LoginRequest
 import android.milestone.toastShort
-import android.milestone.ui.MainActivity
 import android.milestone.ui.login.viewmodel.LoginViewModel
+import android.milestone.ui.main.MainActivity
 import android.milestone.util.PrefUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope

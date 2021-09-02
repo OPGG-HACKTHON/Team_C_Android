@@ -1,4 +1,4 @@
-package android.milestone.repository
+package android.milestone.repository.login
 
 import android.milestone.network.request.LoginRequest
 import android.milestone.network.request.SignUpRequest
@@ -15,4 +15,5 @@ interface LoginRepository {
     fun postLogin(loginRequest: LoginRequest): Flow<Response<LoginResponse>>
 
     fun postSignUp(signUpRequest: SignUpRequest): Flow<Response<RootResponse>>
+
 }

@@ -27,11 +27,16 @@
     <color name="gray700">#5c5c5c</color>
     <color name="gray800">#424242</color>
     <color name="gray900">#292929</color>
-
+    
     <color name="red500">#d32f2f</color>
     <color name="red400">#dc5959</color>
     <color name="yellow500">#f9a825</color>
     <color name="yellow400">#fabc57</color>
     <color name="green500">#4caf50</color>
     <color name="green400">#6ec071</color>
+    
+    <color name="grayDBDBDB">#DBDBDB</color>
+    <color name="redEB4E4E">#EB4E4E</color>
+    <color name="blue4169E1">#4169E1</color>
+    <color name="green23CF72">#23CF72</color>
 </resources>
