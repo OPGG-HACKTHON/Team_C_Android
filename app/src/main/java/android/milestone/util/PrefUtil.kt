@@ -1,6 +1,7 @@
-package android.milestone
+package android.milestone.util
 
 import android.content.Context
+import android.milestone.App
 import androidx.core.content.edit
 
 object PrefUtil {
