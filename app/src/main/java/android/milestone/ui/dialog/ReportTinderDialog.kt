@@ -59,7 +59,7 @@ class ReportTinderDialog(private val onReportAction: (String) -> Unit) : DialogF
     private fun initViews() {
         binding.run {
             tvReport.setOnClickListener {
-                llReportBody.visibility = View.VISIBLE
+                llReportBody.isVisible = true
             }
             tvCancel.setOnClickListener {
                 dismiss()
