@@ -80,10 +80,8 @@ class MainActivity : AppCompatActivity() {
         binding.navigation.setOnItemSelectedListener {
             binding.navigation.menu.findItem(R.id.menu_home).apply {
                 isEnabled = it.itemId != R.id.menu_home
-                setIcon(if (it.itemId != R.id.menu_home) R.drawable.ic_home else R.drawable.ic_trans)
                 title = (if (it.itemId != R.id.menu_home) getString(R.string.home) else "")
-                isEnabled = it.itemId != R.id.menu_home
-                setIcon(if (it.itemId != R.id.menu_home) R.drawable.ic_history else R.drawable.ic_trans)
+                setIcon(if (it.itemId != R.id.menu_home) R.drawable.ic_home else R.drawable.ic_trans)
                 binding.navigation.transform(binding.fab, it.itemId != R.id.menu_home)
             }
 
