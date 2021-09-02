@@ -3,7 +3,6 @@ package android.milestone.ui.login
 import android.content.Intent
 import android.milestone.Naming.ACCESS_TOKEN
 import android.milestone.Naming.REFRESH_TOKEN
-import android.milestone.PrefUtil
 import android.milestone.R
 import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentLoginBinding
@@ -11,6 +10,7 @@ import android.milestone.network.request.LoginRequest
 import android.milestone.toastShort
 import android.milestone.ui.MainActivity
 import android.milestone.ui.login.viewmodel.LoginViewModel
+import android.milestone.util.PrefUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -76,12 +76,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                     }
                     401 -> {
                         setKakaoId(id)
-                        view?.findNavController()
-                            ?.navigate(R.id.action_login_to_team_select)
+                        view?.findNavController()?.navigate(R.id.action_login_to_team_select)
                     }
                 }
             })
         }
+        val intent = Intent(requireContext(), MainActivity::class.java)
+        startActivity(intent)
     }
 
     private fun setToken(key: String, value: String) {
