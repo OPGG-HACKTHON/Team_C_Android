@@ -19,4 +19,6 @@ object Versions {
     const val kakaoUser = "2.6.0"
     const val lifecycle = "2.4.0-alpha02"
     const val glide = "4.12.0"
+    const val cardStackView = "2.3.4"
+    const val lottie = "3.0.7"
 }

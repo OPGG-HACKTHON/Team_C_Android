@@ -1,15 +1,12 @@
 package android.milestone.network
 
-import android.milestone.network.request.LoginRequest
-import android.milestone.network.request.SignUpRequest
+import android.milestone.network.request.*
+import android.milestone.network.response.*
 import android.milestone.network.response.auth.LoginResponse
 import android.milestone.network.response.auth.TeamInfoResponse
-import android.milestone.network.response.TeamInfoResponse
-import org.checkerframework.framework.qual.PostconditionAnnotation
+import android.milestone.network.response.tinder.TinderResponse
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface Api {
 
@@ -23,4 +20,25 @@ interface Api {
 
     @POST("/auth/signup")
     suspend fun postSignUp(@Body signUpRequest: SignUpRequest): Response<RootResponse>
+
+    // tinder
+
+    @POST("/tinder/create")
+    suspend fun createTinder(@Body createTinderRequest: CreateTinderRequest): Response<RootResponse>
+
+    @GET("/tinder/")
+    suspend fun getTinder(
+        @Query("count") count: Int,
+        @Query("filter") filter: String
+    ): Response<TinderResponse>
+
+    @POST("/tinder/report")
+    suspend fun createReport(
+        @Body createReportRequest: CreateReportRequest
+    ): Response<RootResponse>
+
+    @PUT("/tinder/react")
+    suspend fun updateLike(
+        @Body updateLikeRequest: UpdateLikeRequest
+    ): Response<RootResponse>
 }

@@ -6,8 +6,7 @@ import android.milestone.network.request.SignUpRequest
 import android.milestone.network.response.RootResponse
 import android.milestone.network.response.auth.LoginResponse
 import android.milestone.network.response.auth.TeamInfoResponse
-import android.milestone.repository.LoginRepository
-import android.util.Log
+import android.milestone.repository.login.LoginRepository
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
