@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         initViews()
         initViewModels()
         scheduleViewModel.updateData()
-        rankingViewModel.initData()
+        rankingViewModel.updateData()
     }
 
 

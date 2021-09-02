@@ -19,5 +19,10 @@ class RankingFragment : BaseFragment<FragmentRankingBinding>(R.layout.fragment_r
         TabLayoutMediator(binding.tab, binding.pager) { tab, position ->
             tab.text = getString(if (position == 0) R.string.ranking else R.string.mvp)
         }.attach()
+
+        binding.layoutRefresh.setOnRefreshListener {
+            viewModel.updateData()
+            binding.layoutRefresh.isRefreshing = false
+        }
     }
 }

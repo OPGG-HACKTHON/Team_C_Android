@@ -27,5 +27,9 @@ class MatchScheduleFragment : BaseFragment<FragmentMatchScheduleBinding>(R.layou
         viewModel.searchRange.observe(viewLifecycleOwner) {
             binding.tvSelectedMonth.text = DateTimeTranslator(it).toyyyyMM()
         }
+        binding.layoutRefresh.setOnRefreshListener {
+            viewModel.updateData()
+            binding.layoutRefresh.isRefreshing = false
+        }
     }
 }

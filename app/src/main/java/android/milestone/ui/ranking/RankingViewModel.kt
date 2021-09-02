@@ -21,6 +21,11 @@ class RankingViewModel @Inject constructor(private val repository: LeagueReposit
     private val _playerRanking: MutableLiveData<List<Player>?> = MutableLiveData()
     val playerRanking: LiveData<List<Player>?> = _playerRanking
 
+    fun updateData() {
+        updatePlayerData()
+        updateTeamData()
+    }
+
     fun updatePlayerData() {
         viewModelScope.launch(coroutineExceptionHandler) {
             val response = repository.getPlayerRanking()
@@ -45,10 +50,5 @@ class RankingViewModel @Inject constructor(private val repository: LeagueReposit
                 }
             }
         }
-    }
-
-    fun initData() {
-        updatePlayerData()
-        updateTeamData()
     }
 }

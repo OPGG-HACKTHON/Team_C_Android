@@ -55,8 +55,7 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
             singUpResponse
                 .observe(viewLifecycleOwner, { signUpResponse ->
                     if (signUpResponse.success) {
-                        val intent =
-                            Intent(requireContext(), MainActivity::class.java)
+                        val intent = Intent(requireContext(), MainActivity::class.java)
                         startActivity(intent)
                     } else {
                         toastShort(signUpResponse.data)
