@@ -1,4 +1,4 @@
-package android.milestone.ui.history.adapter
+package android.milestone.ui.schedule.adapter
 
 import android.milestone.R
 import android.milestone.base.BaseRecyclerView
