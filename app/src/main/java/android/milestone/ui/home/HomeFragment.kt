@@ -12,6 +12,7 @@ import android.milestone.ui.home.viewmodel.HomeViewModel
 import android.util.Log
 import android.view.View
 import android.view.animation.AccelerateInterpolator
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.yuyakaido.android.cardstackview.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,10 +20,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), CardStackListener {
 
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by activityViewModels()
     private val homeAdapter: HomeAdapter by lazy {
         HomeAdapter { tinderId ->
-            showReportDialog(tinderId)
+            viewModel.setCurrentTinderId(tinderId)
+            showReportDialog()
         }
     }
 
@@ -78,7 +80,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         viewModel.run {
             tinderResponse.observe(viewLifecycleOwner, { tinderResponse ->
                 homeAdapter.submitList(tinderResponse.data)
-                Log.e("asdasd", it.data.toString())
             })
 
             rootResponse.observe(viewLifecycleOwner, { rootResponse ->
@@ -86,6 +87,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                     toastShort(rootResponse.data)
                 } else {
                     toastShort(rootResponse.msg)
+                }
+            })
+
+            reportMessage.observe(viewLifecycleOwner, { reportMessage ->
+                currentTinderId.value?.let { currentTinderId ->
+                    createReport(CreateReportRequest(currentTinderId, reportMessage))
                 }
             })
         }
@@ -119,10 +126,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
     override fun onCardDisappeared(view: View?, position: Int) {}
 
-    private fun showReportDialog(tinderId: Int) {
-        val dialog = ReportTinderDialog.instance { reportMsg ->
-            viewModel.createReport(CreateReportRequest(tinderId, reportMsg))
-        }
+    private fun showReportDialog() {
+        val dialog = ReportTinderDialog.instance()
         dialog.show(parentFragmentManager, "")
     }
 }

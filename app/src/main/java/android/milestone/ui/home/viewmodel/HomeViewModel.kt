@@ -24,11 +24,18 @@ constructor(private val tinderRepository: TinderRepository) : BaseViewModel() {
     val tinderResponse: LiveData<TinderResponse> get() = _tinderResponse
 
     private val _rootResponse = MutableLiveData<RootResponse>()
-    val rootResponse : LiveData<RootResponse> get() = _rootResponse
+    val rootResponse: LiveData<RootResponse> get() = _rootResponse
+
+    private val _currentTinderId = MutableLiveData<Int>()
+    val currentTinderId: LiveData<Int> get() = _currentTinderId
+
+    private val _reportMessage = MutableLiveData<String>()
+    val reportMessage: LiveData<String> get() = _reportMessage
 
     init {
         getTinder()
     }
+
     fun getTinder(count: Int = 10, filter: String = "") {
         viewModelScope.launch(coroutineExceptionHandler) {
             tinderRepository.getTinder(count, filter)
@@ -40,7 +47,7 @@ constructor(private val tinderRepository: TinderRepository) : BaseViewModel() {
         }
     }
 
-    fun updateLike(updateLikeRequest: UpdateLikeRequest){
+    fun updateLike(updateLikeRequest: UpdateLikeRequest) {
         viewModelScope.launch(coroutineExceptionHandler) {
             tinderRepository.updateLike(updateLikeRequest)
                 .collect {
@@ -51,7 +58,7 @@ constructor(private val tinderRepository: TinderRepository) : BaseViewModel() {
         }
     }
 
-    fun createReport(createReportRequest: CreateReportRequest){
+    fun createReport(createReportRequest: CreateReportRequest) {
         viewModelScope.launch(coroutineExceptionHandler) {
             tinderRepository.createReport(createReportRequest)
                 .collect {
@@ -61,5 +68,13 @@ constructor(private val tinderRepository: TinderRepository) : BaseViewModel() {
                     }
                 }
         }
+    }
+
+    fun setCurrentTinderId(tinderId: Int) {
+        _currentTinderId.value = tinderId
+    }
+
+    fun setReportMessage(msg: String) {
+        _reportMessage.value = msg
     }
 }

@@ -1,24 +1,24 @@
 package android.milestone.ui.dialog
 
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.milestone.R
 import android.milestone.databinding.DialogReportTinderBinding
-import android.milestone.databinding.DialogWriteTinderBinding
+import android.milestone.ui.home.viewmodel.HomeViewModel
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import androidx.core.widget.addTextChangedListener
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 
-class ReportTinderDialog(private val onReportAction: (String) -> Unit) : DialogFragment() {
+class ReportTinderDialog() : DialogFragment() {
 
     private lateinit var binding: DialogReportTinderBinding
+    private val viewModel: HomeViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,15 +65,15 @@ class ReportTinderDialog(private val onReportAction: (String) -> Unit) : DialogF
                 dismiss()
             }
             tvReportNickname.setOnClickListener {
-                onReportAction(tvReportNickname.text.toString())
+                viewModel.setReportMessage(tvReportNickname.text.toString())
                 dismiss()
             }
             tvReportPlayerTeam.setOnClickListener {
-                onReportAction(tvReportPlayerTeam.text.toString())
+                viewModel.setReportMessage(tvReportPlayerTeam.text.toString())
                 dismiss()
             }
             tvReportAbuse.setOnClickListener {
-                onReportAction(tvReportAbuse.text.toString())
+                viewModel.setReportMessage(tvReportAbuse.text.toString())
                 dismiss()
             }
         }
@@ -83,6 +83,6 @@ class ReportTinderDialog(private val onReportAction: (String) -> Unit) : DialogF
         private const val HEIGHT_RATIO = 0.8f
         private const val WIDTH_RATIO = 0.9f
 
-        fun instance(onReportAction: (String) -> Unit) = ReportTinderDialog(onReportAction)
+        fun instance() = ReportTinderDialog()
     }
 }
