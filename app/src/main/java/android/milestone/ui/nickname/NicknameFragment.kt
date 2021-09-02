@@ -3,7 +3,6 @@ package android.milestone.ui.nickname
 import android.content.Intent
 import android.milestone.Naming.ACCESS_TOKEN
 import android.milestone.Naming.REFRESH_TOKEN
-import android.milestone.PrefUtil
 import android.milestone.R
 import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentNicknameBinding
@@ -11,6 +10,7 @@ import android.milestone.isValidName
 import android.milestone.toastShort
 import android.milestone.ui.MainActivity
 import android.milestone.ui.login.viewmodel.LoginViewModel
+import android.milestone.util.PrefUtil
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
