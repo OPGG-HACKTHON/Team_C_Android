@@ -39,7 +39,7 @@
                 app:fab_cradle_rounded_corner_radius="16dp"
                 app:fab_size="50dp"
                 app:itemIconTint="@drawable/selector_icon_color"
-                app:labelVisibilityMode="unlabeled"
+                app:labelVisibilityMode="labeled"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
