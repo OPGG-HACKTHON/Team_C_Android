@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <style name="SweepTextViewStyle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/app_font_family</item>
+        <item name="fontFamily">@font/app_font_family</item>
+    </style>
+    r
+</resources>
