@@ -51,4 +51,10 @@ class RankingViewModel @Inject constructor(private val repository: LeagueReposit
             }
         }
     }
+
+    override fun onError() {
+        super.onError()
+        _teamRanking.value = null
+        _playerRanking.value = null
+    }
 }

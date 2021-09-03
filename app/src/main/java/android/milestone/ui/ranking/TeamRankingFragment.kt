@@ -4,6 +4,7 @@ import android.milestone.R
 import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentTeamRankingBinding
 import android.milestone.ui.ranking.adapter.TeamRankingRecyclerViewAdapter
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,9 +20,8 @@ class TeamRankingFragment : BaseFragment<FragmentTeamRankingBinding>(R.layout.fr
         binding.rvContent.adapter = adapter
 
         viewModel.teamRanking.observe(viewLifecycleOwner) {
-            if (!it.isNullOrEmpty()) {
-                adapter.submitList(it)
-            }
+            adapter.submitList(it)
+            binding.tvNoData.isVisible = it.isNullOrEmpty()
         }
     }
 }

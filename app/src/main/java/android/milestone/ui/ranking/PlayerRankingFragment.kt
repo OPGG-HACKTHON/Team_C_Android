@@ -4,6 +4,7 @@ import android.milestone.R
 import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentPlayerRankingBinding
 import android.milestone.ui.ranking.adapter.PlayerRankingRecyclerViewAdapter
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,10 +19,9 @@ class PlayerRankingFragment : BaseFragment<FragmentPlayerRankingBinding>(R.layou
         binding.viewModel = viewModel
         binding.rvContent.adapter = adapter
 
-        viewModel.playerRanking.observe(viewLifecycleOwner) {
-            it?.let { players ->
-                adapter.submitList(players)
-            }
+        viewModel.playerRanking.observe(viewLifecycleOwner) { players ->
+            adapter.submitList(players)
+            binding.tvNoData.isVisible = players.isNullOrEmpty()
         }
     }
 }
