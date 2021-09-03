@@ -7,6 +7,7 @@ import android.milestone.ui.history.adapter.ScheduleRecyclerViewAdapter
 import android.milestone.util.ReadableDateTime
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -14,7 +15,12 @@ class MatchScheduleFragment : BaseFragment<FragmentMatchScheduleBinding>(R.layou
 
     private val viewModel: ScheduleViewModel by activityViewModels()
 
-    private val adapter: ScheduleRecyclerViewAdapter = ScheduleRecyclerViewAdapter()
+    private val adapter: ScheduleRecyclerViewAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        ScheduleRecyclerViewAdapter { scheduleUiModel ->
+            val matchId = scheduleUiModel.schedule.id
+            findNavController().navigate(ScheduleFragmentDirections.actionFragmentMatchDetail(matchId))
+        }
+    }
 
     override fun initViews() {
         binding.rvContent.adapter = adapter
