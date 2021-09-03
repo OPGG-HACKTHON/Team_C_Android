@@ -30,10 +30,10 @@ class RankingViewModel @Inject constructor(private val repository: LeagueReposit
         viewModelScope.launch(coroutineExceptionHandler) {
             val response = repository.getPlayerRanking()
             response.collectLatest {
-                if (it.isSuccessful) {
-                    _playerRanking.value = it.body()?.players
+                _playerRanking.value = if (it.isSuccessful) {
+                    it.body()?.players
                 } else {
-                    _playerRanking.value = null
+                    null
                 }
             }
         }
@@ -43,10 +43,10 @@ class RankingViewModel @Inject constructor(private val repository: LeagueReposit
         viewModelScope.launch(coroutineExceptionHandler) {
             val response = repository.getTeamRanking()
             response.collectLatest {
-                if (it.isSuccessful) {
-                    _teamRanking.value = it.body()?.teamRanking
+                _teamRanking.value = if (it.isSuccessful) {
+                    it.body()?.teamRanking
                 } else {
-                    _teamRanking.value = null
+                    null
                 }
             }
         }

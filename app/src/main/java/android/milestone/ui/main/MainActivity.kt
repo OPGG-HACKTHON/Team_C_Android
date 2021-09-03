@@ -12,6 +12,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -47,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         binding.navigation.setupWithNavController(navHostFragment.navController)
 
         navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
-            // binding.navigation.isVisible = destination.id !in listOf() // 추후 화면 추가됐을 때 사용
+            binding.navigation.isVisible = destination.id !in listOf(R.id.fragment_match_detail)
         }
 
         binding.navigation.selectedItemId = R.id.menu_home
@@ -86,14 +87,14 @@ class MainActivity : AppCompatActivity() {
             }
 
             when (it.itemId) {
-                R.id.menu_history -> {
-                    navHostFragment.findNavController().navigate(R.id.menu_history)
+                R.id.fragment_history -> {
+                    navHostFragment.findNavController().navigate(R.id.fragment_history)
                 }
                 R.id.menu_home -> {
-                    navHostFragment.findNavController().navigate(R.id.home)
+                    navHostFragment.findNavController().navigate(R.id.fragment_home)
                 }
                 else -> {
-                    navHostFragment.findNavController().navigate(R.id.menu_schedule)
+                    navHostFragment.findNavController().navigate(R.id.fragment_schedule)
                 }
             }
             true
