@@ -3,35 +3,18 @@ package android.milestone.ui.history
 import android.milestone.R
 import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentHistoryBinding
-import android.milestone.ui.history.adapter.HistoryRecyclerViewAdapter
-import android.os.Bundle
-import android.view.View
+import android.milestone.ui.history.adapter.HistoryTabAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HistoryFragment : BaseFragment<FragmentHistoryBinding>(R.layout.fragment_history) {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.rvContent.adapter = HistoryRecyclerViewAdapter().apply {
-            submitList(
-                listOf(
-                    "안녕 안녕 안녕안녕 안녕 안녕\n안녕 안녕 안녕\n안녕 안녕 안녕", // dummy data
-                    "안녕 안녕 안녕",
-                    "안녕 안녕 안녕",
-                    "안녕 안녕 안녕",
-                    "안녕 안녕 안녕",
-                    "안녕 안녕 안녕",
-                    "안녕 안녕 안녕",
-                )
-            )
-        }
-        binding.layoutRefresh.setOnRefreshListener {
-            // 새로고침
-            binding.layoutRefresh.isRefreshing = false
-        }
-    }
-
     override fun initViews() {
+        binding.pager.adapter = HistoryTabAdapter(this)
+
+        TabLayoutMediator(binding.tab, binding.pager) { tab, position ->
+            tab.text = if (position == 0) "최근 메세지" else "명예의 전당"
+        }.attach()
     }
 }

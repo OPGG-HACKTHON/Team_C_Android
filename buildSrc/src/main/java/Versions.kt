@@ -1,4 +1,5 @@
 object Versions {
+    const val coreLibrary = "1.1.5"
     const val gradle = "7.0.0"
     const val kotlinGradlePlugin = "1.5.21"
     const val navigation = "2.3.5"
@@ -16,4 +17,9 @@ object Versions {
     const val junit = "4.13.2"
     const val testJunit = "1.1.3"
     const val testEspressoCore = "3.4.0"
+    const val kakaoUser = "2.6.0"
+    const val lifecycle = "2.4.0-alpha02"
+    const val glide = "4.12.0"
+    const val cardStackView = "2.3.4"
+    const val lottie = "3.0.7"
 }

@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -5,6 +7,8 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("dagger.hilt.android.plugin")
 }
+
+val kakaoKey: String = gradleLocalProperties(rootDir).getProperty("kakao_app_key")
 
 android {
     compileSdk = 30
@@ -27,8 +31,12 @@ android {
                 "proguard-rules.pro"
             )
         }
+        getByName("debug") {
+            buildConfigField("String", "kakao_app_key", kakaoKey)
+        }
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
@@ -41,6 +49,7 @@ android {
 }
 
 dependencies {
+    coreLibraryDesugaring(Dependencies.coreLibrary)
 
     implementation(Dependencies.kotlinStdlib)
     implementation(Dependencies.coreKtx)
@@ -67,9 +76,26 @@ dependencies {
     implementation(Dependencies.retrofit)
     implementation(Dependencies.retrofitMoshiConverter)
     implementation(Dependencies.okhttp3)
+    implementation(Dependencies.okhttp3_logger)
     implementation(Dependencies.moshi)
     implementation(Dependencies.moshiKotlin)
     implementation(Dependencies.moshiCodegen)
     implementation(Dependencies.gsonConverter)
     implementation(Dependencies.gson)
+
+    // kakao
+    implementation(Dependencies.kakaoUser)
+
+    // lifecycle
+    implementation(Dependencies.lifecycleLivedataKtx)
+
+    // glide
+    implementation(Dependencies.glide)
+    annotationProcessor(Dependencies.glideCompiler)
+
+    // cardStackView
+    implementation(Dependencies.cardStackView)
+
+    // lottie
+    implementation(Dependencies.lottie)
 }

@@ -1,5 +1,24 @@
 <resources>
     <string name="app_name">Sweep</string>
+    <string name="not_started">예정</string>
+    <string name="progress">진행</string>
+    <string name="finish">종료</string>
+    <string name="no_data">데이터가 없습니다.</string>
+    <string name="no_match">이번 달은 경기가 없어요!</string>
+    <string name="support">응원하기</string>
+    <string name="mog">MOG 10</string>
+    <string name="ranking">순위</string>
+    <string name="mvp">MVP</string>
+    <string name="team">팀</string>
+    <string name="position">포지션</string>
+    <string name="player">플레이어</string>
+    <string name="team_ranking">팀 순위</string>
+    <string name="win">승</string>
+    <string name="lose">패</string>
+    <string name="win_rate">승률</string>
+    <string name="point">포인트</string>
+    <string name="percentage">%d &#37;</string>
+    <string name="full_name">%s %s</string>
     <string name="schedule">일정</string>
     <string name="history">히스토리</string>
     <string name="vs">vs</string>
@@ -8,4 +27,19 @@
     <string name="team_select">팀선택</string>
     <string name="nickname">닉네임</string>
     <string name="fragment_login_title">클린하게 즐기는 LCK</string>
+    <string name="fragment_nickname_title">닉네임을 입력해주세요</string>
+    <string name="fragment_nickname_sub_title">띄어쓰기 포함 9글자까지 가능해요</string>
+    <string name="fragment_team_select_title">응원팀을 선택해 주세요</string>
+    <string name="fragment_team_select_sub_title">팀 선택 시 한 달 동안 변경이\n불가능하니 신중히 선택해 주세요</string>
+    <string name="fragment_team_select_after_select">나중에 선택할래요</string>
+    <string name="pass">흠</string>
+    <string name="dislike">싫어요!</string>
+    <string name="like">좋아요!</string>
+    <string name="best">최고에요!</string>
+    <string name="dialog_write_tinder_hint">메세지를 입력해주세요</string>
+    <string name="dialog_report_tinder_nickname">불쾌감을 주거나 부적절한 닉네임 사용</string>
+    <string name="dialog_report_tinder_player_team">악의적으로 선수 또는 팀을 비난</string>
+    <string name="dialog_report_tinder_abuse">욕설 및 비방</string>
+    <string name="report">신고하기</string>
+    <string name="cancel">취소</string>
 </resources>

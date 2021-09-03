@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    
+    <data>
+        
+        <variable
+            name="viewModel"
+            type="android.milestone.ui.schedule.ScheduleViewModel" />
+    </data>
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+        
+        <ImageButton
+            android:id="@+id/btn_schedule_before"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/actionBarItemBackground"
+            android:onClick="@{() -> viewModel.changeSearchRange(-1)}"
+            android:src="@drawable/ic_left"
+            app:layout_constraintBottom_toBottomOf="@id/tv_selected_month"
+            app:layout_constraintEnd_toStartOf="@id/tv_selected_month"
+            app:layout_constraintTop_toTopOf="@id/tv_selected_month" />
+        
+        <TextView
+            android:id="@+id/tv_selected_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="14dp"
+            android:text="2021년 8월"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2020.02" />
+        
+        <ImageButton
+            android:id="@+id/btn_schedule_after"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/actionBarItemBackground"
+            android:onClick="@{() -> viewModel.changeSearchRange(1)}"
+            android:src="@drawable/ic_right"
+            app:layout_constraintBottom_toBottomOf="@id/tv_selected_month"
+            app:layout_constraintStart_toEndOf="@+id/tv_selected_month"
+            app:layout_constraintTop_toTopOf="@id/tv_selected_month" />
+        
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingBottom="50dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_selected_month"
+            tools:listitem="@layout/item_schedule" />
+        
+        <TextView
+            android:id="@+id/tv_no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_match"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_selected_month" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

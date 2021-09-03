@@ -15,13 +15,28 @@
         android:theme="@style/Theme.Milestone">
         <activity
             android:name="android.milestone.ui.login.LoginActivity"
-            android:exported="true" />
+            android:exported="true" >
 
-        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.main.MainActivity">
+
+        </activity>
+
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth" -->
+                <data android:host="oauth"
+                    android:scheme="kakao8f279e09f792982eb73a1f03f22226f3" />
             </intent-filter>
         </activity>
     </application>
