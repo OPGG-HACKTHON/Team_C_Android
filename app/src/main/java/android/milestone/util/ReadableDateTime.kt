@@ -6,12 +6,12 @@ import java.time.format.TextStyle
 import java.util.*
 
 
-class DateTimeTranslator constructor(private val localDateTime: LocalDateTime) {
+class ReadableDateTime constructor(private val localDateTime: LocalDateTime) {
 
     companion object {
 
-        fun from(yyyyMMddHHmmss: String): DateTimeTranslator {
-            return DateTimeTranslator(to(yyyyMMddHHmmss))
+        fun from(yyyyMMddHHmmss: String): ReadableDateTime {
+            return ReadableDateTime(to(yyyyMMddHHmmss))
         }
 
         private fun to(dateTimeString: String): LocalDateTime {

@@ -4,7 +4,7 @@ import android.milestone.R
 import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentMatchScheduleBinding
 import android.milestone.ui.history.adapter.ScheduleRecyclerViewAdapter
-import android.milestone.util.DateTimeTranslator
+import android.milestone.util.ReadableDateTime
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +25,7 @@ class MatchScheduleFragment : BaseFragment<FragmentMatchScheduleBinding>(R.layou
             binding.tvNoData.isVisible = it.isNullOrEmpty()
         }
         viewModel.searchRange.observe(viewLifecycleOwner) {
-            binding.tvSelectedMonth.text = DateTimeTranslator(it).toyyyyMM()
+            binding.tvSelectedMonth.text = ReadableDateTime(it).toyyyyMM()
         }
         binding.layoutRefresh.setOnRefreshListener {
             viewModel.updateData()
