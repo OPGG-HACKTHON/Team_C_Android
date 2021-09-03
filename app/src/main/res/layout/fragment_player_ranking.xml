@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     
     <data>
         
@@ -20,13 +21,13 @@
             android:background="@color/blue100"
             android:orientation="horizontal"
             android:paddingHorizontal="12dp"
-            android:paddingVertical="14dp">
+            android:paddingVertical="14dp"
+            android:paddingStart="20dp">
             
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:text="@string/ranking"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
@@ -82,6 +83,7 @@
             android:layout_height="wrap_content"
             android:overScrollMode="never"
             android:paddingHorizontal="12dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_team_ranking" />
     </LinearLayout>
 </layout>
