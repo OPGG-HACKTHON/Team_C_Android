@@ -16,7 +16,7 @@ abstract class BaseViewHolder<B : ViewDataBinding, T>(
 ) {
     protected val binding: B = DataBindingUtil.bind(itemView)!!
 
-    open fun bind(item: T, onClick: (T) -> Unit) {
+    open fun bind(item: T, onClick: (T) -> Unit = {}) {
         try {
             binding.run {
                 setVariable(BR.item, item)
