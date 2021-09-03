@@ -9,6 +9,7 @@ class ScheduleUiModel(
     val schedule: Schedule
 ) {
     val startTime = ReadableDateTime.from(schedule.startTime)
+    val readableDate = startTime.toyyyyMMdd()
     val matchStatus = MatchStatus.of(schedule.status)
     val supportAvailable = (matchStatus == MatchStatus.PROGRESS || matchStatus == MatchStatus.FINISH_EXACTLY)
     val isTeamAWinner = schedule.aTeamScore > schedule.bTeamScore
