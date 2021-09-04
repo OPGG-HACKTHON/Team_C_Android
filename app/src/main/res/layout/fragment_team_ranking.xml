@@ -19,9 +19,10 @@
             android:layout_height="wrap_content"
             android:background="@color/blue100"
             android:orientation="horizontal"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="14dp">
-            
+            android:paddingVertical="14dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="12dp">
+    
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -29,7 +30,7 @@
                 android:text="@string/team_ranking"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
-            
+    
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,7 +58,7 @@
                 android:textColor="@color/black"
                 android:textSize="14sp" />
         </LinearLayout>
-        
+    
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
@@ -66,7 +67,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_date" />
-        
+    
+        <TextView
+            android:id="@+id/tv_no_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:gravity="center"
+            android:text="@string/no_data"
+            android:textColor="@color/gray600"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_content"
             android:layout_width="match_parent"

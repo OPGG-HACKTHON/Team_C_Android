@@ -4,7 +4,7 @@
     <string name="progress">진행</string>
     <string name="finish">종료</string>
     <string name="no_data">데이터가 없습니다.</string>
-    <string name="no_match">이번 달은 경기가 없어요!</string>
+    <string name="no_match">이 달은 경기가 없어요 :(</string>
     <string name="support">응원하기</string>
     <string name="mog">MOG 10</string>
     <string name="ranking">순위</string>

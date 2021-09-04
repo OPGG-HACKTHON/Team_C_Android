@@ -5,7 +5,7 @@
         <item name="colorPrimary">@color/blue500</item>
         <item name="colorPrimaryVariant">@color/blue700</item>
         <item name="colorOnPrimary">@color/white</item>
-
+    
         <item name="colorAccent">@color/red400</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/gray500</item>
@@ -14,5 +14,8 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    
+        <item name="android:textViewStyle">@style/SweepTextViewStyle</item>
+        <item name="android:buttonStyle">@style/SweepTextViewStyle</item>
     </style>
 </resources>
