@@ -4,8 +4,8 @@ import android.milestone.base.BaseViewModel
 import android.milestone.network.request.CreateReportRequest
 import android.milestone.network.request.UpdateLikeRequest
 import android.milestone.network.response.RootResponse
-import android.milestone.network.response.tinder.TinderResponse
-import android.milestone.repository.tinder.TinderRepository
+import android.milestone.network.response.home.TinderResponse
+import android.milestone.repository.home.HomeRepository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel
 @Inject
-constructor(private val tinderRepository: TinderRepository) : BaseViewModel() {
+constructor(private val homeRepository: HomeRepository) : BaseViewModel() {
 
     private val _tinderResponse = MutableLiveData<TinderResponse>()
     val tinderResponse: LiveData<TinderResponse> get() = _tinderResponse
@@ -37,7 +37,7 @@ constructor(private val tinderRepository: TinderRepository) : BaseViewModel() {
 
     fun getTinder(count: Int = 10, filter: String = "") {
         viewModelScope.launch(coroutineExceptionHandler) {
-            tinderRepository.getTinder(count, filter)
+            homeRepository.getTinder(count, filter)
                 .collect {
                     it.body()?.let { tinderResponse ->
                         _tinderResponse.value = tinderResponse
@@ -48,7 +48,7 @@ constructor(private val tinderRepository: TinderRepository) : BaseViewModel() {
 
     fun updateLike(updateLikeRequest: UpdateLikeRequest) {
         viewModelScope.launch(coroutineExceptionHandler) {
-            tinderRepository.updateLike(updateLikeRequest)
+            homeRepository.updateLike(updateLikeRequest)
                 .collect {
                     it.body()?.let {
                         // TODO: 2021-08-30 에러 및 성공 처리
@@ -59,7 +59,7 @@ constructor(private val tinderRepository: TinderRepository) : BaseViewModel() {
 
     fun createReport(createReportRequest: CreateReportRequest) {
         viewModelScope.launch(coroutineExceptionHandler) {
-            tinderRepository.createReport(createReportRequest)
+            homeRepository.createReport(createReportRequest)
                 .collect {
                     it.body()?.let { rootResponse ->
                         // TODO: 2021-08-31 에러 및 성공 처리

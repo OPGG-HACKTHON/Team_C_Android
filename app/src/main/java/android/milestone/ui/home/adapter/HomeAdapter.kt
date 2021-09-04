@@ -2,7 +2,7 @@ package android.milestone.ui.home.adapter
 
 import android.milestone.R
 import android.milestone.base.BaseDiffUtil
-import android.milestone.network.model.tinder.TinderModel
+import android.milestone.network.model.home.TinderModel
 import android.milestone.ui.home.viewholder.HomeViewHolder
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter

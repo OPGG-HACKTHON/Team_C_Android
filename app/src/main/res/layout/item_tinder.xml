@@ -7,7 +7,7 @@
         
         <variable
             name="item"
-            type="android.milestone.network.model.tinder.TinderModel" />
+            type="android.milestone.network.model.home.TinderModel" />
     </data>
     
     <androidx.cardview.widget.CardView
