@@ -32,6 +32,7 @@ class MatchDetailFragment : BaseFragment<FragmentMatchDetailBinding>(R.layout.fr
     private val topTinderAdapter = TopTinderRecyclerAdapter()
 
     override fun initViews() {
+        binding.viewModel = matchDetailViewModel
         requireActivity().onBackPressedDispatcher.addCallback(this) {
             findNavController().navigateUp()
         }
@@ -39,7 +40,10 @@ class MatchDetailFragment : BaseFragment<FragmentMatchDetailBinding>(R.layout.fr
             findNavController().navigateUp()
         }
 
-        scheduleViewModel.findScheduleById(args.matchId)?.also {
+        val selectedSchedule = scheduleViewModel.findScheduleById(args.matchId)
+        binding.item = selectedSchedule
+
+        selectedSchedule?.also {
             binding.item = it
             matchDetailViewModel.updateMatchDetail(it.schedule.id)
             binding.layoutMatchScore.tvFirstTeamScore.setTextColor(ContextCompat.getColor(binding.root.context, it.teamAScoreColor))
@@ -47,16 +51,32 @@ class MatchDetailFragment : BaseFragment<FragmentMatchDetailBinding>(R.layout.fr
         }
 
         binding.rvTopTinder.adapter = topTinderAdapter
+        binding.rvPog.adapter = pogAdapter
         val snapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(binding.rvTopTinder)
 
+        binding.tvTeam1Name.setOnClickListener {
+            matchDetailViewModel.changeSelectedTeam(true)
+            matchDetailViewModel.loadPog(selectedSchedule?.schedule?.id ?: 0)
+        }
+        binding.tvTeam2Name.setOnClickListener {
+            matchDetailViewModel.changeSelectedTeam(false)
+            matchDetailViewModel.loadPog(selectedSchedule?.schedule?.id ?: 0)
+        }
+
+        observeData()
+    }
+
+    private fun observeData() {
         matchDetailViewModel.topTinder.observe(viewLifecycleOwner) {
             binding.tvNoTinider.isVisible = it.isNullOrEmpty()
             topTinderAdapter.submitList(it)
         }
-
-        matchDetailViewModel.players.observe(viewLifecycleOwner) {
-            pogAdapter.submitList(it?.aTeam?.player)
+        matchDetailViewModel.selectedTeamPlayers.observe(viewLifecycleOwner) {
+            pogAdapter.submitList(it)
+        }
+        matchDetailViewModel.pogCount.observe(viewLifecycleOwner) {
+            binding.tvPogResult.text = getString(R.string.pog_result).format(it)
         }
     }
 }

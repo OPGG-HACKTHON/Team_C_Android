@@ -3,7 +3,7 @@ package android.milestone.network.response.match_detail
 
 import com.google.gson.annotations.SerializedName
 
-data class ATeam(
+data class PogTeam(
     @SerializedName("icon")
     val icon: String = "",
     @SerializedName("id")

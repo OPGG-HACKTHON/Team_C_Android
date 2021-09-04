@@ -2,6 +2,7 @@ package android.milestone.ui.schedule
 
 import android.milestone.base.BaseViewModel
 import android.milestone.network.response.match_detail.PogPlayer
+import android.milestone.network.response.match_detail.PogTeam
 import android.milestone.network.response.match_detail.TeamsOfGameInfo
 import android.milestone.network.response.tinder.TopTinder
 import android.milestone.repository.LeagueRepository
@@ -27,12 +28,25 @@ class MatchDetailViewModel @Inject constructor(
     private val _players: MutableLiveData<TeamsOfGameInfo?> = MutableLiveData()
     val players: LiveData<TeamsOfGameInfo?> = _players
 
-    val firstTeamPlayers: LiveData<List<PogPlayer>?> = players.map { it?.aTeam?.player }
-    val secondTeamPlayers: LiveData<List<PogPlayer>?> = players.map { it?.bTeam?.player }
+    private val _isFirstTeamSelected: MutableLiveData<Boolean> = MutableLiveData(true)
+    val isFirstTeamSelected: LiveData<Boolean> = _isFirstTeamSelected
+
+    val firstTeam: LiveData<PogTeam?> = players.map { it?.aTeam }
+    val secondTeam: LiveData<PogTeam?> = players.map { it?.bTeam }
+    val selectedTeamPlayers: LiveData<List<PogPlayer>?> = players.map {
+        if (isFirstTeamSelected.value == true) it?.aTeam?.player else it?.bTeam?.player
+    }
+    val pogCount: LiveData<Int> = selectedTeamPlayers.map {
+        it?.sumOf { player -> player.count } ?: 0
+    }
 
     fun updateMatchDetail(gameId: Int) {
         loadTopTinder(gameId)
         loadPog(gameId)
+    }
+
+    fun changeSelectedTeam(isFirstTeam: Boolean) {
+        _isFirstTeamSelected.value = isFirstTeam
     }
 
     private fun loadTopTinder(gameId: Int) {
@@ -44,7 +58,7 @@ class MatchDetailViewModel @Inject constructor(
         }
     }
 
-    private fun loadPog(gameId: Int) {
+    fun loadPog(gameId: Int) {
         viewModelScope.launch(coroutineExceptionHandler) {
             val response = leagueRepository.getPlayerOfGame(gameId)
             response.collect {

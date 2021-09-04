@@ -8,9 +8,13 @@
         <variable
             name="item"
             type="android.milestone.ui.schedule.ui_model.ScheduleUiModel" />
+    
+        <variable
+            name="viewModel"
+            type="android.milestone.ui.schedule.MatchDetailViewModel" />
     </data>
     
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray100">
@@ -55,7 +59,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_back" />
-    
+            
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,7 +68,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/iv_back"
                 app:layout_constraintTop_toBottomOf="@id/layout_match_score">
-        
+                
                 <TextView
                     android:id="@+id/tv_mog"
                     android:layout_width="wrap_content"
@@ -75,13 +79,14 @@
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@id/iv_back"
                     app:layout_constraintTop_toBottomOf="@id/layout_match_score" />
-        
+                
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_top_tinder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:clipToPadding="true"
+                    android:nestedScrollingEnabled="true"
                     android:orientation="horizontal"
                     android:overScrollMode="never"
                     android:paddingStart="20dp"
@@ -90,7 +95,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_mog"
                     tools:listitem="@layout/item_top_tinder" />
-        
+                
                 <TextView
                     android:id="@+id/tv_no_tinider"
                     android:layout_width="wrap_content"
@@ -100,7 +105,7 @@
                     android:text="@string/no_tinder"
                     android:textColor="@color/gray600"
                     android:visibility="gone" />
-        
+                
                 <TextView
                     android:id="@+id/tv_mvp"
                     android:layout_width="wrap_content"
@@ -112,23 +117,103 @@
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@id/iv_back"
                     app:layout_constraintTop_toBottomOf="@id/tv_no_tinider" />
-        
-                <LinearLayout
+                
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_pog"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/shape_rect_radius16_white"
                     android:clipToPadding="true"
                     android:orientation="vertical"
                     android:overScrollMode="never"
-                    android:paddingHorizontal="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_mvp">
-        
-                </LinearLayout>
+                    
+                    <TextView
+                        android:id="@+id/tv_team1_name"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:text="@{viewModel.firstTeam.name}"
+                        android:textColor="@{viewModel.isFirstTeamSelected() ? @color/blue500 : @color/gray300}"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_default="percent"
+                        app:layout_constraintWidth_percent=".5" />
+                    
+                    <TextView
+                        android:id="@+id/tv_team2_name"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:text="@{viewModel.secondTeam.name}"
+                        android:textColor="@{!viewModel.isFirstTeamSelected() ? @color/blue500 : @color/gray300}"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_default="percent"
+                        app:layout_constraintWidth_percent=".5" />
+                    
+                    <View
+                        android:id="@+id/view_team1"
+                        android:layout_width="0dp"
+                        android:layout_height="2dp"
+                        android:background="@{viewModel.isFirstTeamSelected() ? @color/blue500 : @color/gray100}"
+                        app:layout_constraintEnd_toEndOf="@id/tv_team1_name"
+                        app:layout_constraintStart_toStartOf="@id/tv_team1_name"
+                        app:layout_constraintTop_toBottomOf="@id/tv_team1_name" />
+                    
+                    <View
+                        android:id="@+id/view_team2"
+                        android:layout_width="0dp"
+                        android:layout_height="2dp"
+                        android:background="@{!viewModel.isFirstTeamSelected() ? @color/blue500 : @color/gray100}"
+                        app:layout_constraintEnd_toEndOf="@id/tv_team2_name"
+                        app:layout_constraintStart_toStartOf="@id/tv_team2_name"
+                        app:layout_constraintTop_toBottomOf="@id/tv_team2_name" />
+                    
+                    <TextView
+                        android:id="@+id/tv_pog_result"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="24dp"
+                        android:text="@string/pog_result"
+                        android:textColor="@color/gray600"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/view_team1" />
+                    
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_pog"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:nestedScrollingEnabled="false"
+                        android:orientation="vertical"
+                        android:overScrollMode="never"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_pog_result"
+                        tools:itemCount="5"
+                        tools:listitem="@layout/item_pog_player" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </layout>

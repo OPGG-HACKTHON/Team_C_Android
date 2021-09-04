@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class TeamsOfGameInfo(
     @SerializedName("aTeam")
-    val aTeam: ATeam = ATeam(),
+    val aTeam: PogTeam = PogTeam(),
     @SerializedName("bTeam")
-    val bTeam: BTeam = BTeam()
+    val bTeam: PogTeam = PogTeam()
 )
