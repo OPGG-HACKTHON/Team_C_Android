@@ -9,6 +9,7 @@ import android.milestone.ui.schedule.MatchDetailViewModel
 import android.milestone.ui.schedule.ScheduleViewModel
 import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -50,6 +51,7 @@ class MatchDetailFragment : BaseFragment<FragmentMatchDetailBinding>(R.layout.fr
         snapHelper.attachToRecyclerView(binding.rvTopTinder)
 
         matchDetailViewModel.topTinder.observe(viewLifecycleOwner) {
+            binding.tvNoTinider.isVisible = it.isNullOrEmpty()
             topTinderAdapter.submitList(it)
         }
 

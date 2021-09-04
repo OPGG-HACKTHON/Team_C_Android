@@ -55,57 +55,79 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_back" />
-            
-            <TextView
-                android:id="@+id/tv_mog"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/mog"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@id/iv_back"
-                app:layout_constraintTop_toBottomOf="@id/layout_match_score" />
-            
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_top_tinder"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:clipToPadding="true"
-                android:orientation="horizontal"
-                android:overScrollMode="never"
-                android:paddingHorizontal="20dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_mog"
-                tools:listitem="@layout/item_top_tinder" />
     
-            <TextView
-                android:id="@+id/tv_mvp"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/mvp_title"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@id/iv_back"
-                app:layout_constraintTop_toBottomOf="@id/rv_top_tinder" />
-            
-            <LinearLayout
-                android:id="@+id/layout_pog"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:clipToPadding="true"
                 android:orientation="vertical"
-                android:overScrollMode="never"
-                android:paddingHorizontal="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_mvp">
-            
+                app:layout_constraintStart_toStartOf="@id/iv_back"
+                app:layout_constraintTop_toBottomOf="@id/layout_match_score">
+        
+                <TextView
+                    android:id="@+id/tv_mog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/mog"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/iv_back"
+                    app:layout_constraintTop_toBottomOf="@id/layout_match_score" />
+        
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_top_tinder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:clipToPadding="true"
+                    android:orientation="horizontal"
+                    android:overScrollMode="never"
+                    android:paddingStart="20dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_mog"
+                    tools:listitem="@layout/item_top_tinder" />
+        
+                <TextView
+                    android:id="@+id/tv_no_tinider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingVertical="30dp"
+                    android:text="@string/no_tinder"
+                    android:textColor="@color/gray600"
+                    android:visibility="gone" />
+        
+                <TextView
+                    android:id="@+id/tv_mvp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/mvp_title"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/iv_back"
+                    app:layout_constraintTop_toBottomOf="@id/tv_no_tinider" />
+        
+                <LinearLayout
+                    android:id="@+id/layout_pog"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="16dp"
+                    android:clipToPadding="true"
+                    android:orientation="vertical"
+                    android:overScrollMode="never"
+                    android:paddingHorizontal="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_mvp">
+        
+                </LinearLayout>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
