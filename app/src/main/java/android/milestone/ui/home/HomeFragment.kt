@@ -1,5 +1,6 @@
 package android.milestone.ui.home
 
+import android.content.Intent
 import android.milestone.R
 import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentHomeBinding
@@ -14,11 +15,13 @@ import android.milestone.ui.home.viewmodel.HomeViewModel
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.CardStackListener
 import com.yuyakaido.android.cardstackview.Direction
 import com.yuyakaido.android.cardstackview.SwipeAnimationSetting
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.logging.Filter
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), CardStackListener {
@@ -38,6 +41,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                 setCanScrollHorizontal(true)
                 setDirections(Direction.FREEDOM)
             }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.getTinder()
     }
 
     override fun initViews() {
@@ -64,6 +72,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                 setSwipeAnimationSetting(Direction.Top)
                 lvBest.playAnimation()
             }
+            ivFilter.setOnClickListener {
+                val intent = Intent(requireContext(), FilterActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
@@ -81,7 +93,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
     private fun initViewModels() {
         viewModel.run {
-            getTinder()
             tinderResponse.observe(viewLifecycleOwner, { tinderResponse ->
                 homeAdapter.submitList(tinderResponse.data)
             })

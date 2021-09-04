@@ -6,6 +6,7 @@ import android.milestone.network.request.UpdateLikeRequest
 import android.milestone.network.response.RootResponse
 import android.milestone.network.response.home.TinderResponse
 import android.milestone.repository.home.HomeRepository
+import android.milestone.util.PrefUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
@@ -18,7 +19,9 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel
 @Inject
-constructor(private val homeRepository: HomeRepository) : BaseViewModel() {
+constructor(
+    private val homeRepository: HomeRepository
+) : BaseViewModel() {
 
     private val _tinderResponse = MutableLiveData<TinderResponse>()
     val tinderResponse: LiveData<TinderResponse> get() = _tinderResponse
@@ -34,9 +37,12 @@ constructor(private val homeRepository: HomeRepository) : BaseViewModel() {
 
     val currentGameResponse = homeRepository.getCurrentGame().asLiveData(coroutineExceptionHandler)
 
-    fun getTinder(count: Int = 10, filter: String = "") {
+    fun getTinder(count: Int = 10) {
         viewModelScope.launch(coroutineExceptionHandler) {
-            homeRepository.getTinder(count, filter)
+            homeRepository.getTinder(
+                count,
+                PrefUtil.getStringValue(PrefUtil.UNSELECT_TEAM_LIST, "")
+            )
                 .collect {
                     it.body()?.let { tinderResponse ->
                         _tinderResponse.value = tinderResponse
