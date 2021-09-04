@@ -5,6 +5,7 @@ import android.milestone.network.request.CreateTinderRequest
 import android.milestone.network.request.UpdateLikeRequest
 import android.milestone.network.response.RootResponse
 import android.milestone.network.response.tinder.TinderResponse
+import android.milestone.network.response.tinder.TopTinderResponse
 import android.milestone.network.source.RemoteDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -22,6 +23,10 @@ class TinderRepositoryImpl
 
     override fun getTinder(count: Int, filter: String): Flow<Response<TinderResponse>> = flow {
         emit(remoteDataSource.getTinder(count, filter))
+    }.flowOn(Dispatchers.IO)
+
+    override fun getTopTinder(gameId: Int): Flow<Response<TopTinderResponse>> = flow {
+        emit(remoteDataSource.getTopTinder(gameId))
     }.flowOn(Dispatchers.IO)
 
     override fun createReport(createReportRequest: CreateReportRequest): Flow<Response<RootResponse>> =

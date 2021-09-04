@@ -34,7 +34,7 @@
                 tools:text="Faker" />
         </LinearLayout>
         
-        <com.google.android.material.progressindicator.LinearProgressIndicator
+        <View
             android:id="@+id/progress_percentage"
             android:layout_width="100dp"
             android:layout_height="4dp"

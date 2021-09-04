@@ -4,10 +4,12 @@ import android.milestone.network.request.*
 import android.milestone.network.response.RootResponse
 import android.milestone.network.response.auth.LoginResponse
 import android.milestone.network.response.auth.TeamInfoResponse
+import android.milestone.network.response.match_detail.PlayerOfGameResponse
 import android.milestone.network.response.ranking.PlayerRankingResponse
 import android.milestone.network.response.ranking.TeamRankingResponse
 import android.milestone.network.response.schedule.MonthlyScheduleResponse
 import android.milestone.network.response.tinder.TinderResponse
+import android.milestone.network.response.tinder.TopTinderResponse
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -24,6 +26,9 @@ interface Api {
     @GET("/info/pogRank")
     suspend fun getPlayerRank(): Response<PlayerRankingResponse>
 
+    @GET("/pog/result")
+    suspend fun getPogOfGame(@Query("gameId") gameId: Int?): Response<PlayerOfGameResponse>
+
     @POST("/auth/login")
     suspend fun postLogin(@Body loginRequest: LoginRequest): Response<LoginResponse>
 
@@ -34,7 +39,6 @@ interface Api {
     suspend fun loadSchedule(@Query("month") month: Int): Response<MonthlyScheduleResponse>
 
     // tinder
-
     @POST("/tinder/create")
     suspend fun createTinder(@Body createTinderRequest: CreateTinderRequest): Response<RootResponse>
 
@@ -53,4 +57,9 @@ interface Api {
     suspend fun updateLike(
         @Body updateLikeRequest: UpdateLikeRequest
     ): Response<RootResponse>
+
+    @GET("/tinder/toptinder")
+    suspend fun getTopTinder(
+        @Query("gameId") gameId: Int
+    ): Response<TopTinderResponse>
 }

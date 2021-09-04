@@ -5,6 +5,7 @@ import android.milestone.network.response.RootResponse
 import android.milestone.network.response.auth.LoginResponse
 import android.milestone.network.response.auth.TeamInfoResponse
 import android.milestone.network.response.tinder.TinderResponse
+import android.milestone.network.response.tinder.TopTinderResponse
 import retrofit2.Response
 
 interface RemoteDataSource {
@@ -18,6 +19,8 @@ interface RemoteDataSource {
     suspend fun createTinder(createTinderRequest: CreateTinderRequest): Response<RootResponse>
 
     suspend fun getTinder(count: Int, filter: String): Response<TinderResponse>
+
+    suspend fun getTopTinder(gameId: Int): Response<TopTinderResponse>
 
     suspend fun createReport(createReportRequest: CreateReportRequest): Response<RootResponse>
 

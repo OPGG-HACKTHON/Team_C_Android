@@ -1,10 +1,7 @@
 package android.milestone.di
 
 import android.milestone.BuildConfig
-import android.milestone.Naming.ACCESS_TOKEN
-import android.milestone.Naming.REFRESH_TOKEN
 import android.milestone.network.Api
-import android.milestone.util.PrefUtil
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,13 +24,15 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideAccessToken() =
-        PrefUtil.getStringValue(ACCESS_TOKEN, "")
+        // PrefUtil.getStringValue(ACCESS_TOKEN, "")
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUzLCJpYXQiOjE2MzAyNDczOTksImV4cCI6MTYzMjgzOTM5OSwiaXNzIjoibWlsZXN0b25lIn0.GvrVt75ienAU5mkhD5u75qrGnPmHXrP_Z9-qLLA4be4"
 
     @Named("refreshToken")
     @Singleton
     @Provides
     fun provideRefreshToken() =
-        PrefUtil.getStringValue(REFRESH_TOKEN, "")
+        // PrefUtil.getStringValue(REFRESH_TOKEN, "")
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzAyNDczOTksImV4cCI6MTYzMjgzOTM5OSwiaXNzIjoibWlsZXN0b25lIn0.ckDFV86Z2VvVEQUvHHkPs6XMUOiLMTn3twrDPjKPRgQ"
 
     @Provides
     fun provideBaseUrl() = BASE_URL

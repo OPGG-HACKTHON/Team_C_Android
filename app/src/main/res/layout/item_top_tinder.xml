@@ -4,17 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools">
     
     <data>
-        
-        <!--        <variable-->
-        <!--            name="item"-->
-        <!--            type="" />-->
+    
+        <variable
+            name="item"
+            type="android.milestone.network.response.tinder.TopTinder" />
     </data>
     
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="16dp">
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp">
         
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="240dp"
@@ -36,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/montserrat_semibold"
+                android:text="@{String.valueOf(item.rank)}"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="@id/iv_mog_rank"
@@ -50,6 +53,7 @@
                 android:layout_marginTop="36dp"
                 android:ellipsize="end"
                 android:gravity="center"
+                android:text="@{item.tinder.message}"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@id/iv_reaction"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -59,16 +63,19 @@
             
             <ImageView
                 android:id="@+id/iv_team_logo"
+                setImage="@{item.tinder.team.icon}"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="8dp"
+                android:padding="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
             
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="center_vertical"
                 android:orientation="vertical"
@@ -83,6 +90,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="1"
+                    android:text="@{item.tinder.user.nickname}"
                     tools:text="페이커" />
                 
                 <TextView
@@ -120,6 +128,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
+                android:text="@{@string/count(item.tinder.like + item.tinder.superlike - item.tinder.dislike)}"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@id/iv_reaction"
                 app:layout_constraintStart_toEndOf="@id/iv_reaction"
