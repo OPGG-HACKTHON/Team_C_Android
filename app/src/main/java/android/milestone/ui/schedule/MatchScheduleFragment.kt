@@ -4,6 +4,7 @@ import android.milestone.R
 import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentMatchScheduleBinding
 import android.milestone.ui.history.adapter.ScheduleRecyclerViewAdapter
+import android.milestone.ui.main.StartDestination
 import android.milestone.util.ReadableDateTime
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -18,7 +19,11 @@ class MatchScheduleFragment : BaseFragment<FragmentMatchScheduleBinding>(R.layou
     private val adapter: ScheduleRecyclerViewAdapter by lazy(LazyThreadSafetyMode.NONE) {
         ScheduleRecyclerViewAdapter { scheduleUiModel ->
             val matchId = scheduleUiModel.schedule.id
-            findNavController().navigate(ScheduleFragmentDirections.actionFragmentMatchDetail(matchId))
+            if (scheduleUiModel.schedule.status == MatchStatus.FINISH.id) {
+                findNavController().navigate(ScheduleFragmentDirections.actionFragmentMatchDetail(matchId))
+            } else {
+                (requireActivity() as? StartDestination)?.goToStartDestination()
+            }
         }
     }
 

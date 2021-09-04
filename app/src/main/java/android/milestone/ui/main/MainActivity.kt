@@ -20,13 +20,15 @@ import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), StartDestination {
 
     private val scheduleViewModel: ScheduleViewModel by viewModels()
 
     private val rankingViewModel: RankingViewModel by viewModels()
 
     private val viewModel: MainViewModel by viewModels()
+
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,14 +38,9 @@ class MainActivity : AppCompatActivity() {
         rankingViewModel.updateData()
     }
 
-
     private fun initViews() {
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(
-            this,
-            R.layout.activity_main
-        )
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 
         binding.navigation.setupWithNavController(navHostFragment.navController)
 
@@ -51,9 +48,7 @@ class MainActivity : AppCompatActivity() {
             binding.navigation.isVisible = destination.id !in listOf(R.id.fragment_match_detail)
         }
 
-        binding.navigation.selectedItemId = R.id.menu_home
-        binding.navigation.menu[1].isChecked = true
-        binding.navigation.transform(binding.fab, false)
+        goToStartDestination()
 
         initNavigation(binding, navHostFragment)
     }
@@ -107,5 +102,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         dialog.show(supportFragmentManager, "")
+    }
+
+    override fun goToStartDestination() {
+        binding.navigation.selectedItemId = R.id.menu_home
+        binding.navigation.menu[1].isChecked = true
+        binding.navigation.transform(binding.fab, false)
     }
 }
