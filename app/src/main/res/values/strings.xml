@@ -42,4 +42,7 @@
     <string name="dialog_report_tinder_abuse">욕설 및 비방</string>
     <string name="report">신고하기</string>
     <string name="cancel">취소</string>
+    <string name="filter">필터</string>
+    <string name="fragment_filter_title">홈 화면에서 보고 싶은\n팀들을 선택해주세요</string>
+    <string name="fragment_filter_sub_title">활성화된 팀들의 메세지만 받아 볼 수 있어요</string>
 </resources>
