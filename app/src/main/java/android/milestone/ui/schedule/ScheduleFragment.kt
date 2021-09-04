@@ -14,7 +14,7 @@ class ScheduleFragment : BaseFragment<FragmentScheduleBinding>(R.layout.fragment
         binding.pager.adapter = ScheduleTabAdapter(this)
 
         TabLayoutMediator(binding.tab, binding.pager) { tab, position ->
-            tab.text = if (position == 0) "경기" else "순위"
+            tab.text = getString(if (position == 0) R.string.match else R.string.ranking)
         }.attach()
     }
 }

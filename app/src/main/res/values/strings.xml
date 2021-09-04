@@ -8,6 +8,7 @@
     <string name="support">응원하기</string>
     <string name="mog">MOG 10</string>
     <string name="mvp_title">스윕러들의 MVP</string>
+    <string name="match">경기</string>
     <string name="ranking">순위</string>
     <string name="mvp">MVP</string>
     <string name="team">팀</string>
@@ -27,6 +28,8 @@
     <string name="login">로그인</string>
     <string name="team_select">팀선택</string>
     <string name="nickname">닉네임</string>
+    <string name="latest_history">최근 메세지</string>
+    <string name="best_history">명예의 전당</string>
     <string name="fragment_login_title">클린하게 즐기는 LCK</string>
     <string name="fragment_nickname_title">닉네임을 입력해주세요</string>
     <string name="fragment_nickname_sub_title">띄어쓰기 포함 9글자까지 가능해요</string>
