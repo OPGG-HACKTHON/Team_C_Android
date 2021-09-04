@@ -3,6 +3,8 @@ package android.milestone.ui.home
 import android.milestone.R
 import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentHomeBinding
+import android.milestone.databinding.ItemGameScoreBinding
+import android.milestone.network.model.home.CurrentGameModel
 import android.milestone.network.request.CreateReportRequest
 import android.milestone.network.request.UpdateLikeRequest
 import android.milestone.toastShort
@@ -79,6 +81,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
     private fun initViewModels() {
         viewModel.run {
+            getTinder()
             tinderResponse.observe(viewLifecycleOwner, { tinderResponse ->
                 homeAdapter.submitList(tinderResponse.data)
             })
@@ -96,6 +99,38 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                     createReport(CreateReportRequest(currentTinderId, reportMessage))
                 }
             })
+
+            currentGameResponse.observe(viewLifecycleOwner, { currentGameResponse ->
+                val currentGameModel = currentGameResponse.data
+
+                if (currentGameModel == null) {
+                    // TODO: 2021-09-04 경기 없음 처리
+                } else {
+                    binding.itemGameScore.run {
+                        currentModel = currentGameModel
+                        setCurrentScoreTextColor(currentGameModel)
+                    }
+                    // TODO: 2021-09-04 경기 시작전 시간 카운트 처리
+                    // TODO: 2021-09-04 어떻게 계속 데이터를 갱신할건지 고민
+                }
+            })
+        }
+    }
+
+    private fun ItemGameScoreBinding.setCurrentScoreTextColor(currentGameModel: CurrentGameModel) {
+        when {
+            currentGameModel.aTeamScore > currentGameModel.bTeamScore -> {
+                tvFirstTeamScore.setTextColor(requireContext().getColor(R.color.blue500))
+                tvSecondTeamScore.setTextColor(requireContext().getColor(R.color.gray300))
+            }
+            currentGameModel.aTeamScore == currentGameModel.bTeamScore -> {
+                tvFirstTeamScore.setTextColor(requireContext().getColor(R.color.gray300))
+                tvSecondTeamScore.setTextColor(requireContext().getColor(R.color.gray300))
+            }
+            else -> {
+                tvFirstTeamScore.setTextColor(requireContext().getColor(R.color.gray300))
+                tvSecondTeamScore.setTextColor(requireContext().getColor(R.color.blue500))
+            }
         }
     }
 

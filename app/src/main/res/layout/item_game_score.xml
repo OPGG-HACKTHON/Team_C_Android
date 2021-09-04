@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="currentModel"
+            type="android.milestone.network.model.home.CurrentGameModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_rect_radius16_white"
+        android:paddingHorizontal="16dp">
+
+        <ImageView
+            android:id="@+id/iv_first_team"
+            setImage="@{currentModel.ATeam.icon}"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.25" />
+
+        <TextView
+            android:id="@+id/tv_first_team"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{currentModel.ATeam.name}"
+            android:textColor="@color/gray300"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="@id/iv_first_team"
+            app:layout_constraintStart_toStartOf="@id/iv_first_team"
+            app:layout_constraintTop_toBottomOf="@id/iv_first_team" />
+
+        <TextView
+            android:id="@+id/tv_first_team_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(currentModel.ATeamScore)}"
+            android:textColor="@color/blue500"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_vs"
+            app:layout_constraintStart_toEndOf="@id/iv_first_team"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/tv_vs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/vs"
+            android:textColor="@color/gray300"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_second_team_score"
+            app:layout_constraintStart_toEndOf="@id/tv_first_team_score"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_second_team"
+            setImage="@{currentModel.BTeam.icon}"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.25" />
+
+        <TextView
+            android:id="@+id/tv_second_team"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{currentModel.BTeam.name}"
+            android:textColor="@color/gray300"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/iv_second_team"
+            app:layout_constraintStart_toStartOf="@id/iv_second_team"
+            app:layout_constraintTop_toBottomOf="@id/iv_second_team" />
+
+        <TextView
+            android:id="@+id/tv_second_team_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(currentModel.BTeamScore)}"
+            android:textColor="@color/gray300"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_second_team"
+            app:layout_constraintStart_toEndOf="@id/tv_vs"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

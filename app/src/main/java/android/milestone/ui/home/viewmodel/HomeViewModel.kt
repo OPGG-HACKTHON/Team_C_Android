@@ -8,6 +8,7 @@ import android.milestone.network.response.home.TinderResponse
 import android.milestone.repository.home.HomeRepository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
@@ -31,9 +32,7 @@ constructor(private val homeRepository: HomeRepository) : BaseViewModel() {
     private val _reportMessage = MutableLiveData<String>()
     val reportMessage: LiveData<String> get() = _reportMessage
 
-    init {
-        getTinder()
-    }
+    val currentGameResponse = homeRepository.getCurrentGame().asLiveData(coroutineExceptionHandler)
 
     fun getTinder(count: Int = 10, filter: String = "") {
         viewModelScope.launch(coroutineExceptionHandler) {
