@@ -32,35 +32,18 @@ class ScheduleViewHolder(parent: ViewGroup) : BaseViewHolder<ItemScheduleBinding
 ) {
 
     override fun bind(item: ScheduleUiModel, onClick: (ScheduleUiModel) -> Unit) {
-        super.bind(item, onClick)
+        super.bind(item) {}
         binding.tvDate.text = item.startTime.toMMdd()
         binding.tvStartTime.text = item.startTime.toHHmm()
         binding.tvStatus.text = binding.root.context.getString(item.matchStatus.displayTextId)
-        binding.btnMore.text = binding.root.context.getString(
-            if (item.supportAvailable) {
-                R.string.support
-            } else {
-                R.string.mog
-            }
-        )
-        binding.btnMore.setTextColor(
-            ContextCompat.getColor(binding.root.context, if (item.supportAvailable) R.color.blue500 else R.color.gray500)
-        )
-        binding.btnMore.setBackgroundResource(
-            if (item.supportAvailable) R.drawable.shape_rect_radius12_blue_stroke else R.drawable.shape_rect_radius12_stroke
-        )
-        binding.tvTeam1Score.setTextColor(
-            ContextCompat.getColor(
-                binding.root.context,
-                if (item.isTeamAWinner) R.color.blue500 else R.color.gray300
-            )
-        )
-        binding.tvTeam2Score.setTextColor(
-            ContextCompat.getColor(
-                binding.root.context,
-                if (item.isTeamBWinner) R.color.blue500 else R.color.gray300
-            )
-        )
+        binding.btnMore.text = binding.root.context.getString(item.btnMoreTextResId)
+        binding.btnMore.setOnClickListener {
+            onClick(item)
+        }
+        binding.btnMore.setTextColor(ContextCompat.getColor(binding.root.context, item.btnMoreColorResId))
+        binding.btnMore.setBackgroundResource(item.btnMoreBackgroundResId)
+        binding.tvTeam1Score.setTextColor(ContextCompat.getColor(binding.root.context, item.teamAScoreColor))
+        binding.tvTeam2Score.setTextColor(ContextCompat.getColor(binding.root.context, item.teamBScoreColor))
     }
 
     fun bindDateVisibility(isVisible: Boolean) {
