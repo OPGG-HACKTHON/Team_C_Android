@@ -36,10 +36,11 @@ class FilterViewHolder(parent: ViewGroup) : BaseViewHolder<ItemTeamBinding, Team
         }
         itemView.setOnClickListener {
             onClick(item)
-            background = if (background == R.drawable.shape_round_line_white)
+            background = if (background == R.drawable.shape_round_line_white) {
                 R.drawable.shape_round_line_blue_500
-            else
+            } else {
                 R.drawable.shape_round_line_white
+            }
             binding.clTeam.setBackgroundResource(background)
         }
         binding.clTeam.setBackgroundResource(background)
