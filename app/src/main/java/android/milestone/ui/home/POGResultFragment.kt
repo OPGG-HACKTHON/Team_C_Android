@@ -26,6 +26,15 @@ class POGResultFragment : BaseFragment<FragmentPogResultBinding>(R.layout.fragme
     override fun initViews() {
         binding.rvPog.adapter = pogAdapter
         viewModel.playerOfGameResponse.observe(viewLifecycleOwner, {
+            binding.tvTotalVote.text = getString(
+                R.string.total_vote,
+                if (position == 0) {
+                    it.data.aTeam.player.sumOf { pogPlayer ->
+                        pogPlayer.count
+                    }
+                } else {
+                    it.data.bTeam.player.sumOf { pogPlayer -> pogPlayer.count }
+                })
             pogAdapter.submitList(if (position == 0) it.data.aTeam.player else it.data.bTeam.player)
         })
     }
