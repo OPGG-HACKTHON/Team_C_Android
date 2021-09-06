@@ -7,6 +7,7 @@ import android.milestone.network.response.auth.TeamInfoResponse
 import android.milestone.network.response.tinder.TopTinderResponse
 import android.milestone.network.response.home.CurrentGameResponse
 import android.milestone.network.response.home.TinderResponse
+import android.milestone.network.response.match_detail.PlayerOfGameResponse
 import retrofit2.Response
 
 interface RemoteDataSource {
@@ -28,4 +29,6 @@ interface RemoteDataSource {
     suspend fun updateLike(updateLikeRequest: UpdateLikeRequest): Response<RootResponse>
 
     suspend fun getCurrentGame() : CurrentGameResponse
+
+    suspend fun getPogOfGame(gameId: Int?) : Response<PlayerOfGameResponse>
 }

@@ -5,6 +5,7 @@ import android.milestone.network.request.CreateReportRequest
 import android.milestone.network.request.UpdateLikeRequest
 import android.milestone.network.response.RootResponse
 import android.milestone.network.response.home.TinderResponse
+import android.milestone.network.response.match_detail.PlayerOfGameResponse
 import android.milestone.network.response.schedule.Schedule
 import android.milestone.repository.home.HomeRepository
 import android.milestone.ui.schedule.ui_model.ScheduleUiModel
@@ -34,6 +35,9 @@ constructor(
     private val _reportMessage = MutableLiveData<String>()
     val reportMessage: LiveData<String> get() = _reportMessage
 
+    private val _playerOfGameResponse = MutableLiveData<PlayerOfGameResponse>()
+    val playerOfGameResponse: LiveData<PlayerOfGameResponse> get() = _playerOfGameResponse
+
     private val _scheduleData =
         homeRepository.getCurrentGame().asLiveData(coroutineExceptionHandler)
             .map {
@@ -56,6 +60,17 @@ constructor(
     val scheduleData: LiveData<ScheduleUiModel?> = _scheduleData.map { schedule ->
         schedule?.let {
             ScheduleUiModel(it)
+        }
+    }
+
+    fun getPogOfGame() {
+        viewModelScope.launch(coroutineExceptionHandler) {
+            homeRepository.getPogOfGame(null)
+                .collect {
+                    if (it.body()?.success == true) {
+                        _playerOfGameResponse.value = it.body()
+                    }
+                }
         }
     }
 
