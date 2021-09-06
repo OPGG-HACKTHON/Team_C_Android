@@ -1,7 +1,9 @@
 package android.milestone.di
 
-import android.milestone.repository.LeagueRepository
-import android.milestone.repository.LeagueRepositoryImpl
+import android.milestone.repository.history.HistoryRepository
+import android.milestone.repository.history.HistoryRepositoryImpl
+import android.milestone.repository.league.LeagueRepository
+import android.milestone.repository.league.LeagueRepositoryImpl
 import android.milestone.repository.login.LoginRepository
 import android.milestone.repository.login.LoginRepositoryImpl
 import android.milestone.repository.tinder.TinderRepository
@@ -27,4 +29,8 @@ abstract class RepositoryModule {
     @Singleton
     @Binds
     abstract fun bindTinderRepository(impl: TinderRepositoryImpl): TinderRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindHistoryRepository(impl: HistoryRepositoryImpl): HistoryRepository
 }

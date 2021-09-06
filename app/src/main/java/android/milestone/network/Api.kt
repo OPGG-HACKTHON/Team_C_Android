@@ -4,6 +4,8 @@ import android.milestone.network.request.*
 import android.milestone.network.response.RootResponse
 import android.milestone.network.response.auth.LoginResponse
 import android.milestone.network.response.auth.TeamInfoResponse
+import android.milestone.network.response.history.BestHistoryResponse
+import android.milestone.network.response.history.LatestHistoryResponse
 import android.milestone.network.response.match_detail.PlayerOfGameResponse
 import android.milestone.network.response.ranking.PlayerRankingResponse
 import android.milestone.network.response.ranking.TeamRankingResponse
@@ -62,4 +64,10 @@ interface Api {
     suspend fun getTopTinder(
         @Query("gameId") gameId: Int
     ): Response<TopTinderResponse>
+
+    @GET("/tinder/history")
+    suspend fun loadLatestHistory(): Response<LatestHistoryResponse>
+
+    @GET("/tinder/hof")
+    suspend fun loadBestHistory(): Response<BestHistoryResponse>
 }

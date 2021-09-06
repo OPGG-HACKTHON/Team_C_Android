@@ -5,6 +5,7 @@ import android.milestone.databinding.ActivityMainBinding
 import android.milestone.network.request.CreateTinderRequest
 import android.milestone.toastShort
 import android.milestone.ui.dialog.WriteTinderDialog
+import android.milestone.ui.history.HistoryViewModel
 import android.milestone.ui.main.viewmodel.MainViewModel
 import android.milestone.ui.ranking.RankingViewModel
 import android.milestone.ui.schedule.ScheduleViewModel
@@ -24,6 +25,8 @@ class MainActivity : AppCompatActivity(), StartDestination {
 
     private val scheduleViewModel: ScheduleViewModel by viewModels()
 
+    private val historyViewModel: HistoryViewModel by viewModels()
+
     private val rankingViewModel: RankingViewModel by viewModels()
 
     private val viewModel: MainViewModel by viewModels()
@@ -36,6 +39,7 @@ class MainActivity : AppCompatActivity(), StartDestination {
         initViewModels()
         scheduleViewModel.updateData()
         rankingViewModel.updateData()
+        historyViewModel.updateData()
     }
 
     private fun initViews() {

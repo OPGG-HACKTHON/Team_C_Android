@@ -5,7 +5,7 @@ import android.milestone.network.response.match_detail.PogPlayer
 import android.milestone.network.response.match_detail.PogTeam
 import android.milestone.network.response.match_detail.TeamsOfGameInfo
 import android.milestone.network.response.tinder.TopTinder
-import android.milestone.repository.LeagueRepository
+import android.milestone.repository.league.LeagueRepository
 import android.milestone.repository.tinder.TinderRepository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

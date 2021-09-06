@@ -1,4 +1,4 @@
-package android.milestone.repository
+package android.milestone.repository.league
 
 import android.milestone.network.response.match_detail.PlayerOfGameResponse
 import android.milestone.network.response.ranking.PlayerRankingResponse

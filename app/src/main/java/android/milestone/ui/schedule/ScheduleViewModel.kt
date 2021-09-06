@@ -2,7 +2,7 @@ package android.milestone.ui.schedule
 
 import android.milestone.base.BaseViewModel
 import android.milestone.network.response.schedule.Schedule
-import android.milestone.repository.LeagueRepository
+import android.milestone.repository.league.LeagueRepository
 import android.milestone.ui.schedule.ui_model.ScheduleUiModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package android.milestone.repository
+package android.milestone.repository.league
 
 import android.milestone.network.Api
 import kotlinx.coroutines.flow.flow
