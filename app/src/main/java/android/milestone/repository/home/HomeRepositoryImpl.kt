@@ -6,11 +6,10 @@ import android.milestone.network.request.UpdateLikeRequest
 import android.milestone.network.response.RootResponse
 import android.milestone.network.response.home.CurrentGameResponse
 import android.milestone.network.response.home.TinderResponse
+import android.milestone.network.response.tinder.TopTinderResponse
 import android.milestone.network.source.RemoteDataSource
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -37,5 +36,9 @@ class HomeRepositoryImpl
 
     override fun getCurrentGame(): Flow<CurrentGameResponse> = flow {
         emit(remoteDataSource.getCurrentGame())
+    }
+
+    override fun getTopTinder(gameId: Int): Flow<Response<TopTinderResponse>> = flow {
+        emit(remoteDataSource.getTopTinder(gameId))
     }
 }

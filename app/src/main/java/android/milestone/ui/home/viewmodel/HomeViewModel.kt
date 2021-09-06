@@ -5,12 +5,11 @@ import android.milestone.network.request.CreateReportRequest
 import android.milestone.network.request.UpdateLikeRequest
 import android.milestone.network.response.RootResponse
 import android.milestone.network.response.home.TinderResponse
+import android.milestone.network.response.schedule.Schedule
 import android.milestone.repository.home.HomeRepository
+import android.milestone.ui.schedule.ui_model.ScheduleUiModel
 import android.milestone.util.PrefUtil
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -35,7 +34,30 @@ constructor(
     private val _reportMessage = MutableLiveData<String>()
     val reportMessage: LiveData<String> get() = _reportMessage
 
-    val currentGameResponse = homeRepository.getCurrentGame().asLiveData(coroutineExceptionHandler)
+    private val _scheduleData =
+        homeRepository.getCurrentGame().asLiveData(coroutineExceptionHandler)
+            .map {
+                val currentGameModel = it.data
+                val schedule = currentGameModel?.run {
+                    Schedule(
+                        aTeamIcon = aTeam.icon,
+                        aTeamName = aTeam.name,
+                        aTeamScore = aTeamScore,
+                        bTeamIcon = bTeam.icon,
+                        bTeamName = bTeam.name,
+                        bTeamScore = bTeamScore,
+                        id = id,
+                        startTime = startTime,
+                        status = status
+                    )
+                }
+                schedule
+            }
+    val scheduleData: LiveData<ScheduleUiModel?> = _scheduleData.map { schedule ->
+        schedule?.let {
+            ScheduleUiModel(it)
+        }
+    }
 
     fun getTinder(count: Int = 10) {
         viewModelScope.launch(coroutineExceptionHandler) {

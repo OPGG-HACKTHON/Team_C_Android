@@ -51,7 +51,7 @@
             <include
                 android:id="@+id/layout_match_score"
                 item="@{item}"
-                layout="@layout/item_home_score"
+                layout="@layout/item_game_score"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"

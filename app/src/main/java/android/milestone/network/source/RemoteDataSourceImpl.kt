@@ -5,7 +5,6 @@ import android.milestone.network.request.*
 import android.milestone.network.response.RootResponse
 import android.milestone.network.response.auth.LoginResponse
 import android.milestone.network.response.auth.TeamInfoResponse
-import android.milestone.network.response.tinder.TinderResponse
 import android.milestone.network.response.tinder.TopTinderResponse
 import android.milestone.network.response.home.CurrentGameResponse
 import android.milestone.network.response.home.TinderResponse
