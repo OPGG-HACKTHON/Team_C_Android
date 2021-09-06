@@ -15,5 +15,5 @@ interface LeagueRepository {
 
     fun getPlayerOfGame(gameId: Int): Flow<Response<PlayerOfGameResponse>>
 
-    fun loadSchedule(month: Int): Flow<Response<MonthlyScheduleResponse>>
+    fun loadSchedule(year: Int, month: Int): Flow<Response<MonthlyScheduleResponse>>
 }

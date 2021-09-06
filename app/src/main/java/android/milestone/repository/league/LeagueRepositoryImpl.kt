@@ -18,7 +18,7 @@ class LeagueRepositoryImpl @Inject constructor(private val service: Api) : Leagu
         emit(service.getPogOfGame(gameId))
     }
 
-    override fun loadSchedule(month: Int) = flow {
-        emit(service.loadSchedule(month))
+    override fun loadSchedule(year: Int, month: Int) = flow {
+        emit(service.loadSchedule(year, month))
     }
 }

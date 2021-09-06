@@ -38,7 +38,10 @@ interface Api {
     suspend fun postSignUp(@Body signUpRequest: SignUpRequest): Response<RootResponse>
 
     @GET("/info/schedule")
-    suspend fun loadSchedule(@Query("month") month: Int): Response<MonthlyScheduleResponse>
+    suspend fun loadSchedule(
+        @Query("year") year: Int,
+        @Query("month") month: Int
+    ): Response<MonthlyScheduleResponse>
 
     // tinder
     @POST("/tinder/create")
