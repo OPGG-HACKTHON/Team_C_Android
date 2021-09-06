@@ -4,11 +4,12 @@ import android.milestone.base.BaseViewModel
 import android.milestone.network.request.CreateReportRequest
 import android.milestone.network.request.UpdateLikeRequest
 import android.milestone.network.response.RootResponse
-import android.milestone.network.response.tinder.TinderResponse
-import android.milestone.repository.tinder.TinderRepository
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import android.milestone.network.response.home.TinderResponse
+import android.milestone.network.response.schedule.Schedule
+import android.milestone.repository.home.HomeRepository
+import android.milestone.ui.schedule.ui_model.ScheduleUiModel
+import android.milestone.util.PrefUtil
+import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -17,7 +18,9 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel
 @Inject
-constructor(private val tinderRepository: TinderRepository) : BaseViewModel() {
+constructor(
+    private val homeRepository: HomeRepository
+) : BaseViewModel() {
 
     private val _tinderResponse = MutableLiveData<TinderResponse>()
     val tinderResponse: LiveData<TinderResponse> get() = _tinderResponse
@@ -31,13 +34,37 @@ constructor(private val tinderRepository: TinderRepository) : BaseViewModel() {
     private val _reportMessage = MutableLiveData<String>()
     val reportMessage: LiveData<String> get() = _reportMessage
 
-    init {
-        getTinder()
+    private val _scheduleData =
+        homeRepository.getCurrentGame().asLiveData(coroutineExceptionHandler)
+            .map {
+                val currentGameModel = it.data
+                val schedule = currentGameModel?.run {
+                    Schedule(
+                        aTeamIcon = aTeam.icon,
+                        aTeamName = aTeam.name,
+                        aTeamScore = aTeamScore,
+                        bTeamIcon = bTeam.icon,
+                        bTeamName = bTeam.name,
+                        bTeamScore = bTeamScore,
+                        id = id,
+                        startTime = startTime,
+                        status = status
+                    )
+                }
+                schedule
+            }
+    val scheduleData: LiveData<ScheduleUiModel?> = _scheduleData.map { schedule ->
+        schedule?.let {
+            ScheduleUiModel(it)
+        }
     }
 
-    fun getTinder(count: Int = 10, filter: String = "") {
+    fun getTinder(count: Int = 10) {
         viewModelScope.launch(coroutineExceptionHandler) {
-            tinderRepository.getTinder(count, filter)
+            homeRepository.getTinder(
+                count,
+                PrefUtil.getStringValue(PrefUtil.UNSELECT_TEAM_LIST, "")
+            )
                 .collect {
                     it.body()?.let { tinderResponse ->
                         _tinderResponse.value = tinderResponse
@@ -48,7 +75,7 @@ constructor(private val tinderRepository: TinderRepository) : BaseViewModel() {
 
     fun updateLike(updateLikeRequest: UpdateLikeRequest) {
         viewModelScope.launch(coroutineExceptionHandler) {
-            tinderRepository.updateLike(updateLikeRequest)
+            homeRepository.updateLike(updateLikeRequest)
                 .collect {
                     it.body()?.let {
                         // TODO: 2021-08-30 에러 및 성공 처리
@@ -59,7 +86,7 @@ constructor(private val tinderRepository: TinderRepository) : BaseViewModel() {
 
     fun createReport(createReportRequest: CreateReportRequest) {
         viewModelScope.launch(coroutineExceptionHandler) {
-            tinderRepository.createReport(createReportRequest)
+            homeRepository.createReport(createReportRequest)
                 .collect {
                     it.body()?.let { rootResponse ->
                         // TODO: 2021-08-31 에러 및 성공 처리

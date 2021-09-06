@@ -6,6 +6,7 @@ import androidx.core.content.edit
 
 object PrefUtil {
     private const val DEF_PREF_NAME = "Sweep"
+    const val UNSELECT_TEAM_LIST = "unSelectTeamList"
 
     private val prefUtil =
         App.instance.applicationContext.getSharedPreferences(DEF_PREF_NAME, Context.MODE_PRIVATE)

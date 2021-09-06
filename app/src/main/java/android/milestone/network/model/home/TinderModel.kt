@@ -1,4 +1,4 @@
-package android.milestone.network.model.tinder
+package android.milestone.network.model.home
 
 import android.milestone.network.model.auth.UserModel
 
