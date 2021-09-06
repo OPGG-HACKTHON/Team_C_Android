@@ -52,4 +52,5 @@
     <string name="filter">필터</string>
     <string name="fragment_filter_title">홈 화면에서 보고 싶은\n팀들을 선택해주세요</string>
     <string name="fragment_filter_sub_title">활성화된 팀들의 메세지만 받아 볼 수 있어요</string>
+    <string name="total_vote">총 %d개의 투표가 진행되었어요</string>
 </resources>

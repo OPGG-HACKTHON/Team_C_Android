@@ -15,7 +15,9 @@ data class PogPlayer(
     @SerializedName("rate")
     val rate: Float = 0f,
     @SerializedName("role")
-    val role: String = ""
+    val role: String = "",
+    @SerializedName("rateRank")
+    val rateRank: Int = 0
 ) {
     fun rateString() = "${rate.toInt()}%"
 }

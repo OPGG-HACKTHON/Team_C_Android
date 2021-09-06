@@ -1,6 +1,7 @@
 package android.milestone.ui
 
 import android.milestone.R
+import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -32,4 +33,36 @@ fun ImageView.setPositionImage(position: String?) {
             else -> R.drawable.ic_jug
         }
     )
+}
+
+@BindingAdapter("setPogRate")
+@NotNull
+fun View.setPogRate(rate: Float) {
+    val params = layoutParams
+    params.width = 10 + (rate.toInt() * 5)
+    layoutParams = params
+}
+
+@BindingAdapter("setPogRateBackground")
+@NotNull
+fun View.setPogRateBackground(rateRank: Int) {
+    val background =
+        when (rateRank) {
+            1 -> {
+                R.drawable.shape_rect_radius3_blue600
+            }
+            2 -> {
+                R.drawable.shape_rect_radius3_blue500
+            }
+            3 -> {
+                R.drawable.shape_rect_radius3_blue400
+            }
+            4 -> {
+                R.drawable.shape_rect_radius3_blue300
+            }
+            else -> {
+                R.drawable.shape_rect_radius3_blue200
+            }
+        }
+    setBackgroundResource(background)
 }
