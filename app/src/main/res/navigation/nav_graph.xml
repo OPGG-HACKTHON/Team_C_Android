@@ -2,29 +2,47 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/home">
-
+    app:startDestination="@id/fragment_home">
+    
     <fragment
-        android:id="@+id/home"
+        android:id="@+id/fragment_home"
         android:name="android.milestone.ui.home.HomeFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_home">
-
+    
     </fragment>
-
+    
     <fragment
-        android:id="@+id/menu_schedule"
+        android:id="@+id/fragment_schedule"
         android:name="android.milestone.ui.schedule.ScheduleFragment"
         android:label="@string/schedule"
         tools:layout="@layout/fragment_schedule">
-
+        
+        <action
+            android:id="@+id/action_fragment_match_detail"
+            app:destination="@id/fragment_match_detail"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
-
+    
     <fragment
-        android:id="@+id/menu_history"
+        android:id="@+id/fragment_history"
         android:name="android.milestone.ui.history.HistoryFragment"
         android:label="@string/history"
         tools:layout="@layout/fragment_history">
-
+    
+    </fragment>
+    
+    <fragment
+        android:id="@+id/fragment_match_detail"
+        android:name="android.milestone.ui.match_detail.MatchDetailFragment"
+        tools:layout="@layout/fragment_match_detail">
+        
+        <argument
+            android:name="matchId"
+            android:defaultValue="0"
+            app:argType="integer" />
     </fragment>
 </navigation>

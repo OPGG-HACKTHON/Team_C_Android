@@ -4,9 +4,12 @@
     <string name="progress">진행</string>
     <string name="finish">종료</string>
     <string name="no_data">데이터가 없습니다.</string>
+    <string name="no_tinder">인기 메시지가 없습니다.</string>
     <string name="no_match">이 달은 경기가 없어요 :(</string>
     <string name="support">응원하기</string>
     <string name="mog">MOG 10</string>
+    <string name="mvp_title">스윕러들의 MVP</string>
+    <string name="match">경기</string>
     <string name="ranking">순위</string>
     <string name="mvp">MVP</string>
     <string name="team">팀</string>
@@ -26,6 +29,8 @@
     <string name="login">로그인</string>
     <string name="team_select">팀선택</string>
     <string name="nickname">닉네임</string>
+    <string name="latest_history">최근 메세지</string>
+    <string name="best_history">명예의 전당</string>
     <string name="fragment_login_title">클린하게 즐기는 LCK</string>
     <string name="fragment_nickname_title">닉네임을 입력해주세요</string>
     <string name="fragment_nickname_sub_title">띄어쓰기 포함 9글자까지 가능해요</string>
@@ -42,6 +47,8 @@
     <string name="dialog_report_tinder_abuse">욕설 및 비방</string>
     <string name="report">신고하기</string>
     <string name="cancel">취소</string>
+    <string name="count">%d개</string>
+    <string name="pog_result">총 %d개의 투표가 진행되었어요.</string>
     <string name="filter">필터</string>
     <string name="fragment_filter_title">홈 화면에서 보고 싶은\n팀들을 선택해주세요</string>
     <string name="fragment_filter_sub_title">활성화된 팀들의 메세지만 받아 볼 수 있어요</string>

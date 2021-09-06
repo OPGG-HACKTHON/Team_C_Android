@@ -19,5 +19,5 @@ data class TeamRanking(
     @SerializedName("win")
     val win: Int = 0
 ) {
-    val rateString = "$rate"
+    fun rateString() = "$rate%"
 }

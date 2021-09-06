@@ -14,7 +14,7 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>(R.layout.fragment_h
         binding.pager.adapter = HistoryTabAdapter(this)
 
         TabLayoutMediator(binding.tab, binding.pager) { tab, position ->
-            tab.text = if (position == 0) "최근 메세지" else "명예의 전당"
+            tab.text = getString(if (position == 0) R.string.latest_history else R.string.best_history)
         }.attach()
     }
 }

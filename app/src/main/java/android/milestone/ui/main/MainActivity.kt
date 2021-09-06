@@ -12,6 +12,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -19,13 +20,15 @@ import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), StartDestination {
 
     private val scheduleViewModel: ScheduleViewModel by viewModels()
 
     private val rankingViewModel: RankingViewModel by viewModels()
 
     private val viewModel: MainViewModel by viewModels()
+
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,24 +38,17 @@ class MainActivity : AppCompatActivity() {
         rankingViewModel.updateData()
     }
 
-
     private fun initViews() {
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(
-            this,
-            R.layout.activity_main
-        )
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 
         binding.navigation.setupWithNavController(navHostFragment.navController)
 
         navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
-            // binding.navigation.isVisible = destination.id !in listOf() // 추후 화면 추가됐을 때 사용
+            binding.navigation.isVisible = destination.id !in listOf(R.id.fragment_match_detail)
         }
 
-        binding.navigation.selectedItemId = R.id.menu_home
-        binding.navigation.menu[1].isChecked = true
-        binding.navigation.transform(binding.fab, false)
+        goToStartDestination()
 
         initNavigation(binding, navHostFragment)
     }
@@ -86,14 +82,14 @@ class MainActivity : AppCompatActivity() {
             }
 
             when (it.itemId) {
-                R.id.menu_history -> {
-                    navHostFragment.findNavController().navigate(R.id.menu_history)
+                R.id.fragment_history -> {
+                    navHostFragment.findNavController().navigate(R.id.fragment_history)
                 }
                 R.id.menu_home -> {
-                    navHostFragment.findNavController().navigate(R.id.home)
+                    navHostFragment.findNavController().navigate(R.id.fragment_home)
                 }
                 else -> {
-                    navHostFragment.findNavController().navigate(R.id.menu_schedule)
+                    navHostFragment.findNavController().navigate(R.id.fragment_schedule)
                 }
             }
             true
@@ -106,5 +102,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         dialog.show(supportFragmentManager, "")
+    }
+
+    override fun goToStartDestination() {
+        binding.navigation.selectedItemId = R.id.menu_home
+        binding.navigation.menu[1].isChecked = true
+        binding.navigation.transform(binding.fab, false)
     }
 }

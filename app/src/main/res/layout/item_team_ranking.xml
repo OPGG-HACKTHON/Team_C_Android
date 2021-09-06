@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
-                android:text="@{String.valueOf(item.rate)}"
+                android:text="@{item.rateString}"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold" />

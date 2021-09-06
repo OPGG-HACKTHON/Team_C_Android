@@ -6,13 +6,17 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import org.jetbrains.annotations.NotNull
 
-@BindingAdapter("setImage")
+@BindingAdapter("setImage", "isCircleCrop", requireAll = false)
 @NotNull
-fun ImageView.setImage(imageUrl: String?) {
+fun ImageView.setImage(imageUrl: String?, isCircleCrop: Boolean = false) {
     imageUrl?.let {
-        Glide.with(this)
-            .load(it)
-            .into(this)
+        var glide = Glide.with(this).load(it)
+
+        if (isCircleCrop) {
+            glide = glide.circleCrop()
+        }
+
+        glide.into(this)
     }
 }
 

@@ -25,6 +25,8 @@ class ScheduleViewModel @Inject constructor(private val repository: LeagueReposi
         it?.map { schedule -> ScheduleUiModel(schedule) }
     }
 
+    fun findScheduleById(matchId: Int) = scheduleData.value?.find { it.schedule.id == matchId }
+
     fun changeSearchRange(interval: Int = 1) {
         _searchRange.value = _searchRange.value?.plusMonths(interval.toLong())
         updateData()

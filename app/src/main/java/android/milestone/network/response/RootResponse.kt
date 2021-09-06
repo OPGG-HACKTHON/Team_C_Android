@@ -11,5 +11,4 @@ data class RootResponse(
     val status: Int,
     @SerializedName("success")
     val success: Boolean
-
 )
