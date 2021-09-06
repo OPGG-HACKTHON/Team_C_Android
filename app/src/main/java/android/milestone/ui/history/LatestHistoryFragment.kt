@@ -4,6 +4,7 @@ import android.milestone.R
 import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentLatestHistoryBinding
 import android.milestone.ui.schedule.adapter.HistoryRecyclerViewAdapter
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 
 class LatestHistoryFragment : BaseFragment<FragmentLatestHistoryBinding>(R.layout.fragment_latest_history) {
@@ -19,6 +20,7 @@ class LatestHistoryFragment : BaseFragment<FragmentLatestHistoryBinding>(R.layou
             binding.layoutRefresh.isRefreshing = false
         }
         viewModel.latestHistory.observe(viewLifecycleOwner) {
+            binding.tvError.isVisible = it.isNullOrEmpty()
             adapter.submitList(it)
         }
     }
