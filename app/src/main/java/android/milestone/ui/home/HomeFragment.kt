@@ -75,8 +75,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                 startActivity(intent)
             }
             ivPogStatus.setOnClickListener {
-                val dialog = POGBottomSheetDialog.instance()
-                dialog.show(parentFragmentManager, "")
+                val status = viewModel.currentGameResponse.value?.data?.status
+                if (status == 1 || status == 0) {
+                    val dialog = POGBottomSheetDialog.instance()
+                    dialog.show(parentFragmentManager, "")
+                } else {
+                    toastShort("진행중인 경기가 없습니다.")
+                }
             }
         }
     }

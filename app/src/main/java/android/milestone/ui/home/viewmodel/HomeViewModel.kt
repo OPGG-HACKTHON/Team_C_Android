@@ -38,25 +38,25 @@ constructor(
     private val _playerOfGameResponse = MutableLiveData<PlayerOfGameResponse>()
     val playerOfGameResponse: LiveData<PlayerOfGameResponse> get() = _playerOfGameResponse
 
-    private val _scheduleData =
-        homeRepository.getCurrentGame().asLiveData(coroutineExceptionHandler)
-            .map {
-                val currentGameModel = it.data
-                val schedule = currentGameModel?.run {
-                    Schedule(
-                        aTeamIcon = aTeam.icon,
-                        aTeamName = aTeam.name,
-                        aTeamScore = aTeamScore,
-                        bTeamIcon = bTeam.icon,
-                        bTeamName = bTeam.name,
-                        bTeamScore = bTeamScore,
-                        id = id,
-                        startTime = startTime,
-                        status = status
-                    )
-                }
-                schedule
-            }
+    val currentGameResponse = homeRepository.getCurrentGame().asLiveData(coroutineExceptionHandler)
+
+    private val _scheduleData = currentGameResponse.map {
+        val currentGameModel = it.data
+        val schedule = currentGameModel?.run {
+            Schedule(
+                aTeamIcon = aTeam.icon,
+                aTeamName = aTeam.name,
+                aTeamScore = aTeamScore,
+                bTeamIcon = bTeam.icon,
+                bTeamName = bTeam.name,
+                bTeamScore = bTeamScore,
+                id = id,
+                startTime = startTime,
+                status = status
+            )
+        }
+        schedule
+    }
     val scheduleData: LiveData<ScheduleUiModel?> = _scheduleData.map { schedule ->
         schedule?.let {
             ScheduleUiModel(it)
