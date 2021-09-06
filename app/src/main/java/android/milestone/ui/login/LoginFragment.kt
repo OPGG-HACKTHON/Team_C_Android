@@ -85,7 +85,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
     private fun setToken(key: String, value: String) {
         PrefUtil.setStringValue(key, value)
-        Log.e(key, value)
     }
     // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
     // eyJ1c2VySWQiOjQwLCJpYXQiOjE2MzA0MTE3MTIsImV4cCI6MTYzMDQxNTMxMiwiaXNzIjoibWlsZXN0b25lIn0.
