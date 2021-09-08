@@ -46,23 +46,12 @@ fun View.setPogRate(rate: Float) {
 @BindingAdapter("setPogRateBackground")
 @NotNull
 fun View.setPogRateBackground(rateRank: Int) {
-    val background =
-        when (rateRank) {
-            1 -> {
-                R.drawable.shape_rect_radius3_blue600
-            }
-            2 -> {
-                R.drawable.shape_rect_radius3_blue500
-            }
-            3 -> {
-                R.drawable.shape_rect_radius3_blue400
-            }
-            4 -> {
-                R.drawable.shape_rect_radius3_blue300
-            }
-            else -> {
-                R.drawable.shape_rect_radius3_blue200
-            }
-        }
-    setBackgroundResource(background)
+    val backgroundArray by lazy { resources.obtainTypedArray(R.array.pog_bar_background) }
+
+    setBackgroundResource(
+        backgroundArray.getResourceId(
+            rateRank - 1,
+            R.drawable.shape_rect_radius3_blue200
+        )
+    )
 }
