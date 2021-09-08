@@ -5,7 +5,6 @@ import android.milestone.R
 import android.milestone.databinding.FragmentPogBottomSheetBinding
 import android.milestone.ui.home.adapter.POGBottomSheetTabAdapter
 import android.milestone.ui.home.viewmodel.HomeViewModel
-import android.milestone.ui.schedule.adapter.ScheduleTabAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -47,7 +46,11 @@ class POGBottomSheetDialog : BottomSheetDialogFragment() {
                 TabLayoutMediator(binding.tab, binding.pager) { tab, position ->
                     val teamsOfGameInfo = playerOfGameResponse.data
                     tab.text =
-                        if (position == 0) teamsOfGameInfo.aTeam.name else teamsOfGameInfo.bTeam.name
+                        if (position == 0) {
+                            teamsOfGameInfo.aTeam.name
+                        } else {
+                            teamsOfGameInfo.bTeam.name
+                        }
                 }.attach()
             })
         }
