@@ -20,10 +20,11 @@ constructor(private val homeRepository: HomeRepository) : BaseViewModel() {
     private val gameState = homeRepository.getCurrentGame().asLiveData(coroutineExceptionHandler)
         .map { currentGameResponse ->
             val currentGameModel = currentGameResponse.data
-            if (currentGameModel?.status == 1)
+            if (currentGameModel?.status == 1) {
                 currentGameModel.id
-            else
+            } else {
                 null
+            }
         }
 
     fun createTinder(msg: String) {
