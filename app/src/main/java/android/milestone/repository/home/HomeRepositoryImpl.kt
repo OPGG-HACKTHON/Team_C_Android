@@ -6,6 +6,7 @@ import android.milestone.network.request.UpdateLikeRequest
 import android.milestone.network.response.RootResponse
 import android.milestone.network.response.home.CurrentGameResponse
 import android.milestone.network.response.home.TinderResponse
+import android.milestone.network.response.match_detail.PlayerOfGameResponse
 import android.milestone.network.response.tinder.TopTinderResponse
 import android.milestone.network.source.RemoteDataSource
 import kotlinx.coroutines.flow.Flow
@@ -40,5 +41,9 @@ class HomeRepositoryImpl
 
     override fun getTopTinder(gameId: Int): Flow<Response<TopTinderResponse>> = flow {
         emit(remoteDataSource.getTopTinder(gameId))
+    }
+
+    override fun getPogOfGame(gameId: Int?): Flow<Response<PlayerOfGameResponse>> = flow {
+        emit(remoteDataSource.getPogOfGame(gameId))
     }
 }

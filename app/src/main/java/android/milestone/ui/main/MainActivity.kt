@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity(), StartDestination {
 
     private fun showWriteTinderDialog() {
         val dialog = WriteTinderDialog.instance { msg ->
-            viewModel.createTinder(CreateTinderRequest(msg))
+            viewModel.createTinder(msg)
         }
 
         dialog.show(supportFragmentManager, "")

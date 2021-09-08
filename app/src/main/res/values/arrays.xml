@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="pog_bar_background">
+        <item>@drawable/shape_rect_radius3_blue600</item>
+        <item>@drawable/shape_rect_radius3_blue500</item>
+        <item>@drawable/shape_rect_radius3_blue400</item>
+        <item>@drawable/shape_rect_radius3_blue300</item>
+        <item>@drawable/shape_rect_radius3_blue200</item>
+    </array>
+</resources>

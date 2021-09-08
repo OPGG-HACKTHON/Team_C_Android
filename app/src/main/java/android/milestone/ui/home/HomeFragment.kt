@@ -7,6 +7,7 @@ import android.milestone.databinding.FragmentHomeBinding
 import android.milestone.network.request.CreateReportRequest
 import android.milestone.network.request.UpdateLikeRequest
 import android.milestone.toastShort
+import android.milestone.ui.dialog.POGBottomSheetDialog
 import android.milestone.ui.dialog.ReportTinderDialog
 import android.milestone.ui.home.adapter.HomeAdapter
 import android.milestone.ui.home.viewmodel.HomeViewModel
@@ -73,6 +74,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                 val intent = Intent(requireContext(), FilterActivity::class.java)
                 startActivity(intent)
             }
+            ivPogStatus.setOnClickListener {
+                val status = viewModel.currentGameResponse.value?.data?.status
+                if (status == 1 || status == 0) {
+                    val dialog = POGBottomSheetDialog.instance()
+                    dialog.show(parentFragmentManager, "")
+                } else {
+                    toastShort("진행중인 경기가 없습니다.")
+                }
+            }
         }
     }
 
@@ -113,8 +123,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                     // TODO: 2021-09-04 경기 없음 처리
                 } else {
                     binding.item = scheduleData
-                    binding.itemGameScore.tvFirstTeamScore.setTextColor(ContextCompat.getColor(binding.root.context, scheduleData.teamAScoreColor))
-                    binding.itemGameScore.tvSecondTeamScore.setTextColor(ContextCompat.getColor(binding.root.context, scheduleData.teamBScoreColor))
+                    binding.itemGameScore.tvFirstTeamScore.setTextColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            scheduleData.teamAScoreColor
+                        )
+                    )
+                    binding.itemGameScore.tvSecondTeamScore.setTextColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            scheduleData.teamBScoreColor
+                        )
+                    )
                     // TODO: 2021-09-04 경기 시작전 시간 카운트 처리
                     // TODO: 2021-09-04 어떻게 계속 데이터를 갱신할건지 고민
                 }
