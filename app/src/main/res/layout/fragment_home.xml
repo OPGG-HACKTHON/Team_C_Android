@@ -3,16 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="item"
             type="android.milestone.ui.schedule.ui_model.ScheduleUiModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingHorizontal="20dp"
         android:paddingTop="24dp">
-        
+
         <ImageView
             android:id="@+id/iv_my"
             android:layout_width="wrap_content"
@@ -20,7 +22,7 @@
             android:src="@drawable/ic_my"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-        
+
         <ImageView
             android:id="@+id/iv_pog_status"
             android:layout_width="wrap_content"
@@ -31,7 +33,7 @@
             app:layout_constraintBottom_toBottomOf="@id/iv_my"
             app:layout_constraintEnd_toStartOf="@id/iv_filter"
             app:layout_constraintTop_toTopOf="@id/iv_my" />
-        
+
         <ImageView
             android:id="@+id/iv_filter"
             android:layout_width="wrap_content"
@@ -41,75 +43,87 @@
             app:layout_constraintBottom_toBottomOf="@id/iv_my"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/iv_my" />
-    
+
         <include
             android:id="@+id/item_game_score"
-            layout="@layout/item_game_score"
             item="@{item}"
+            layout="@layout/item_game_score"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_my" />
-    
-        <com.yuyakaido.android.cardstackview.CardStackView
-            android:id="@+id/cv_tinder"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_tinder"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:clipToPadding="false"
-            android:padding="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.4"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/item_game_score" />
+            app:layout_constraintTop_toBottomOf="@id/item_game_score">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cv_tinder">
-        
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/lv_pass"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_weight="1"
-                app:lottie_autoPlay="false"
-                app:lottie_loop="false"
-                app:lottie_rawRes="@raw/emoji_pass" />
-        
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/lv_dislike"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_weight="1"
-                app:lottie_autoPlay="false"
-                app:lottie_loop="false"
-                app:lottie_rawRes="@raw/emoji_dislkie" />
-        
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/lv_best"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_weight="1"
-                app:lottie_autoPlay="false"
-                app:lottie_loop="false"
-                app:lottie_rawRes="@raw/emoji_best" />
-        
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/lv_like"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_weight="1"
-                app:lottie_autoPlay="false"
-                app:lottie_loop="false"
-                app:lottie_rawRes="@raw/emoji_like" />
-    
-        </LinearLayout>
+            <com.yuyakaido.android.cardstackview.CardStackView
+                android:id="@+id/cv_tinder"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:clipToPadding="false"
+                android:padding="4dp"
+                app:layout_constraintBottom_toTopOf="@id/ll_emoji"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/ll_emoji"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lv_pass"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_weight="1"
+                    app:lottie_autoPlay="false"
+                    app:lottie_loop="false"
+                    app:lottie_rawRes="@raw/emoji_pass" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lv_dislike"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_weight="1"
+                    app:lottie_autoPlay="false"
+                    app:lottie_loop="false"
+                    app:lottie_rawRes="@raw/emoji_dislkie" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lv_best"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_weight="1"
+                    app:lottie_autoPlay="false"
+                    app:lottie_loop="false"
+                    app:lottie_rawRes="@raw/emoji_best" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lv_like"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_weight="1"
+                    app:lottie_autoPlay="false"
+                    app:lottie_loop="false"
+                    app:lottie_rawRes="@raw/emoji_like" />
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
