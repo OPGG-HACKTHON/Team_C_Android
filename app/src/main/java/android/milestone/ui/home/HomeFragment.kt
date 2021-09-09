@@ -10,16 +10,22 @@ import android.milestone.toastShort
 import android.milestone.ui.dialog.POGBottomSheetDialog
 import android.milestone.ui.dialog.ReportTinderDialog
 import android.milestone.ui.home.adapter.HomeAdapter
+import android.milestone.ui.home.adapter.POGListTabAdapter
 import android.milestone.ui.home.viewmodel.HomeViewModel
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import com.google.android.material.tabs.TabLayoutMediator
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.CardStackListener
 import com.yuyakaido.android.cardstackview.Direction
 import com.yuyakaido.android.cardstackview.SwipeAnimationSetting
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), CardStackListener {
@@ -83,6 +89,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                     toastShort("진행중인 경기가 없습니다.")
                 }
             }
+            pager.adapter = POGListTabAdapter(this@HomeFragment)
         }
     }
 
@@ -103,7 +110,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
             tinderResponse.observe(viewLifecycleOwner, { tinderResponse ->
                 homeAdapter.submitList(tinderResponse.data)
             })
+            pogListResponse.observe(viewLifecycleOwner, { pogListResponse ->
+                TabLayoutMediator(binding.tab, binding.pager) { tab, position ->
+                    val pogListDataResponse = pogListResponse.data
+                    tab.text =
+                        if (position == 0) {
+                            pogListDataResponse.aTeam.name
+                        } else {
+                            pogListDataResponse.bTeam.name
+                        }
+                }.attach()
 
+                lifecycleScope.launch {
+                    repeat(5) {
+                        delay(1000)
+                        binding.progress.progress = binding.progress.progress - 20
+                        binding.tvTime.text = getString(R.string.timer, 4 - it)
+                    }
+                }
+            })
             rootResponse.observe(viewLifecycleOwner, { rootResponse ->
                 if (rootResponse.success) {
                     toastShort(rootResponse.data)
@@ -145,8 +170,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     override fun onCardDragging(direction: Direction?, ratio: Float) {}
 
     override fun onCardSwiped(direction: Direction?) {
-        if (cardStackLayoutManager.topPosition == homeAdapter.itemCount - 2) {
+        if (cardStackLayoutManager.topPosition == homeAdapter.itemCount) {
             viewModel.getTinder()
+            binding.clTinder.isVisible = false
+            binding.clPogVote.isVisible = true
+            viewModel.getPogList()
         }
         updateLike(direction)
     }

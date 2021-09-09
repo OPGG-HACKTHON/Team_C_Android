@@ -2,9 +2,11 @@ package android.milestone.ui.home.viewmodel
 
 import android.milestone.base.BaseViewModel
 import android.milestone.network.request.CreateReportRequest
+import android.milestone.network.request.PogVoteRequest
 import android.milestone.network.request.UpdateLikeRequest
 import android.milestone.network.response.RootResponse
 import android.milestone.network.response.home.TinderResponse
+import android.milestone.network.response.home.pog_list.PogListResponse
 import android.milestone.network.response.match_detail.PlayerOfGameResponse
 import android.milestone.network.response.schedule.Schedule
 import android.milestone.repository.home.HomeRepository
@@ -38,6 +40,11 @@ constructor(
     private val _playerOfGameResponse = MutableLiveData<PlayerOfGameResponse>()
     val playerOfGameResponse: LiveData<PlayerOfGameResponse> get() = _playerOfGameResponse
 
+    private val _pogListResponse = MutableLiveData<PogListResponse>()
+    val pogListResponse: LiveData<PogListResponse> get() = _pogListResponse
+
+    private val pogVoteRequestList = mutableListOf<PogVoteRequest>()
+
     val currentGameResponse = homeRepository.getCurrentGame().asLiveData(coroutineExceptionHandler)
 
     private val _scheduleData = currentGameResponse.map {
@@ -60,6 +67,28 @@ constructor(
     val scheduleData: LiveData<ScheduleUiModel?> = _scheduleData.map { schedule ->
         schedule?.let {
             ScheduleUiModel(it)
+        }
+    }
+
+    fun postPogVote(pogVoteRequestList: List<PogVoteRequest>) {
+        viewModelScope.launch(coroutineExceptionHandler) {
+            homeRepository.postPogVote(pogVoteRequestList)
+                .collect {
+                    if (it.body()?.success == true) {
+                        _rootResponse.value = it.body()
+                    }
+                }
+        }
+    }
+
+    fun getPogList() {
+        viewModelScope.launch(coroutineExceptionHandler) {
+            homeRepository.getPogList()
+                .collect {
+                    if (it.body()?.success == true) {
+                        _pogListResponse.value = it.body()
+                    }
+                }
         }
     }
 
@@ -117,5 +146,8 @@ constructor(
 
     fun setReportMessage(msg: String) {
         _reportMessage.value = msg
+    }
+
+    fun setPogVoteCount(gamePlayerId: Int) {
     }
 }

@@ -56,4 +56,5 @@
     <string name="total_vote">총 %d개의 투표가 진행되었어요</string>
     <string name="fragment_pog_vote_body">제일 잘 하고 있는 선수를 탭해주세요!</string>
     <string name="ok">확인</string>
+    <string name="timer">00:0%d</string>
 </resources>
