@@ -55,4 +55,5 @@
     <string name="fragment_filter_sub_title">활성화된 팀들의 메세지만 받아 볼 수 있어요</string>
     <string name="total_vote">총 %d개의 투표가 진행되었어요</string>
     <string name="fragment_pog_vote_body">제일 잘 하고 있는 선수를 탭해주세요!</string>
+    <string name="ok">확인</string>
 </resources>

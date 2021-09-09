@@ -14,7 +14,7 @@ abstract class BaseViewHolder<B : ViewDataBinding, T>(
 ) : RecyclerView.ViewHolder(
     LayoutInflater.from(parent?.context).inflate(layoutResId, parent, false)
 ) {
-    protected val binding: B = DataBindingUtil.bind(itemView)!!
+     val binding: B = DataBindingUtil.bind(itemView)!!
 
     open fun bind(item: T, onClick: (T) -> Unit = {}) {
         try {
@@ -29,4 +29,6 @@ abstract class BaseViewHolder<B : ViewDataBinding, T>(
             e.printStackTrace()
         }
     }
+
+    open fun setSingleSelectPosition(selectPosition : Int){}
 }
