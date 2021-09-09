@@ -1,5 +1,6 @@
 package android.milestone.ui.home
 
+import android.milestone.Naming.POSITION
 import android.milestone.R
 import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentPogResultBinding
@@ -38,7 +39,6 @@ class POGResultFragment : BaseFragment<FragmentPogResultBinding>(R.layout.fragme
     }
 
     companion object {
-        private const val POSITION = "position"
 
         fun instance(position: Int) = POGResultFragment().apply {
             arguments = Bundle().apply {
