@@ -76,6 +76,6 @@ interface Api {
     suspend fun getPogList(): Response<PogListResponse>
 
     @POST("/pog/vote")
-    suspend fun postPogVote(@Body pogVoteRequestList: List<PogVoteRequest>): Response<RootResponse>
+    suspend fun postPogVote(@Body pogVoteRequestList: PogVoteListRequest): Response<RootResponse>
 
 }

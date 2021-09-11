@@ -14,6 +14,7 @@ import android.milestone.ui.schedule.ui_model.ScheduleUiModel
 import android.milestone.util.PrefUtil
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -27,6 +28,9 @@ constructor(
 
     private val _tinderResponse = MutableLiveData<TinderResponse>()
     val tinderResponse: LiveData<TinderResponse> get() = _tinderResponse
+
+    private val _postPogVoteResponse = MutableLiveData<RootResponse>()
+    val postPogVoteResponse: LiveData<RootResponse> get() = _postPogVoteResponse
 
     private val _rootResponse = MutableLiveData<RootResponse>()
     val rootResponse: LiveData<RootResponse> get() = _rootResponse
@@ -43,9 +47,16 @@ constructor(
     private val _pogListResponse = MutableLiveData<PogListResponse>()
     val pogListResponse: LiveData<PogListResponse> get() = _pogListResponse
 
+    private val _progress = MutableLiveData(100)
+    val progress: LiveData<Int> get() = _progress
+
+    private val _timerCount = MutableLiveData(5)
+    val timerCount: LiveData<Int> get() = _timerCount
+
     private val pogVoteRequestList = mutableListOf<PogVoteRequest>()
 
     val currentGameResponse = homeRepository.getCurrentGame().asLiveData(coroutineExceptionHandler)
+
 
     private val _scheduleData = currentGameResponse.map {
         val currentGameModel = it.data
@@ -70,26 +81,32 @@ constructor(
         }
     }
 
-    fun postPogVote(pogVoteRequestList: List<PogVoteRequest>) {
+    private fun postPogVote(pogVoteRequestList: List<PogVoteRequest>) {
         viewModelScope.launch(coroutineExceptionHandler) {
             homeRepository.postPogVote(pogVoteRequestList)
                 .collect {
                     if (it.body()?.success == true) {
-                        _rootResponse.value = it.body()
+                        _postPogVoteResponse.value = it.body()
                     }
                 }
         }
     }
 
-    fun getPogList() {
+    suspend fun getPogList() {
         viewModelScope.launch(coroutineExceptionHandler) {
             homeRepository.getPogList()
                 .collect {
                     if (it.body()?.success == true) {
                         _pogListResponse.value = it.body()
+                        repeat(5) {
+                            delay(1000)
+                            _progress.value = _progress.value?.minus(20)
+                            _timerCount.value = _timerCount.value?.minus(1)
+                        }
                     }
                 }
-        }
+        }.join()
+        postPogVote(pogVoteRequestList)
     }
 
     fun getPogOfGame() {
@@ -138,6 +155,11 @@ constructor(
                     }
                 }
         }
+    }
+
+    fun initTimer() {
+        _progress.value = 100
+        _timerCount.value = 5
     }
 
     fun setCurrentTinderId(tinderId: Int) {

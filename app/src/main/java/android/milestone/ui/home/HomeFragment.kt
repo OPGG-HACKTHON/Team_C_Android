@@ -120,14 +120,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                             pogListDataResponse.bTeam.name
                         }
                 }.attach()
+            })
+            postPogVoteResponse.observe(viewLifecycleOwner, {
+                binding.clTinder.isVisible = true
+                binding.clPogVote.isVisible = false
+                initTimer()
+            })
 
-                lifecycleScope.launch {
-                    repeat(5) {
-                        delay(1000)
-                        binding.progress.progress = binding.progress.progress - 20
-                        binding.tvTime.text = getString(R.string.timer, 4 - it)
-                    }
-                }
+            progress.observe(viewLifecycleOwner, {
+                binding.progress.progress = it
+            })
+
+            timerCount.observe(viewLifecycleOwner, {
+                binding.tvTime.text = getString(R.string.timer, it)
             })
             rootResponse.observe(viewLifecycleOwner, { rootResponse ->
                 if (rootResponse.success) {
@@ -174,7 +179,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
             viewModel.getTinder()
             binding.clTinder.isVisible = false
             binding.clPogVote.isVisible = true
-            viewModel.getPogList()
+            lifecycleScope.launch {
+                viewModel.getPogList()
+            }
         }
         updateLike(direction)
     }

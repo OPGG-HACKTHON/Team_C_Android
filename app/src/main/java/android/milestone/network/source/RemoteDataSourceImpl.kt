@@ -48,5 +48,5 @@ constructor(private val api: Api) : RemoteDataSource {
     override suspend fun getPogList(): Response<PogListResponse> = api.getPogList()
 
     override suspend fun postPogVote(pogVoteRequestList: List<PogVoteRequest>): Response<RootResponse> =
-        api.postPogVote(pogVoteRequestList)
+        api.postPogVote(PogVoteListRequest(pogVoteRequestList))
 }
