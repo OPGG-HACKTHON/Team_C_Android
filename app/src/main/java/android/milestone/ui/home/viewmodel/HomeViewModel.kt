@@ -149,5 +149,15 @@ constructor(
     }
 
     fun setPogVoteCount(gamePlayerId: Int) {
+        val pogVoteRequest = pogVoteRequestList.find {
+            it.gamePlayerId == gamePlayerId
+        }
+        if (pogVoteRequest == null) {
+            pogVoteRequestList.add(PogVoteRequest(gamePlayerId, 1))
+        } else {
+            val index = pogVoteRequestList.indexOf(pogVoteRequest)
+            pogVoteRequestList[index] = pogVoteRequest.copy(count = pogVoteRequest.count + 1)
+        }
     }
+
 }
