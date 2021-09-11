@@ -4,7 +4,6 @@ import android.content.Intent
 import android.milestone.R
 import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentHomeBinding
-import android.milestone.network.request.CreateReportRequest
 import android.milestone.network.request.UpdateLikeRequest
 import android.milestone.toastShort
 import android.milestone.ui.dialog.POGBottomSheetDialog
@@ -24,7 +23,6 @@ import com.yuyakaido.android.cardstackview.CardStackListener
 import com.yuyakaido.android.cardstackview.Direction
 import com.yuyakaido.android.cardstackview.SwipeAnimationSetting
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -45,11 +43,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                 setCanScrollHorizontal(true)
                 setDirections(Direction.FREEDOM)
             }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.getTinder()
     }
 
     override fun initViews() {
@@ -107,6 +100,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
     private fun initViewModels() {
         viewModel.run {
+            getTinder()
             tinderResponse.observe(viewLifecycleOwner, { tinderResponse ->
                 homeAdapter.submitList(tinderResponse.data)
             })
@@ -139,12 +133,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                     toastShort(rootResponse.data)
                 } else {
                     toastShort(rootResponse.msg)
-                }
-            })
-
-            reportMessage.observe(viewLifecycleOwner, { reportMessage ->
-                currentTinderId.value?.let { currentTinderId ->
-                    createReport(CreateReportRequest(currentTinderId, reportMessage))
                 }
             })
 

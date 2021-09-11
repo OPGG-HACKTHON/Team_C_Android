@@ -38,9 +38,6 @@ constructor(
     private val _currentTinderId = MutableLiveData<Int>()
     val currentTinderId: LiveData<Int> get() = _currentTinderId
 
-    private val _reportMessage = MutableLiveData<String>()
-    val reportMessage: LiveData<String> get() = _reportMessage
-
     private val _playerOfGameResponse = MutableLiveData<PlayerOfGameResponse>()
     val playerOfGameResponse: LiveData<PlayerOfGameResponse> get() = _playerOfGameResponse
 
@@ -137,11 +134,7 @@ constructor(
     fun updateLike(updateLikeRequest: UpdateLikeRequest) {
         viewModelScope.launch(coroutineExceptionHandler) {
             homeRepository.updateLike(updateLikeRequest)
-                .collect {
-                    it.body()?.let {
-                        // TODO: 2021-08-30 에러 및 성공 처리
-                    }
-                }
+                .collect()
         }
     }
 
@@ -164,10 +157,6 @@ constructor(
 
     fun setCurrentTinderId(tinderId: Int) {
         _currentTinderId.value = tinderId
-    }
-
-    fun setReportMessage(msg: String) {
-        _reportMessage.value = msg
     }
 
     fun setPogVoteCount(gamePlayerId: Int) {
