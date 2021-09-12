@@ -19,6 +19,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
@@ -104,8 +105,10 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
             singUpResponse
                 .observe(viewLifecycleOwner, { signUpResponse ->
                     if (signUpResponse.success) {
-                        val intent = Intent(requireContext(), MainActivity::class.java)
-                        startActivity(intent)
+                        val action =
+                            NicknameFragmentDirections.actionNicknameToComplete(binding.etNickname.text.toString())
+                        this@NicknameFragment.findNavController()
+                            .navigate(action)
                     } else {
                         toastShort(signUpResponse.data)
                     }

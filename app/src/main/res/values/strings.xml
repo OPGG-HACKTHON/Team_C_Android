@@ -29,6 +29,7 @@
     <string name="login">로그인</string>
     <string name="team_select">팀선택</string>
     <string name="nickname">닉네임</string>
+    <string name="sign_up_complete">회원가입 완료</string>
     <string name="latest_history">최근 메세지</string>
     <string name="best_history">명예의 전당</string>
     <string name="fragment_login_title">소통을 새롭고\n클린하게</string>
@@ -40,6 +41,7 @@
     <string name="fragment_team_select_title">응원팀을 선택해 주세요</string>
     <string name="fragment_team_select_sub_title">팀 선택 시 한 달 동안 변경이\n불가능하니 신중히 선택해 주세요</string>
     <string name="fragment_team_select_after_select">나중에 선택할래요</string>
+    <string name="fragment_sign_up_complete_title">%s님,\n가입을 환영합니다!</string>
     <string name="pass">흠</string>
     <string name="dislike">싫어요!</string>
     <string name="like">좋아요!</string>
