@@ -35,5 +35,8 @@
         android:label="@string/nickname"
         tools:layout="@layout/fragment_nickname">
 
+        <action
+            android:id="@+id/action_nickname_to_team_select"
+            app:destination="@id/team_select" />
     </fragment>
 </navigation>
