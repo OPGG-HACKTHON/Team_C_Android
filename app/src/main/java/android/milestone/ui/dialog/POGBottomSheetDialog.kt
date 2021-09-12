@@ -65,6 +65,7 @@ class POGBottomSheetDialog : BottomSheetDialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return BottomSheetDialog(requireContext(), R.style.pogBottomDialog).apply {
             behavior.state = BottomSheetBehavior.STATE_EXPANDED
+            setCanceledOnTouchOutside(true)
         }
     }
 
