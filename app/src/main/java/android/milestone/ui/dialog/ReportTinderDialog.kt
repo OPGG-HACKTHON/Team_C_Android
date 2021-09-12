@@ -6,7 +6,9 @@ import android.milestone.databinding.DialogReportTinderBinding
 import android.milestone.network.request.CreateReportRequest
 import android.milestone.toastShort
 import android.milestone.ui.home.viewmodel.HomeViewModel
+import android.milestone.util.EventObserver
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -27,27 +29,33 @@ class ReportTinderDialog :
             }
             tvReportNickname.setOnClickListener {
                 createReport(tvReportNickname.text.toString())
-                dismiss()
             }
             tvReportPlayerTeam.setOnClickListener {
                 createReport(tvReportPlayerTeam.text.toString())
-                dismiss()
             }
             tvReportAbuse.setOnClickListener {
                 createReport(tvReportAbuse.text.toString())
-                dismiss()
             }
         }
     }
 
     private fun initViewModels() {
         viewModel.run {
-            rootResponse.observe(viewLifecycleOwner, { rootResponse ->
+            rootResponse.observe(viewLifecycleOwner, EventObserver { rootResponse ->
                 if (rootResponse.success) {
-                    toastShort(rootResponse.data)
+                    showReportCompleteDialog()
+                    dismiss()
                 }
             })
         }
+    }
+
+    private fun showReportCompleteDialog() {
+        val dialog = ReportCompleteDialog.instance(
+            dialogHeightRatio = 0.2f,
+            dialogWidthRatio = 0.811111f
+        )
+        dialog.show(parentFragmentManager, "")
     }
 
     private fun createReport(msg: String) {
