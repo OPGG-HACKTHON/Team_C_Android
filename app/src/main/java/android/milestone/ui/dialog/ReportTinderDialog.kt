@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.milestone.R
 import android.milestone.databinding.DialogReportTinderBinding
+import android.milestone.network.request.CreateReportRequest
 import android.milestone.ui.home.viewmodel.HomeViewModel
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -65,17 +66,23 @@ class ReportTinderDialog() : DialogFragment() {
                 dismiss()
             }
             tvReportNickname.setOnClickListener {
-                viewModel.setReportMessage(tvReportNickname.text.toString())
+                createReport(tvReportNickname.text.toString())
                 dismiss()
             }
             tvReportPlayerTeam.setOnClickListener {
-                viewModel.setReportMessage(tvReportPlayerTeam.text.toString())
+                createReport(tvReportPlayerTeam.text.toString())
                 dismiss()
             }
             tvReportAbuse.setOnClickListener {
-                viewModel.setReportMessage(tvReportAbuse.text.toString())
+                createReport(tvReportAbuse.text.toString())
                 dismiss()
             }
+        }
+    }
+
+    private fun createReport(msg: String) {
+        viewModel.currentTinderId.value?.let { currentTinderId ->
+            viewModel.createReport(CreateReportRequest(currentTinderId, msg))
         }
     }
 

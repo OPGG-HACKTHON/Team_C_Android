@@ -31,7 +31,8 @@
     <string name="nickname">닉네임</string>
     <string name="latest_history">최근 메세지</string>
     <string name="best_history">명예의 전당</string>
-    <string name="fragment_login_title">클린하게 즐기는 LCK</string>
+    <string name="fragment_login_title">소통을 새롭고\n클린하게</string>
+    <string name="fragment_login_sub_title">클린하게 소통하자, 스윕</string>
     <string name="fragment_nickname_title">닉네임을 입력해주세요</string>
     <string name="fragment_nickname_sub_title">띄어쓰기 포함 9글자까지 가능해요</string>
     <string name="fragment_team_select_title">응원팀을 선택해 주세요</string>
@@ -53,4 +54,7 @@
     <string name="fragment_filter_title">홈 화면에서 보고 싶은\n팀들을 선택해주세요</string>
     <string name="fragment_filter_sub_title">활성화된 팀들의 메세지만 받아 볼 수 있어요</string>
     <string name="total_vote">총 %d개의 투표가 진행되었어요</string>
+    <string name="fragment_pog_vote_body">제일 잘 하고 있는 선수를 탭해주세요!</string>
+    <string name="ok">확인</string>
+    <string name="timer">00:0%d</string>
 </resources>

@@ -4,22 +4,26 @@ import android.content.Intent
 import android.milestone.R
 import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentHomeBinding
-import android.milestone.network.request.CreateReportRequest
 import android.milestone.network.request.UpdateLikeRequest
 import android.milestone.toastShort
 import android.milestone.ui.dialog.POGBottomSheetDialog
 import android.milestone.ui.dialog.ReportTinderDialog
 import android.milestone.ui.home.adapter.HomeAdapter
+import android.milestone.ui.home.adapter.POGListTabAdapter
 import android.milestone.ui.home.viewmodel.HomeViewModel
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import com.google.android.material.tabs.TabLayoutMediator
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.CardStackListener
 import com.yuyakaido.android.cardstackview.Direction
 import com.yuyakaido.android.cardstackview.SwipeAnimationSetting
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), CardStackListener {
@@ -39,11 +43,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                 setCanScrollHorizontal(true)
                 setDirections(Direction.FREEDOM)
             }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.getTinder()
     }
 
     override fun initViews() {
@@ -83,6 +82,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                     toastShort("진행중인 경기가 없습니다.")
                 }
             }
+            pager.adapter = POGListTabAdapter(this@HomeFragment)
         }
     }
 
@@ -100,21 +100,39 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
     private fun initViewModels() {
         viewModel.run {
+            getTinder()
             tinderResponse.observe(viewLifecycleOwner, { tinderResponse ->
                 homeAdapter.submitList(tinderResponse.data)
             })
+            pogListResponse.observe(viewLifecycleOwner, { pogListResponse ->
+                TabLayoutMediator(binding.tab, binding.pager) { tab, position ->
+                    val pogListDataResponse = pogListResponse.data
+                    tab.text =
+                        if (position == 0) {
+                            pogListDataResponse.aTeam.name
+                        } else {
+                            pogListDataResponse.bTeam.name
+                        }
+                }.attach()
+            })
+            postPogVoteResponse.observe(viewLifecycleOwner, {
+                binding.clTinder.isVisible = true
+                binding.clPogVote.isVisible = false
+                initTimer()
+            })
 
+            progress.observe(viewLifecycleOwner, {
+                binding.progress.progress = it
+            })
+
+            timerCount.observe(viewLifecycleOwner, {
+                binding.tvTime.text = getString(R.string.timer, it)
+            })
             rootResponse.observe(viewLifecycleOwner, { rootResponse ->
                 if (rootResponse.success) {
                     toastShort(rootResponse.data)
                 } else {
                     toastShort(rootResponse.msg)
-                }
-            })
-
-            reportMessage.observe(viewLifecycleOwner, { reportMessage ->
-                currentTinderId.value?.let { currentTinderId ->
-                    createReport(CreateReportRequest(currentTinderId, reportMessage))
                 }
             })
 
@@ -145,8 +163,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     override fun onCardDragging(direction: Direction?, ratio: Float) {}
 
     override fun onCardSwiped(direction: Direction?) {
-        if (cardStackLayoutManager.topPosition == homeAdapter.itemCount - 2) {
+        if (cardStackLayoutManager.topPosition == homeAdapter.itemCount) {
             viewModel.getTinder()
+            binding.clTinder.isVisible = false
+            binding.clPogVote.isVisible = true
+            lifecycleScope.launch {
+                viewModel.getPogList()
+            }
         }
         updateLike(direction)
     }

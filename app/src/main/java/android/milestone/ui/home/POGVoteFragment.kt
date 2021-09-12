@@ -3,17 +3,19 @@ package android.milestone.ui.home
 import android.milestone.Naming.POSITION
 import android.milestone.R
 import android.milestone.base.BaseFragment
-import android.milestone.databinding.FragmentPogResultBinding
+import android.milestone.databinding.FragmentPogVoteBinding
+import android.milestone.ui.home.adapter.POGPlayerVoteAdapter
 import android.milestone.ui.home.viewmodel.HomeViewModel
-import android.milestone.ui.match_detail.adapter.PlayerOfGameRecyclerAdapter
 import android.os.Bundle
 import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class POGResultFragment : BaseFragment<FragmentPogResultBinding>(R.layout.fragment_pog_result) {
+class POGVoteFragment : BaseFragment<FragmentPogVoteBinding>(R.layout.fragment_pog_vote) {
 
-    private val pogAdapter = PlayerOfGameRecyclerAdapter()
+    private val pogAdapter = POGPlayerVoteAdapter {
+        viewModel.setPogVoteCount(it.gamePlayerId)
+    }
     private val viewModel: HomeViewModel by activityViewModels()
 
     private val position by lazy {
@@ -24,23 +26,14 @@ class POGResultFragment : BaseFragment<FragmentPogResultBinding>(R.layout.fragme
 
     override fun initViews() {
         binding.rvPog.adapter = pogAdapter
-        viewModel.playerOfGameResponse.observe(viewLifecycleOwner, {
-            binding.tvTotalVote.text = getString(
-                R.string.total_vote,
-                if (position == 0) {
-                    it.data.aTeam.player.sumOf { pogPlayer ->
-                        pogPlayer.count
-                    }
-                } else {
-                    it.data.bTeam.player.sumOf { pogPlayer -> pogPlayer.count }
-                })
+        viewModel.pogListResponse.observe(viewLifecycleOwner, {
             pogAdapter.submitList(if (position == 0) it.data.aTeam.player else it.data.bTeam.player)
         })
     }
 
     companion object {
 
-        fun instance(position: Int) = POGResultFragment().apply {
+        fun instance(position: Int) = POGVoteFragment().apply {
             arguments = Bundle().apply {
                 putInt(POSITION, position)
             }

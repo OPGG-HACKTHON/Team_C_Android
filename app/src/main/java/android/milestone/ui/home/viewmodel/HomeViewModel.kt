@@ -2,9 +2,11 @@ package android.milestone.ui.home.viewmodel
 
 import android.milestone.base.BaseViewModel
 import android.milestone.network.request.CreateReportRequest
+import android.milestone.network.request.PogVoteRequest
 import android.milestone.network.request.UpdateLikeRequest
 import android.milestone.network.response.RootResponse
 import android.milestone.network.response.home.TinderResponse
+import android.milestone.network.response.home.pog_list.PogListResponse
 import android.milestone.network.response.match_detail.PlayerOfGameResponse
 import android.milestone.network.response.schedule.Schedule
 import android.milestone.repository.home.HomeRepository
@@ -12,6 +14,7 @@ import android.milestone.ui.schedule.ui_model.ScheduleUiModel
 import android.milestone.util.PrefUtil
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,19 +29,31 @@ constructor(
     private val _tinderResponse = MutableLiveData<TinderResponse>()
     val tinderResponse: LiveData<TinderResponse> get() = _tinderResponse
 
+    private val _postPogVoteResponse = MutableLiveData<RootResponse>()
+    val postPogVoteResponse: LiveData<RootResponse> get() = _postPogVoteResponse
+
     private val _rootResponse = MutableLiveData<RootResponse>()
     val rootResponse: LiveData<RootResponse> get() = _rootResponse
 
     private val _currentTinderId = MutableLiveData<Int>()
     val currentTinderId: LiveData<Int> get() = _currentTinderId
 
-    private val _reportMessage = MutableLiveData<String>()
-    val reportMessage: LiveData<String> get() = _reportMessage
-
     private val _playerOfGameResponse = MutableLiveData<PlayerOfGameResponse>()
     val playerOfGameResponse: LiveData<PlayerOfGameResponse> get() = _playerOfGameResponse
 
+    private val _pogListResponse = MutableLiveData<PogListResponse>()
+    val pogListResponse: LiveData<PogListResponse> get() = _pogListResponse
+
+    private val _progress = MutableLiveData(100)
+    val progress: LiveData<Int> get() = _progress
+
+    private val _timerCount = MutableLiveData(5)
+    val timerCount: LiveData<Int> get() = _timerCount
+
+    private val pogVoteRequestList = mutableListOf<PogVoteRequest>()
+
     val currentGameResponse = homeRepository.getCurrentGame().asLiveData(coroutineExceptionHandler)
+
 
     private val _scheduleData = currentGameResponse.map {
         val currentGameModel = it.data
@@ -61,6 +76,34 @@ constructor(
         schedule?.let {
             ScheduleUiModel(it)
         }
+    }
+
+    private fun postPogVote(pogVoteRequestList: List<PogVoteRequest>) {
+        viewModelScope.launch(coroutineExceptionHandler) {
+            homeRepository.postPogVote(pogVoteRequestList)
+                .collect {
+                    if (it.body()?.success == true) {
+                        _postPogVoteResponse.value = it.body()
+                    }
+                }
+        }
+    }
+
+    suspend fun getPogList() {
+        viewModelScope.launch(coroutineExceptionHandler) {
+            homeRepository.getPogList()
+                .collect {
+                    if (it.body()?.success == true) {
+                        _pogListResponse.value = it.body()
+                        repeat(5) {
+                            delay(1000)
+                            _progress.value = _progress.value?.minus(20)
+                            _timerCount.value = _timerCount.value?.minus(1)
+                        }
+                    }
+                }
+        }.join()
+        postPogVote(pogVoteRequestList)
     }
 
     fun getPogOfGame() {
@@ -91,11 +134,7 @@ constructor(
     fun updateLike(updateLikeRequest: UpdateLikeRequest) {
         viewModelScope.launch(coroutineExceptionHandler) {
             homeRepository.updateLike(updateLikeRequest)
-                .collect {
-                    it.body()?.let {
-                        // TODO: 2021-08-30 에러 및 성공 처리
-                    }
-                }
+                .collect()
         }
     }
 
@@ -111,11 +150,25 @@ constructor(
         }
     }
 
+    fun initTimer() {
+        _progress.value = 100
+        _timerCount.value = 5
+    }
+
     fun setCurrentTinderId(tinderId: Int) {
         _currentTinderId.value = tinderId
     }
 
-    fun setReportMessage(msg: String) {
-        _reportMessage.value = msg
+    fun setPogVoteCount(gamePlayerId: Int) {
+        val pogVoteRequest = pogVoteRequestList.find {
+            it.gamePlayerId == gamePlayerId
+        }
+        if (pogVoteRequest == null) {
+            pogVoteRequestList.add(PogVoteRequest(gamePlayerId, 1))
+        } else {
+            val index = pogVoteRequestList.indexOf(pogVoteRequest)
+            pogVoteRequestList[index] = pogVoteRequest.copy(count = pogVoteRequest.count + 1)
+        }
     }
+
 }
