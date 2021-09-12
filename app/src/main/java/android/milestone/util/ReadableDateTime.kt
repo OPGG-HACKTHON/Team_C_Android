@@ -1,6 +1,7 @@
 package android.milestone.util
 
 import java.time.LocalDateTime
+import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.*
@@ -19,6 +20,14 @@ class ReadableDateTime constructor(private val localDateTime: LocalDateTime) {
         }
     }
 
+    fun toMinuteDifference(): Int {
+        val currentTime = LocalTime.now()
+        val currentMinute = (24 - currentTime.hour) * 60 + currentTime.minute
+        val minute = (24 - localDateTime.hour) * 60 + currentTime.minute
+
+        return currentMinute - minute
+    }
+
     fun toHHmm(): String {
         val pattern = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
         return localDateTime.format(pattern)
@@ -35,9 +44,11 @@ class ReadableDateTime constructor(private val localDateTime: LocalDateTime) {
     }
 
     fun toMMdd(): String {
-        val pattern = DateTimeFormatter.ofPattern("MM월 dd일 (${getDayOfWeek()})", Locale.getDefault())
+        val pattern =
+            DateTimeFormatter.ofPattern("MM월 dd일 (${getDayOfWeek()})", Locale.getDefault())
         return localDateTime.format(pattern)
     }
 
-    fun getDayOfWeek() = localDateTime.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault()).first()
+    fun getDayOfWeek() =
+        localDateTime.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault()).first()
 }

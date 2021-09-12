@@ -29,15 +29,19 @@
     <string name="login">로그인</string>
     <string name="team_select">팀선택</string>
     <string name="nickname">닉네임</string>
+    <string name="sign_up_complete">회원가입 완료</string>
     <string name="latest_history">최근 메세지</string>
     <string name="best_history">명예의 전당</string>
     <string name="fragment_login_title">소통을 새롭고\n클린하게</string>
     <string name="fragment_login_sub_title">클린하게 소통하자, 스윕</string>
     <string name="fragment_nickname_title">닉네임을 입력해주세요</string>
-    <string name="fragment_nickname_sub_title">띄어쓰기 포함 9글자까지 가능해요</string>
+    <string name="fragment_nickname_sub_title">한글과 영문으로 구성된 2~9자로 입력해주세요</string>
+    <string name="fragment_nickname_waring_length">2자 이상 입력해주세요</string>
+    <string name="fragment_nickname_waring_wrong">부적절한 단어가 포함된 닉네임은 사용할 수 없어요!</string>
     <string name="fragment_team_select_title">응원팀을 선택해 주세요</string>
     <string name="fragment_team_select_sub_title">팀 선택 시 한 달 동안 변경이\n불가능하니 신중히 선택해 주세요</string>
     <string name="fragment_team_select_after_select">나중에 선택할래요</string>
+    <string name="fragment_sign_up_complete_title">%s님,\n가입을 환영합니다!</string>
     <string name="pass">흠</string>
     <string name="dislike">싫어요!</string>
     <string name="like">좋아요!</string>
@@ -57,4 +61,9 @@
     <string name="fragment_pog_vote_body">제일 잘 하고 있는 선수를 탭해주세요!</string>
     <string name="ok">확인</string>
     <string name="timer">00:0%d</string>
+    <string name="input_complete">입력완료</string>
+    <string name="start">시작하기</string>
+    <string name="dialog_tutorial_body">메세지를 좌, 우, 상, 하로\n넘겨서 리액션을 보내보세요!</string>
+    <string name="previous_minute">%d분 전</string>
+    <string name="dialog_report_complete_title">신고가 정상적으로 접수되었습니다</string>
 </resources>

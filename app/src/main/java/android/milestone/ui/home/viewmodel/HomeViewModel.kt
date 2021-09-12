@@ -11,7 +11,9 @@ import android.milestone.network.response.match_detail.PlayerOfGameResponse
 import android.milestone.network.response.schedule.Schedule
 import android.milestone.repository.home.HomeRepository
 import android.milestone.ui.schedule.ui_model.ScheduleUiModel
+import android.milestone.util.Event
 import android.milestone.util.PrefUtil
+import android.util.Log
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -32,8 +34,8 @@ constructor(
     private val _postPogVoteResponse = MutableLiveData<RootResponse>()
     val postPogVoteResponse: LiveData<RootResponse> get() = _postPogVoteResponse
 
-    private val _rootResponse = MutableLiveData<RootResponse>()
-    val rootResponse: LiveData<RootResponse> get() = _rootResponse
+    private val _rootResponse = MutableLiveData<Event<RootResponse>>()
+    val rootResponse: LiveData<Event<RootResponse>> get() = _rootResponse
 
     private val _currentTinderId = MutableLiveData<Int>()
     val currentTinderId: LiveData<Int> get() = _currentTinderId
@@ -144,7 +146,8 @@ constructor(
                 .collect {
                     it.body()?.let { rootResponse ->
                         // TODO: 2021-08-31 에러 및 성공 처리
-                        _rootResponse.value = rootResponse
+                        _rootResponse.value = Event(rootResponse)
+
                     }
                 }
         }

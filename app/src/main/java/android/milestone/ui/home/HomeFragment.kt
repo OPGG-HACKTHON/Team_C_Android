@@ -8,9 +8,11 @@ import android.milestone.network.request.UpdateLikeRequest
 import android.milestone.toastShort
 import android.milestone.ui.dialog.POGBottomSheetDialog
 import android.milestone.ui.dialog.ReportTinderDialog
+import android.milestone.ui.dialog.TutorialDialog
 import android.milestone.ui.home.adapter.HomeAdapter
 import android.milestone.ui.home.adapter.POGListTabAdapter
 import android.milestone.ui.home.viewmodel.HomeViewModel
+import android.milestone.util.PrefUtil
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import androidx.core.content.ContextCompat
@@ -46,6 +48,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     }
 
     override fun initViews() {
+        if (PrefUtil.getBooleanValue("first", true)) {
+            showTutorialDialog()
+        }
         initViewModels()
         binding.run {
             cvTinder.apply {
@@ -84,6 +89,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
             }
             pager.adapter = POGListTabAdapter(this@HomeFragment)
         }
+    }
+
+    private fun showTutorialDialog() {
+        val dialog = TutorialDialog.instance(
+            dialogHeightRatio = 0.95f,
+            dialogWidthRatio = 1f
+        )
+        dialog.show(parentFragmentManager, "")
     }
 
     private fun setSwipeAnimationSetting(direction: Direction) {
@@ -127,13 +140,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
             timerCount.observe(viewLifecycleOwner, {
                 binding.tvTime.text = getString(R.string.timer, it)
-            })
-            rootResponse.observe(viewLifecycleOwner, { rootResponse ->
-                if (rootResponse.success) {
-                    toastShort(rootResponse.data)
-                } else {
-                    toastShort(rootResponse.msg)
-                }
             })
 
             scheduleData.observe(viewLifecycleOwner, { scheduleData ->
@@ -194,7 +200,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     override fun onCardDisappeared(view: View?, position: Int) {}
 
     private fun showReportDialog() {
-        val dialog = ReportTinderDialog.instance()
+        val dialog = ReportTinderDialog.instance(
+            dialogHeightRatio = 0.8f,
+            dialogWidthRatio = 0.9f
+        )
         dialog.show(parentFragmentManager, "")
     }
 }

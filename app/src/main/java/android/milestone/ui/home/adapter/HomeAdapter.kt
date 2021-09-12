@@ -1,5 +1,6 @@
 package android.milestone.ui.home.adapter
 
+import android.milestone.App
 import android.milestone.R
 import android.milestone.base.BaseDiffUtil
 import android.milestone.databinding.ItemTinderBinding
@@ -37,7 +38,8 @@ class HomeViewHolder(
             ivMore.setOnClickListener {
                 onReportAction(item.id)
             }
-            tvCount.text = (item.dislike + item.like + item.superlike).toString()
+            tvCount.text =
+                App.context().getString(R.string.count, (item.dislike + item.like + item.superlike))
 
             executePendingBindings()
         }
