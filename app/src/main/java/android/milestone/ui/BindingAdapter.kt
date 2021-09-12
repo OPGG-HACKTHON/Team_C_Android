@@ -1,8 +1,11 @@
 package android.milestone.ui
 
+import android.milestone.App
 import android.milestone.R
+import android.milestone.util.ReadableDateTime
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import org.jetbrains.annotations.NotNull
@@ -53,5 +56,14 @@ fun View.setPogRateBackground(rateRank: Int) {
             rateRank - 1,
             R.drawable.shape_rect_radius3_blue200
         )
+    )
+}
+
+@BindingAdapter("setCreatedAt")
+@NotNull
+fun TextView.setCreatedAt(createdAt: String) {
+    text = App.context().getString(
+        R.string.previous_minute,
+        ReadableDateTime.from(createdAt).toMinuteDifference()
     )
 }
