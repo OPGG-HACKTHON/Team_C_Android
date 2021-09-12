@@ -92,7 +92,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     }
 
     private fun showTutorialDialog() {
-        val dialog = TutorialDialog.instance()
+        val dialog = TutorialDialog.instance(
+            dialogHeightRatio = 0.95f,
+            dialogWidthRatio = 1f
+        )
         dialog.show(parentFragmentManager, "")
     }
 
@@ -137,13 +140,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
             timerCount.observe(viewLifecycleOwner, {
                 binding.tvTime.text = getString(R.string.timer, it)
-            })
-            rootResponse.observe(viewLifecycleOwner, { rootResponse ->
-                if (rootResponse.success) {
-                    toastShort(rootResponse.data)
-                } else {
-                    toastShort(rootResponse.msg)
-                }
             })
 
             scheduleData.observe(viewLifecycleOwner, { scheduleData ->
@@ -204,7 +200,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     override fun onCardDisappeared(view: View?, position: Int) {}
 
     private fun showReportDialog() {
-        val dialog = ReportTinderDialog.instance()
+        val dialog = ReportTinderDialog.instance(
+            dialogHeightRatio = 0.8f,
+            dialogWidthRatio = 0.9f
+        )
         dialog.show(parentFragmentManager, "")
     }
 }
