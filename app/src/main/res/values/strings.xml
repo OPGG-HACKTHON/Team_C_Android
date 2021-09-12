@@ -62,4 +62,6 @@
     <string name="ok">확인</string>
     <string name="timer">00:0%d</string>
     <string name="input_complete">입력완료</string>
+    <string name="start">시작하기</string>
+    <string name="dialog_tutorial_body">메세지를 좌, 우, 상, 하로\n넘겨서 리액션을 보내보세요!</string>
 </resources>

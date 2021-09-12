@@ -8,9 +8,11 @@ import android.milestone.network.request.UpdateLikeRequest
 import android.milestone.toastShort
 import android.milestone.ui.dialog.POGBottomSheetDialog
 import android.milestone.ui.dialog.ReportTinderDialog
+import android.milestone.ui.dialog.TutorialDialog
 import android.milestone.ui.home.adapter.HomeAdapter
 import android.milestone.ui.home.adapter.POGListTabAdapter
 import android.milestone.ui.home.viewmodel.HomeViewModel
+import android.milestone.util.PrefUtil
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import androidx.core.content.ContextCompat
@@ -46,6 +48,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     }
 
     override fun initViews() {
+        if (PrefUtil.getBooleanValue("first", true)) {
+            showTutorialDialog()
+        }
         initViewModels()
         binding.run {
             cvTinder.apply {
@@ -84,6 +89,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
             }
             pager.adapter = POGListTabAdapter(this@HomeFragment)
         }
+    }
+
+    private fun showTutorialDialog() {
+        val dialog = TutorialDialog.instance()
+        dialog.show(parentFragmentManager, "")
     }
 
     private fun setSwipeAnimationSetting(direction: Direction) {
