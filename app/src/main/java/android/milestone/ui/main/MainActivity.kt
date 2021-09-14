@@ -43,7 +43,8 @@ class MainActivity : AppCompatActivity(), StartDestination {
 
     private fun initViews() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 
         binding.navigation.setupWithNavController(navHostFragment.navController)
 
@@ -101,9 +102,12 @@ class MainActivity : AppCompatActivity(), StartDestination {
     }
 
     private fun showWriteTinderDialog() {
-        val dialog = WriteTinderDialog.instance { msg ->
-            viewModel.createTinder(msg)
-        }
+        val dialog = WriteTinderDialog.instance(
+            dialogHeightRatio = 0.8f,
+            dialogWidthRatio = 0.9f,
+            onSendAction = { msg ->
+                viewModel.createTinder(msg)
+            })
 
         dialog.show(supportFragmentManager, "")
     }

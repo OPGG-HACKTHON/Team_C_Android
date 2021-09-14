@@ -8,6 +8,7 @@ import android.milestone.network.response.history.BestHistoryResponse
 import android.milestone.network.response.history.LatestHistoryResponse
 import android.milestone.network.response.home.CurrentGameResponse
 import android.milestone.network.response.home.TinderResponse
+import android.milestone.network.response.home.pog_list.PogListResponse
 import android.milestone.network.response.match_detail.PlayerOfGameResponse
 import android.milestone.network.response.ranking.PlayerRankingResponse
 import android.milestone.network.response.ranking.TeamRankingResponse
@@ -36,9 +37,6 @@ interface Api {
 
     @GET("/info/pogRank")
     suspend fun getPlayerRank(): Response<PlayerRankingResponse>
-
-    @GET("/pog/result")
-    suspend fun getPogOfGame(@Query("gameId") gameId: Int?): Response<PlayerOfGameResponse>
 
     @GET("/info/schedule")
     suspend fun loadSchedule(
@@ -73,6 +71,17 @@ interface Api {
     suspend fun getTopTinder(
         @Query("gameId") gameId: Int
     ): Response<TopTinderResponse>
+
+    // pog
+
+    @GET("/pog/result")
+    suspend fun getPogOfGame(@Query("gameId") gameId: Int?): Response<PlayerOfGameResponse>
+
+    @GET("/pog/list")
+    suspend fun getPogList(): Response<PogListResponse>
+
+    @POST("/pog/vote")
+    suspend fun postPogVote(@Body pogVoteRequestList: PogVoteListRequest): Response<RootResponse>
 
     @GET("/tinder/history")
     suspend fun loadLatestHistory(): Response<LatestHistoryResponse>

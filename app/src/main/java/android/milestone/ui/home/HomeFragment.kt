@@ -4,30 +4,33 @@ import android.content.Intent
 import android.milestone.R
 import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentHomeBinding
-import android.milestone.network.request.CreateReportRequest
 import android.milestone.network.request.UpdateLikeRequest
 import android.milestone.toastShort
 import android.milestone.ui.dialog.POGBottomSheetDialog
 import android.milestone.ui.dialog.ReportTinderDialog
-import android.milestone.ui.history.HistoryViewModel
+import android.milestone.ui.dialog.TutorialDialog
 import android.milestone.ui.home.adapter.HomeAdapter
+import android.milestone.ui.home.adapter.POGListTabAdapter
 import android.milestone.ui.home.viewmodel.HomeViewModel
+import android.milestone.util.PrefUtil
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import com.google.android.material.tabs.TabLayoutMediator
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.CardStackListener
 import com.yuyakaido.android.cardstackview.Direction
 import com.yuyakaido.android.cardstackview.SwipeAnimationSetting
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), CardStackListener {
 
     private val viewModel: HomeViewModel by activityViewModels()
-    private val historyViewModel: HistoryViewModel by activityViewModels()
-
     private val homeAdapter: HomeAdapter by lazy {
         HomeAdapter { tinderId ->
             viewModel.setCurrentTinderId(tinderId)
@@ -44,12 +47,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
             }
     }
 
-    override fun onStart() {
-        super.onStart()
-        viewModel.getTinder()
-    }
-
     override fun initViews() {
+        if (PrefUtil.getBooleanValue("first", true)) {
+            showTutorialDialog()
+        }
         initViewModels()
         binding.run {
             cvTinder.apply {
@@ -86,7 +87,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                     toastShort("진행중인 경기가 없습니다.")
                 }
             }
+            pager.adapter = POGListTabAdapter(this@HomeFragment)
         }
+    }
+
+    private fun showTutorialDialog() {
+        val dialog = TutorialDialog.instance(
+            dialogHeightRatio = 0.95f,
+            dialogWidthRatio = 1f
+        )
+        dialog.show(parentFragmentManager, "")
     }
 
     private fun setSwipeAnimationSetting(direction: Direction) {
@@ -103,43 +113,68 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
 
     private fun initViewModels() {
         viewModel.run {
+            getTinder()
             tinderResponse.observe(viewLifecycleOwner, { tinderResponse ->
                 homeAdapter.submitList(tinderResponse.data)
             })
-
-            rootResponse.observe(viewLifecycleOwner, { rootResponse ->
-                if (rootResponse.success) {
-                    toastShort(rootResponse.data)
-                } else {
-                    toastShort(rootResponse.msg)
-                }
+            pogListResponse.observe(viewLifecycleOwner, { pogListResponse ->
+                TabLayoutMediator(binding.tab, binding.pager) { tab, position ->
+                    val pogListDataResponse = pogListResponse.data
+                    tab.text =
+                        if (position == 0) {
+                            pogListDataResponse.aTeam.name
+                        } else {
+                            pogListDataResponse.bTeam.name
+                        }
+                }.attach()
+            })
+            postPogVoteResponse.observe(viewLifecycleOwner, {
+                binding.clTinder.isVisible = true
+                binding.clPogVote.isVisible = false
+                initTimer()
             })
 
-            reportMessage.observe(viewLifecycleOwner, { reportMessage ->
-                currentTinderId.value?.let { currentTinderId ->
-                    createReport(CreateReportRequest(currentTinderId, reportMessage))
-                }
+            progress.observe(viewLifecycleOwner, {
+                binding.progress.progress = it
+            })
+
+            timerCount.observe(viewLifecycleOwner, {
+                binding.tvTime.text = getString(R.string.timer, it)
             })
 
             scheduleData.observe(viewLifecycleOwner, { scheduleData ->
-                if (scheduleData == null) {
-                    // TODO: 2021-09-04 경기 없음 처리
-                } else {
-                    binding.item = scheduleData
-                    binding.itemGameScore.tvFirstTeamScore.setTextColor(
-                        ContextCompat.getColor(
-                            binding.root.context,
-                            scheduleData.teamAScoreColor
+                binding.run {
+                    if (scheduleData == null) {
+                        itemGameScore.clNoGame.isVisible = true
+                        itemGameScore.clGame.isVisible = false
+                    } else {
+                        itemGameScore.clNoGame.isVisible = false
+                        itemGameScore.clGame.isVisible = true
+                        item = scheduleData
+                        itemGameScore.tvFirstTeamScore.setTextColor(
+                            ContextCompat.getColor(
+                                root.context,
+                                scheduleData.teamAScoreColor
+                            )
                         )
-                    )
-                    binding.itemGameScore.tvSecondTeamScore.setTextColor(
-                        ContextCompat.getColor(
-                            binding.root.context,
-                            scheduleData.teamBScoreColor
+                        itemGameScore.tvSecondTeamScore.setTextColor(
+                            ContextCompat.getColor(
+                                root.context,
+                                scheduleData.teamBScoreColor
+                            )
                         )
-                    )
-                    // TODO: 2021-09-04 경기 시작전 시간 카운트 처리
-                    // TODO: 2021-09-04 어떻게 계속 데이터를 갱신할건지 고민
+                    }
+                }
+            })
+            currentGameResponse.observe(viewLifecycleOwner, {
+                binding.itemGameScore.run {
+                    if (it.data?.status == -1) {
+                        llScore.isVisible = false
+                        tvStartTime.isVisible = true
+                    } else {
+                        llScore.isVisible = true
+                        tvStartTime.isVisible = false
+                    }
                 }
             })
         }
@@ -148,8 +183,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     override fun onCardDragging(direction: Direction?, ratio: Float) {}
 
     override fun onCardSwiped(direction: Direction?) {
-        if (cardStackLayoutManager.topPosition == homeAdapter.itemCount - 2) {
+        if (cardStackLayoutManager.topPosition == homeAdapter.itemCount) {
             viewModel.getTinder()
+            binding.clTinder.isVisible = false
+            binding.clPogVote.isVisible = true
+            lifecycleScope.launch {
+                viewModel.getPogList()
+            }
         }
         updateLike(direction)
     }
@@ -174,7 +214,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     override fun onCardDisappeared(view: View?, position: Int) {}
 
     private fun showReportDialog() {
-        val dialog = ReportTinderDialog.instance()
+        val dialog = ReportTinderDialog.instance(
+            dialogHeightRatio = 0.8f,
+            dialogWidthRatio = 0.9f
+        )
         dialog.show(parentFragmentManager, "")
     }
 }

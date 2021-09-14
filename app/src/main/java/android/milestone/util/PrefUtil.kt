@@ -21,4 +21,15 @@ object PrefUtil {
     fun getStringValue(name: String, defValue: String): String =
         prefUtil.getString(name, defValue) ?: ""
 
+    fun setBooleanValue(name: String, value: Boolean) {
+        prefUtil.edit {
+            putBoolean(name, value)
+            apply()
+        }
+    }
+
+    fun getBooleanValue(name: String, defValue: Boolean): Boolean =
+        prefUtil.getBoolean(name, defValue)
+
+
 }

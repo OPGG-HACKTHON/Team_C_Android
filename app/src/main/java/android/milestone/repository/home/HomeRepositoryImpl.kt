@@ -2,10 +2,12 @@ package android.milestone.repository.home
 
 import android.milestone.network.request.CreateReportRequest
 import android.milestone.network.request.CreateTinderRequest
+import android.milestone.network.request.PogVoteRequest
 import android.milestone.network.request.UpdateLikeRequest
 import android.milestone.network.response.RootResponse
 import android.milestone.network.response.home.CurrentGameResponse
 import android.milestone.network.response.home.TinderResponse
+import android.milestone.network.response.home.pog_list.PogListResponse
 import android.milestone.network.response.match_detail.PlayerOfGameResponse
 import android.milestone.network.response.tinder.TopTinderResponse
 import android.milestone.network.source.RemoteDataSource
@@ -46,4 +48,13 @@ class HomeRepositoryImpl
     override fun getPogOfGame(gameId: Int?): Flow<Response<PlayerOfGameResponse>> = flow {
         emit(remoteDataSource.getPogOfGame(gameId))
     }
+
+    override fun getPogList(): Flow<Response<PogListResponse>> = flow {
+        emit(remoteDataSource.getPogList())
+    }
+
+    override fun postPogVote(pogVoteRequestList: List<PogVoteRequest>): Flow<Response<RootResponse>> =
+        flow {
+            emit(remoteDataSource.postPogVote(pogVoteRequestList))
+        }
 }
