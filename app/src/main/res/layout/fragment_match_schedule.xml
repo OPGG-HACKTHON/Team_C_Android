@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:background="?attr/actionBarItemBackground"
                 android:onClick="@{() -> viewModel.changeSearchRange(1)}"
-                android:src="@drawable/ic_right"
+                android:src="@drawable/ic_arrow_right"
                 app:layout_constraintBottom_toBottomOf="@id/tv_selected_month"
                 app:layout_constraintStart_toEndOf="@+id/tv_selected_month"
                 app:layout_constraintTop_toTopOf="@id/tv_selected_month" />
