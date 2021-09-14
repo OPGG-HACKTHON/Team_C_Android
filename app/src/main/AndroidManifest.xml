@@ -24,9 +24,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.main.MainActivity">
-
-        </activity>
+        <activity android:name=".ui.main.MainActivity" />
+    
+        <activity android:name=".ui.home.FilterActivity" />
 
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>

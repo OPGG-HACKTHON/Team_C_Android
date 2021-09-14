@@ -1,7 +1,7 @@
 package android.milestone.ui.home.viewholder
 
 import android.milestone.databinding.ItemTinderBinding
-import android.milestone.network.model.tinder.TinderModel
+import android.milestone.network.model.home.TinderModel
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes

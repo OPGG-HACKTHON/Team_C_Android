@@ -1,4 +1,4 @@
-package android.milestone.network.model.tinder
+package android.milestone.network.model.home
 
 data class TeamModel(
     val icon: String,

@@ -6,5 +6,15 @@
         <item name="android:fontFamily">@font/app_font_family</item>
         <item name="fontFamily">@font/app_font_family</item>
     </style>
-    r
+    
+    <style name="pogBottomDialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 </resources>

@@ -5,8 +5,8 @@ import android.milestone.network.response.match_detail.PogPlayer
 import android.milestone.network.response.match_detail.PogTeam
 import android.milestone.network.response.match_detail.TeamsOfGameInfo
 import android.milestone.network.response.tinder.TopTinder
+import android.milestone.repository.home.HomeRepository
 import android.milestone.repository.league.LeagueRepository
-import android.milestone.repository.tinder.TinderRepository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MatchDetailViewModel @Inject constructor(
     private val leagueRepository: LeagueRepository,
-    private val tinderRepository: TinderRepository
+    private val homeRepository: HomeRepository
 ) : BaseViewModel() {
 
     private val _topTinder: MutableLiveData<List<TopTinder>?> = MutableLiveData()
@@ -51,7 +51,7 @@ class MatchDetailViewModel @Inject constructor(
 
     private fun loadTopTinder(gameId: Int) {
         viewModelScope.launch(coroutineExceptionHandler) {
-            val response = tinderRepository.getTopTinder(gameId)
+            val response = homeRepository.getTopTinder(gameId)
             response.collect {
                 _topTinder.value = if (it.isSuccessful) it.body()?.data else null
             }

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
     
     <data>
-        
-        <variable
+    
+    <variable
             name="item"
             type="android.milestone.ui.schedule.ui_model.ScheduleUiModel" />
     </data>

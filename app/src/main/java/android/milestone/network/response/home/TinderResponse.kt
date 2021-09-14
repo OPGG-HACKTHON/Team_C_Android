@@ -1,6 +1,6 @@
-package android.milestone.network.response.tinder
+package android.milestone.network.response.home
 
-import android.milestone.network.model.tinder.TinderModel
+import android.milestone.network.model.home.TinderModel
 import com.google.gson.annotations.SerializedName
 
 data class TinderResponse(

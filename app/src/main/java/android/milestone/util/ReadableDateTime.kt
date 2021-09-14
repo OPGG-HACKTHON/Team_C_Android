@@ -1,6 +1,8 @@
 package android.milestone.util
 
 import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.*
@@ -15,7 +17,8 @@ class ReadableDateTime constructor(private val localDateTime: LocalDateTime) {
         }
 
         private fun to(dateTimeString: String): LocalDateTime {
-            return LocalDateTime.parse(dateTimeString, DateTimeFormatter.ISO_DATE_TIME)
+            val localDateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ISO_DATE_TIME)
+            return ZonedDateTime.of(localDateTime, ZoneId.of("Asia/Seoul")).toLocalDateTime()
         }
     }
 

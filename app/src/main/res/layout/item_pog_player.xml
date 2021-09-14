@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    
+
     <data>
-    
-        <variable
+
+    <variable
             name="item"
             type="android.milestone.network.response.match_detail.PogPlayer" />
     </data>
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="vertical">
-    
+            
             <ImageView
                 android:id="@+id/iv_player"
                 isCircleCrop="@{true}"
@@ -44,10 +44,11 @@
         
         <View
             android:id="@+id/progress_percentage"
-            android:layout_width="100dp"
+            setPogRate="@{item.rate}"
+            setPogRateBackground="@{item.rateRank}"
+            android:layout_width="wrap_content"
             android:layout_height="4dp"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/shape_rect_radius3" />
+            android:layout_marginBottom="12dp" />
         
         <TextView
             android:id="@+id/tv_percentage"

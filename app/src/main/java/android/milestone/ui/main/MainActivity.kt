@@ -2,7 +2,6 @@ package android.milestone.ui.main
 
 import android.milestone.R
 import android.milestone.databinding.ActivityMainBinding
-import android.milestone.network.request.CreateTinderRequest
 import android.milestone.toastShort
 import android.milestone.ui.dialog.WriteTinderDialog
 import android.milestone.ui.history.HistoryViewModel
@@ -63,6 +62,7 @@ class MainActivity : AppCompatActivity(), StartDestination {
                 when (state) {
                     200 -> {
                         toastShort("메세지 전송성공")
+                        historyViewModel.updateData()
                     }
                 }
             })
@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity(), StartDestination {
 
     private fun showWriteTinderDialog() {
         val dialog = WriteTinderDialog.instance { msg ->
-            viewModel.createTinder(CreateTinderRequest(msg))
+            viewModel.createTinder(msg)
         }
 
         dialog.show(supportFragmentManager, "")
