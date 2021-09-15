@@ -43,18 +43,26 @@ class MainActivity : AppCompatActivity(), StartDestination {
 
     private fun initViews() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 
         binding.navigation.setupWithNavController(navHostFragment.navController)
 
         navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
-            binding.navigation.isVisible = destination.id !in listOf(R.id.fragment_match_detail)
+            binding.navigation.isVisible = destination.id !in listOf(
+                R.id.fragment_match_detail,
+                R.id.fragment_mypage,
+                R.id.fragment_edit_nickname,
+                R.id.fragment_setting,
+            )
+
+            if (!binding.navigation.isVisible) {
+                outFromDestination()
+            }
         }
 
         goToStartDestination()
-
         initNavigation(binding, navHostFragment)
+        binding.navigation.transform(binding.fab, true)
     }
 
     private fun initViewModels() {
@@ -83,7 +91,7 @@ class MainActivity : AppCompatActivity(), StartDestination {
                 isEnabled = it.itemId != R.id.menu_home
                 title = (if (it.itemId != R.id.menu_home) getString(R.string.home) else "")
                 setIcon(if (it.itemId != R.id.menu_home) R.drawable.ic_home else R.drawable.ic_trans)
-                binding.navigation.transform(binding.fab, it.itemId != R.id.menu_home)
+                binding.navigation.transform(binding.fab, it.itemId == R.id.menu_home)
             }
 
             when (it.itemId) {
@@ -115,6 +123,10 @@ class MainActivity : AppCompatActivity(), StartDestination {
     override fun goToStartDestination() {
         binding.navigation.selectedItemId = R.id.menu_home
         binding.navigation.menu[1].isChecked = true
+        binding.navigation.transform(binding.fab, true)
+    }
+
+    override fun outFromDestination() {
         binding.navigation.transform(binding.fab, false)
     }
 }
