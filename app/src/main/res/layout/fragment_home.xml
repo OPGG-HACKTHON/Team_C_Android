@@ -106,16 +106,7 @@
                     app:lottie_autoPlay="false"
                     app:lottie_loop="false"
                     app:lottie_rawRes="@raw/emoji_dislkie" />
-                
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/lv_best"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:layout_weight="1"
-                    app:lottie_autoPlay="false"
-                    app:lottie_loop="false"
-                    app:lottie_rawRes="@raw/emoji_best" />
-                
+
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/lv_like"
                     android:layout_width="64dp"
@@ -124,6 +115,15 @@
                     app:lottie_autoPlay="false"
                     app:lottie_loop="false"
                     app:lottie_rawRes="@raw/emoji_like" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lv_best"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_weight="1"
+                    app:lottie_autoPlay="false"
+                    app:lottie_loop="false"
+                    app:lottie_rawRes="@raw/emoji_best" />
             
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
