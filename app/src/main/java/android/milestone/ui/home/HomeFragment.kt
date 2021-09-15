@@ -44,6 +44,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
             .apply {
                 setCanScrollVertical(true)
                 setCanScrollHorizontal(true)
+                setScaleInterval(0.9f)
+                setMaxDegree(20.0f)
                 setDirections(Direction.FREEDOM)
             }
     }
@@ -135,7 +137,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                 }.attach()
             })
             postPogVoteResponse.observe(viewLifecycleOwner, {
-                binding.clTinder.isVisible = true
+                binding.cvTinder.isVisible = true
+                binding.llEmoji.isVisible = true
                 binding.clPogVote.isVisible = false
                 initTimer()
             })
@@ -196,7 +199,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
     override fun onCardSwiped(direction: Direction?) {
         if (cardStackLayoutManager.topPosition == homeAdapter.itemCount) {
             viewModel.getTinder()
-            binding.clTinder.isVisible = false
+            binding.cvTinder.isVisible = false
+            binding.llEmoji.isVisible = false
             binding.clPogVote.isVisible = true
             lifecycleScope.launch {
                 viewModel.getPogList()
