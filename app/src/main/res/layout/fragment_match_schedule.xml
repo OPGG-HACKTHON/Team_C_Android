@@ -48,8 +48,8 @@
             
             <ImageButton
                 android:id="@+id/btn_schedule_after"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:background="?attr/actionBarItemBackground"
                 android:onClick="@{() -> viewModel.changeSearchRange(1)}"
                 android:src="@drawable/ic_arrow_right"

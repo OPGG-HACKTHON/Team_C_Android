@@ -2,37 +2,38 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/tools">
-
+    
     <data>
-
+        
         <variable
             name="item"
             type="android.milestone.network.model.auth.TeamInfoModel" />
     </data>
-
+    
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_team"
-        android:layout_width="152dp"
-        android:layout_height="152dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:background="@drawable/shape_round_line_white">
-
+        android:background="@drawable/shape_round_line_white"
+        android:padding="24dp">
+        
         <ImageView
             android:id="@+id/iv_team_logo"
             android:layout_width="64dp"
             android:layout_height="64dp"
+            android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             bind:setImage="@{item.icon}" />
-
+        
         <TextView
             android:id="@+id/tv_team_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:layout_marginBottom="24dp"
             android:text="@{item.name}"
             android:textColor="@color/gray400"
             android:textSize="16sp"

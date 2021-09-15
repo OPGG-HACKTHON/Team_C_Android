@@ -16,12 +16,12 @@
         android:layout_marginVertical="8dp"
         android:elevation="0dp"
         app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="16dp">
-        
+        app:cardCornerRadius="24dp">
+    
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            
+        
             <TextView
                 android:id="@+id/tv_content"
                 android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                 android:layout_marginBottom="16dp"
                 android:background="@color/gray200"
                 app:layout_constraintTop_toBottomOf="@id/iv_reaction" />
-    
+        
             <ImageView
                 android:id="@+id/iv_user_icon"
                 setImage="@{item.team.icon}"
@@ -77,13 +77,13 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/v_line" />
-    
+        
             <TextView
                 android:id="@+id/tv_user_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="4dp"
                 android:text="@{item.user.nickname}"
                 android:textColor="@color/black"
                 android:textSize="14sp"
@@ -91,7 +91,7 @@
                 app:layout_constraintStart_toEndOf="@id/iv_user_icon"
                 app:layout_constraintTop_toTopOf="@id/iv_user_icon"
                 tools:text="굴려줘 주사위" />
-
+        
             <TextView
                 android:id="@+id/tv_created_at"
                 setCreatedAt="@{item.createdAt}"
@@ -102,8 +102,9 @@
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@id/iv_user_icon"
                 app:layout_constraintStart_toEndOf="@id/iv_user_icon"
+                app:layout_constraintTop_toBottomOf="@id/tv_user_nickname"
                 tools:text="1분 전" />
-    
+        
             <ImageView
                 android:id="@+id/iv_more"
                 android:layout_width="wrap_content"
