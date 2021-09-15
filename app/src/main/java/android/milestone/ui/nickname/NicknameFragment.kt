@@ -53,7 +53,7 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
                 }
             }
             ivBack.setOnClickListener {
-                it.findNavController().navigate(R.id.action_login_to_team_select)
+                it.findNavController().navigate(R.id.action_nickname_to_team_select)
             }
             btOk.setOnClickListener {
                 viewModel.postSignUp(etNickname.text.toString())
