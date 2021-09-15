@@ -17,25 +17,38 @@ constructor(private val homeRepository: HomeRepository) : BaseViewModel() {
     private val _tinderState = MutableLiveData<Int>()
     val tinderState: LiveData<Int> get() = _tinderState
 
-    private val gameState = homeRepository.getCurrentGame().asLiveData(coroutineExceptionHandler)
-        .map { currentGameResponse ->
-            val currentGameModel = currentGameResponse.data
-            if (currentGameModel?.status == 1) {
-                currentGameModel.id
-            } else {
-                null
-            }
-        }
+    private val gameState = MutableLiveData<Int>(-1)
+
+    init {
+        initGameState()
+    }
 
     fun createTinder(msg: String) {
         viewModelScope.launch(coroutineExceptionHandler) {
-            val createTinderRequest =
-                CreateTinderRequest(msg, gameState.value)
-            homeRepository.createTinder(createTinderRequest)
-                .collect {
-                    // TODO: 2021-08-31 에러 및 성공 처리
-                    _tinderState.value = it.body()?.status
-                }
+            if (gameState.value == -1) {
+                initGameState { sendRequest(msg) }
+            } else {
+                sendRequest(msg)
+            }
+        }
+    }
+
+    private fun sendRequest(msg: String) {
+        viewModelScope.launch(coroutineExceptionHandler) {
+            val createTinderRequest = CreateTinderRequest(msg, gameState.value)
+            homeRepository.createTinder(createTinderRequest).collect {
+                _tinderState.value = it.body()?.status
+            }
+        }
+    }
+
+    private fun initGameState(onSuccess: () -> Unit = {}) {
+        viewModelScope.launch(coroutineExceptionHandler) {
+            homeRepository.getCurrentGame().collect {
+                val currentGameModel = it.data
+                gameState.value = currentGameModel?.id
+                onSuccess()
+            }
         }
     }
 }
