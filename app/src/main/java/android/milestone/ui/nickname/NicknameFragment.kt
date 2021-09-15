@@ -29,8 +29,8 @@ import kotlinx.coroutines.launch
 class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment_nickname) {
 
     private val viewModel: LoginViewModel by activityViewModels()
-
     override fun initViews() {
+        val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         initViewModels()
         binding.run {
             lifecycleScope.launch {
@@ -40,8 +40,6 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
                     isEnabled = true
                     setBackgroundResource(R.drawable.shape_round_gray_line_blue_500)
                     requestFocus()
-                    val imm =
-                        requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.toggleSoftInput(
                         InputMethodManager.SHOW_FORCED,
                         InputMethodManager.SHOW_IMPLICIT
@@ -57,6 +55,7 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
             }
             btOk.setOnClickListener {
                 viewModel.postSignUp(etNickname.text.toString())
+                imm.hideSoftInputFromWindow(binding.etNickname.windowToken,0)
             }
             ibClear.setOnClickListener {
                 etNickname.text.clear()
