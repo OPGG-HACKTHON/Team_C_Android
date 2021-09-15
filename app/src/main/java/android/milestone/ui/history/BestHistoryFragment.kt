@@ -16,7 +16,7 @@ class BestHistoryFragment : BaseFragment<FragmentBestHistoryBinding>(R.layout.fr
     override fun initViews() {
         binding.rvContent.adapter = adapter
         binding.layoutRefresh.setOnRefreshListener {
-            viewModel.loadLatestHistory()
+            viewModel.loadBestHistory()
             binding.layoutRefresh.isRefreshing = false
         }
         viewModel.bestHistory.observe(viewLifecycleOwner) {
