@@ -76,4 +76,6 @@
     <string name="policy">개인정보처리방침</string>
     <string name="logout">로그아웃</string>
     <string name="delete_account">회원탈퇴</string>
+    <string name="worlds_2021">Worlds 2021</string>
+    <string name="worlds_2021_day">2021. 10. 05 ~ 11. 06</string>
 </resources>

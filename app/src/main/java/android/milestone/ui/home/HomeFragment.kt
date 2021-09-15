@@ -151,11 +151,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
             scheduleData.observe(viewLifecycleOwner, { scheduleData ->
                 binding.run {
                     if (scheduleData == null) {
-                        itemGameScore.clNoGame.isVisible = true
-                        itemGameScore.clGame.isVisible = false
+                        binding.itemGameScore.run {
+                            clWorlds.isVisible = true
+                            clGame.isVisible = false
+                        }
                     } else {
-                        itemGameScore.clNoGame.isVisible = false
-                        itemGameScore.clGame.isVisible = true
+                        binding.itemGameScore.run {
+                            clWorlds.isVisible = false
+                            clGame.isVisible = true
+                        }
+
                         item = scheduleData
                         itemGameScore.tvFirstTeamScore.setTextColor(
                             ContextCompat.getColor(
