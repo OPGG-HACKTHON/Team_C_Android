@@ -107,10 +107,8 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
             singUpResponse
                 .observe(viewLifecycleOwner, { signUpResponse ->
                     if (signUpResponse.success) {
-                        val action =
-                            NicknameFragmentDirections.actionNicknameToComplete(binding.etNickname.text.toString())
-                        this@NicknameFragment.findNavController()
-                            .navigate(action)
+                        val action = NicknameFragmentDirections.actionNicknameToComplete(binding.etNickname.text.toString())
+                        this@NicknameFragment.findNavController().navigate(action)
                     } else {
                         toastShort(signUpResponse.data)
                     }
