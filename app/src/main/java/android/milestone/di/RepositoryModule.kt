@@ -8,6 +8,8 @@ import android.milestone.repository.league.LeagueRepository
 import android.milestone.repository.league.LeagueRepositoryImpl
 import android.milestone.repository.login.LoginRepository
 import android.milestone.repository.login.LoginRepositoryImpl
+import android.milestone.repository.user.UserRepository
+import android.milestone.repository.user.UserRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -33,4 +35,8 @@ abstract class RepositoryModule {
     @Singleton
     @Binds
     abstract fun bindHomeRepository(impl: HomeRepositoryImpl): HomeRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindUserRepository(impl: UserRepositoryImpl): UserRepository
 }

@@ -4,6 +4,7 @@ import android.milestone.network.request.*
 import android.milestone.network.response.RootResponse
 import android.milestone.network.response.auth.LoginResponse
 import android.milestone.network.response.auth.TeamInfoResponse
+import android.milestone.network.response.auth.UserDataResponse
 import android.milestone.network.response.history.BestHistoryResponse
 import android.milestone.network.response.history.LatestHistoryResponse
 import android.milestone.network.response.home.CurrentGameResponse
@@ -20,12 +21,14 @@ import retrofit2.http.*
 interface Api {
 
     // auth
-
     @POST("/auth/login")
     suspend fun postLogin(@Body loginRequest: LoginRequest): Response<LoginResponse>
 
     @POST("/auth/signup")
     suspend fun postSignUp(@Body signUpRequest: SignUpRequest): Response<RootResponse>
+
+    @GET("/auth/read")
+    suspend fun getUserData(): Response<UserDataResponse>
 
     // info
 
@@ -51,7 +54,13 @@ interface Api {
     @POST("/tinder/create")
     suspend fun createTinder(@Body createTinderRequest: CreateTinderRequest): Response<RootResponse>
 
-    @GET("/tinder/")
+    @GET("/tinder/totalTinder")
+    suspend fun totalTinderCount(): Response<RootResponse>
+
+    @GET("/tinder/totalLike")
+    suspend fun totalLikeCount(): Response<RootResponse>
+
+    @GET("/tinder")
     suspend fun getTinder(
         @Query("count") count: Int,
         @Query("filter") filter: String
@@ -88,4 +97,13 @@ interface Api {
 
     @GET("/tinder/hof")
     suspend fun loadBestHistory(): Response<BestHistoryResponse>
+
+    @PUT("/userSetting/nickname")
+    suspend fun updateNickname(@Body updateNicknameRequest: UpdateNicknameRequest): Response<RootResponse>
+
+    @PUT("/userSetting/updateTeamId")
+    suspend fun updateTeamId(@Body updateTeamIdRequest: UpdateTeamIdRequest): Response<RootResponse>
+
+    @PUT("/userSetting/preference")
+    suspend fun updatePreference(@Body updatePreferenceRequest: UpdatePreferenceRequest): Response<RootResponse>
 }
