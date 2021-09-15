@@ -41,7 +41,7 @@ fun ImageView.setPositionImage(position: String?) {
 @NotNull
 fun View.setPogRate(rate: Float) {
     val params = layoutParams
-    params.width = 10 + (rate.toInt() * 5)
+    params.width = 10 + (rate.toInt() * 20)
     layoutParams = params
 }
 

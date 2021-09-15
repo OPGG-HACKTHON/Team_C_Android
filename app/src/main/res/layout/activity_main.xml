@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/gray100">
-
+    
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/nav_host_fragment"
                 android:name="androidx.navigation.fragment.NavHostFragment"
@@ -28,13 +28,14 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:navGraph="@navigation/nav_graph" />
-
+    
             <android.milestone.ui.custom.CurvedBottomNavigationView
                 android:id="@+id/navigation"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:outlineAmbientShadowColor="@color/gray400"
                 android:outlineSpotShadowColor="@color/gray400"
+                android:paddingHorizontal="24dp"
                 app:fab_cradle_margin="8dp"
                 app:fab_cradle_rounded_corner_radius="16dp"
                 app:fab_size="50dp"
@@ -45,7 +46,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:menu="@menu/main_menu" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
+    
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="58dp"

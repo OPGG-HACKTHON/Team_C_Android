@@ -17,12 +17,13 @@
         android:layout_marginVertical="8dp"
         android:elevation="0dp"
         app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="16dp">
-        
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp">
+    
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            
+        
             <ImageView
                 android:id="@+id/iv_history_order"
                 android:layout_width="20dp"
@@ -32,7 +33,7 @@
                 android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-    
+        
             <TextView
                 android:id="@+id/tv_history_order"
                 android:layout_width="wrap_content"
@@ -43,7 +44,7 @@
                 app:layout_constraintEnd_toEndOf="@id/iv_history_order"
                 app:layout_constraintStart_toStartOf="@id/iv_history_order"
                 app:layout_constraintTop_toTopOf="parent" />
-    
+        
             <TextView
                 android:id="@+id/tv_date"
                 setCreatedAt="@{item.createdAt}"
@@ -54,7 +55,7 @@
                 android:textColor="@color/gray500"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-    
+        
             <TextView
                 android:id="@+id/tv_content"
                 android:layout_width="match_parent"
@@ -70,7 +71,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="ㅇ아아므이ㅏㅁ자으미ㅏ즈" />
-    
+        
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
@@ -79,7 +80,7 @@
                 app:layout_constraintBottom_toTopOf="@id/layout_reaction"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
-    
+        
             <LinearLayout
                 android:id="@+id/layout_reaction"
                 android:layout_width="match_parent"
@@ -89,19 +90,19 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
-        
+            
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="horizontal">
-            
+                
                     <ImageView
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:src="@drawable/ic_best" />
-            
+                
                     <TextView
                         android:id="@+id/tv_reaction1"
                         android:layout_width="wrap_content"
@@ -113,19 +114,19 @@
                         android:textColor="@color/black"
                         app:iconSize="24dp" />
                 </LinearLayout>
-        
+            
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="horizontal">
-            
+                
                     <ImageView
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:src="@drawable/ic_like" />
-            
+                
                     <TextView
                         android:id="@+id/tv_reaction2"
                         android:layout_width="wrap_content"
@@ -137,19 +138,19 @@
                         android:textColor="@color/black"
                         app:iconSize="24dp" />
                 </LinearLayout>
-        
+            
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="horizontal">
-            
+                
                     <ImageView
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:src="@drawable/ic_dislike" />
-            
+                
                     <TextView
                         android:id="@+id/tv_reaction3"
                         android:layout_width="wrap_content"
