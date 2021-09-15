@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class PogVoteListRequest(
     @SerializedName("vote")
-    val vote : List<PogVoteRequest>
+    val vote: List<PogVoteRequest>
 )

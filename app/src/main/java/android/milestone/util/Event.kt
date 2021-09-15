@@ -15,6 +15,7 @@ open class Event<out T>(private val content: T) {
             content
         }
     }
+
     fun peekContent(): T = content
 }
 

@@ -13,7 +13,6 @@ import android.milestone.repository.home.HomeRepository
 import android.milestone.ui.schedule.ui_model.ScheduleUiModel
 import android.milestone.util.Event
 import android.milestone.util.PrefUtil
-import android.util.Log
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay

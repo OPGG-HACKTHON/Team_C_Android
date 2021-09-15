@@ -4,16 +4,18 @@
     
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp">
+    
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/shape_round_white_32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_send"
             app:layout_constraintStart_toStartOf="parent">
-            
+        
             <EditText
                 android:id="@+id/et_tinder"
                 android:layout_width="0dp"

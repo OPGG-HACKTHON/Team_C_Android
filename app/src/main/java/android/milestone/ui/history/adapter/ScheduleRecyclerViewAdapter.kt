@@ -23,6 +23,8 @@ class ScheduleRecyclerViewAdapter(
             val beforeItemDate = getItem(position - 1).startTime.toyyyyMMdd()
             val currentItemDate = getItem(position).startTime.toyyyyMMdd()
             (holder as? ScheduleViewHolder)?.bindDateVisibility(beforeItemDate != currentItemDate)
+        } else {
+            (holder as? ScheduleViewHolder)?.bindDateVisibility(true)
         }
     }
 }

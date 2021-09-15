@@ -2,152 +2,157 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
+    
     <data>
-
+        
         <variable
             name="item"
             type="android.milestone.ui.schedule.ui_model.ScheduleUiModel" />
     </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_no_game"
+    
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="92dp"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_no_game"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/no_game"
-            android:textColor="@color/gray700"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_game"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/shape_rect_radius16_white"
-        android:minHeight="92dp"
-        android:paddingHorizontal="24dp"
-        android:paddingVertical="16dp">
-
-        <LinearLayout
-            android:id="@+id/layout_first_team"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/iv_first_team"
-                setImage="@{item.schedule.aTeamIcon}"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:scaleType="fitCenter" />
-
+            android:minHeight="92dp"
+            android:visibility="gone">
+            
             <TextView
-                android:id="@+id/tv_first_team"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:text="@{item.schedule.aTeamName}"
-                android:textColor="@color/gray400"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layout_second_team"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/iv_second_team"
-                setImage="@{item.schedule.bTeamIcon}"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:scaleType="fitCenter" />
-
-            <TextView
-                android:id="@+id/tv_second_team"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:text="@{item.schedule.bTeamName}"
-                android:textColor="@color/gray400"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_start_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{item.startTime.toHHmm()}"
-            android:textColor="@color/gray700"
-            android:textSize="16sp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
-            android:id="@+id/ll_score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/tv_first_team_score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{String.valueOf(item.schedule.ATeamScore)}"
-                android:textSize="32sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tv_vs"
-                app:layout_constraintStart_toEndOf="@id/iv_first_team"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="1" />
-
-            <TextView
-                android:id="@+id/tv_vs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="28dp"
-                android:text="@string/vs"
-                android:textColor="@color/gray300"
+                android:text="@string/no_game"
+                android:textColor="@color/gray700"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_second_team_score"
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_game"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_rect_radius16_white"
+            android:minHeight="92dp"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="16dp">
+            
+            <LinearLayout
+                android:id="@+id/layout_first_team"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{String.valueOf(item.schedule.BTeamScore)}"
-                android:textSize="32sp"
-                android:textStyle="bold"
+                android:gravity="center"
+                android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:text="0" />
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                
+                <ImageView
+                    android:id="@+id/iv_first_team"
+                    setImage="@{item.schedule.aTeamIcon}"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter" />
+                
+                <TextView
+                    android:id="@+id/tv_first_team"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="@{item.schedule.aTeamName}"
+                    android:textColor="@color/gray400"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:id="@+id/layout_second_team"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                
+                <ImageView
+                    android:id="@+id/iv_second_team"
+                    setImage="@{item.schedule.bTeamIcon}"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter" />
+                
+                <TextView
+                    android:id="@+id/tv_second_team"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="@{item.schedule.bTeamName}"
+                    android:textColor="@color/gray400"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            
+            <TextView
+                android:id="@+id/tv_start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.startTime.toHHmm()}"
+                android:textColor="@color/gray700"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            
+            <LinearLayout
+                android:id="@+id/ll_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                
+                <TextView
+                    android:id="@+id/tv_first_team_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(item.schedule.ATeamScore)}"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_vs"
+                    app:layout_constraintStart_toEndOf="@id/iv_first_team"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="1" />
+                
+                <TextView
+                    android:id="@+id/tv_vs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="28dp"
+                    android:text="@string/vs"
+                    android:textColor="@color/gray300"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toTopOf="parent" />
+                
+                <TextView
+                    android:id="@+id/tv_second_team_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(item.schedule.BTeamScore)}"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:text="0" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </layout>

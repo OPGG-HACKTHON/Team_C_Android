@@ -4,13 +4,12 @@ import android.milestone.network.request.*
 import android.milestone.network.response.RootResponse
 import android.milestone.network.response.auth.LoginResponse
 import android.milestone.network.response.auth.TeamInfoResponse
-import android.milestone.network.response.tinder.TopTinderResponse
 import android.milestone.network.response.home.CurrentGameResponse
 import android.milestone.network.response.home.TinderResponse
 import android.milestone.network.response.home.pog_list.PogListResponse
 import android.milestone.network.response.match_detail.PlayerOfGameResponse
+import android.milestone.network.response.tinder.TopTinderResponse
 import retrofit2.Response
-import retrofit2.http.Body
 
 interface RemoteDataSource {
 
@@ -30,12 +29,11 @@ interface RemoteDataSource {
 
     suspend fun updateLike(updateLikeRequest: UpdateLikeRequest): Response<RootResponse>
 
-    suspend fun getCurrentGame() : CurrentGameResponse
-
-    suspend fun getPogOfGame(gameId: Int?) : Response<PlayerOfGameResponse>
+    suspend fun getCurrentGame(): CurrentGameResponse
 
     suspend fun getPogList(): Response<PogListResponse>
 
     suspend fun postPogVote(pogVoteRequestList: List<PogVoteRequest>): Response<RootResponse>
 
+    suspend fun getPogOfGame(gameId: Int?): Response<PlayerOfGameResponse>
 }

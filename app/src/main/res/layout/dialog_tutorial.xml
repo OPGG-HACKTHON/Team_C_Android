@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:paddingBottom="75dp">
+    
         <TextView
             android:id="@+id/tv_up"
             android:layout_width="wrap_content"
@@ -18,7 +19,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
-
+        
         <ImageView
             android:id="@+id/iv_best"
             android:layout_width="wrap_content"
@@ -28,7 +29,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_up" />
-
+        
         <ImageView
             android:id="@+id/iv_up"
             android:layout_width="wrap_content"
@@ -39,7 +40,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_best" />
-
+        
         <ImageView
             android:id="@+id/iv_left"
             android:layout_width="wrap_content"
@@ -49,7 +50,7 @@
             app:layout_constraintBottom_toTopOf="@id/iv_dislike"
             app:layout_constraintEnd_toEndOf="@id/iv_dislike"
             app:layout_constraintStart_toStartOf="@id/iv_dislike" />
-
+        
         <ImageView
             android:id="@+id/iv_dislike"
             android:layout_width="wrap_content"
@@ -59,7 +60,7 @@
             app:layout_constraintBottom_toBottomOf="@id/tv_center_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_center_text" />
-
+        
         <TextView
             android:id="@+id/tv_left"
             android:layout_width="wrap_content"
@@ -71,7 +72,7 @@
             app:layout_constraintEnd_toEndOf="@id/iv_dislike"
             app:layout_constraintStart_toStartOf="@id/iv_dislike"
             app:layout_constraintTop_toBottomOf="@id/iv_dislike" />
-
+        
         <ImageView
             android:id="@+id/iv_right"
             android:layout_width="wrap_content"
@@ -81,7 +82,7 @@
             app:layout_constraintBottom_toTopOf="@id/iv_like"
             app:layout_constraintEnd_toEndOf="@id/iv_like"
             app:layout_constraintStart_toStartOf="@id/iv_like" />
-
+        
         <ImageView
             android:id="@+id/iv_like"
             android:layout_width="wrap_content"
@@ -91,7 +92,7 @@
             app:layout_constraintBottom_toBottomOf="@id/tv_center_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_center_text" />
-
+        
         <TextView
             android:id="@+id/tv_right"
             android:layout_width="wrap_content"
@@ -103,7 +104,7 @@
             app:layout_constraintEnd_toEndOf="@id/iv_like"
             app:layout_constraintStart_toStartOf="@id/iv_like"
             app:layout_constraintTop_toBottomOf="@id/iv_like" />
-
+        
         <ImageView
             android:id="@+id/iv_hand"
             android:layout_width="wrap_content"
@@ -113,7 +114,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
+        
         <TextView
             android:id="@+id/tv_center_text"
             android:layout_width="wrap_content"
@@ -126,7 +127,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_hand" />
-
+        
         <ImageView
             android:id="@+id/iv_down"
             android:layout_width="wrap_content"
@@ -138,7 +139,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_center_text"
             app:layout_constraintVertical_chainStyle="packed" />
-
+        
         <ImageView
             android:id="@+id/iv_pass"
             android:layout_width="wrap_content"
@@ -148,7 +149,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_down" />
-
+        
         <TextView
             android:id="@+id/tv_down"
             android:layout_width="wrap_content"
@@ -161,7 +162,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_pass" />
-
+        
         <Button
             android:id="@+id/bt_start"
             android:layout_width="0dp"

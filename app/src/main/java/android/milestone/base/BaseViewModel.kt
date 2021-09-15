@@ -1,6 +1,5 @@
 package android.milestone.base
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 

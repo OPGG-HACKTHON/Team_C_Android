@@ -6,7 +6,7 @@
         <item name="android:fontFamily">@font/app_font_family</item>
         <item name="fontFamily">@font/app_font_family</item>
     </style>
-
+    
     <style name="pogBottomDialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowBackground">@android:color/transparent</item>

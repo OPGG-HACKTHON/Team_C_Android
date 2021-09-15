@@ -7,6 +7,7 @@ import android.milestone.ui.match_detail.adapter.PlayerOfGameRecyclerAdapter
 import android.milestone.ui.match_detail.adapter.TopTinderRecyclerAdapter
 import android.milestone.ui.schedule.MatchDetailViewModel
 import android.milestone.ui.schedule.ScheduleViewModel
+import android.milestone.ui.schedule.ui_model.ScheduleUiModel
 import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -56,15 +57,18 @@ class MatchDetailFragment : BaseFragment<FragmentMatchDetailBinding>(R.layout.fr
         snapHelper.attachToRecyclerView(binding.rvTopTinder)
 
         binding.tvTeam1Name.setOnClickListener {
-            matchDetailViewModel.changeSelectedTeam(true)
-            matchDetailViewModel.loadPog(selectedSchedule?.schedule?.id ?: 0)
+            updateSelectedTeam(selectedSchedule, true)
         }
         binding.tvTeam2Name.setOnClickListener {
-            matchDetailViewModel.changeSelectedTeam(false)
-            matchDetailViewModel.loadPog(selectedSchedule?.schedule?.id ?: 0)
+            updateSelectedTeam(selectedSchedule, false)
         }
 
         observeData()
+    }
+
+    private fun updateSelectedTeam(selectedSchedule: ScheduleUiModel?, isFirstTeam: Boolean) {
+        matchDetailViewModel.changeSelectedTeam(isFirstTeam)
+        matchDetailViewModel.loadPog(selectedSchedule?.schedule?.id ?: 0)
     }
 
     private fun observeData() {

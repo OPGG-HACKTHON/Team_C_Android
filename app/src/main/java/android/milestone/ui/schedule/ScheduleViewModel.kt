@@ -2,7 +2,7 @@ package android.milestone.ui.schedule
 
 import android.milestone.base.BaseViewModel
 import android.milestone.network.response.schedule.Schedule
-import android.milestone.repository.LeagueRepository
+import android.milestone.repository.league.LeagueRepository
 import android.milestone.ui.schedule.ui_model.ScheduleUiModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -34,7 +34,10 @@ class ScheduleViewModel @Inject constructor(private val repository: LeagueReposi
 
     fun updateData() {
         viewModelScope.launch(coroutineExceptionHandler) {
-            val response = repository.loadSchedule(_searchRange.value?.monthValue ?: 1)
+            val response = repository.loadSchedule(
+                _searchRange.value?.year ?: 2021,
+                _searchRange.value?.monthValue ?: 1
+            )
             response.collectLatest {
                 if (it.isSuccessful) {
                     _scheduleData.value = it.body()?.data

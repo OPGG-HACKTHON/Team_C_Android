@@ -1,7 +1,7 @@
 package android.milestone.ui.nickname
 
 import android.content.Context
-import android.content.Intent
+import android.content.res.ColorStateList
 import android.milestone.Naming.ACCESS_TOKEN
 import android.milestone.Naming.REFRESH_TOKEN
 import android.milestone.R
@@ -10,11 +10,11 @@ import android.milestone.databinding.FragmentNicknameBinding
 import android.milestone.isValidName
 import android.milestone.toastShort
 import android.milestone.ui.login.viewmodel.LoginViewModel
-import android.milestone.ui.main.MainActivity
 import android.milestone.util.PrefUtil
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -72,15 +72,17 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    val validName = etNickname.text.isValidName()
+                    val validName = etNickname.text.toString().isValidName()
                     tvWaring.text = validName.second
                     ibClear.isVisible = etNickname.text.isNotBlank()
                     if (validName.first) {
                         btOk.isEnabled = true
+                        btOk.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.blue500))
                         etNickname.setBackgroundResource(R.drawable.shape_round_gray_line_blue_500)
                         tvSubTitle.setTextColor(resources.getColor(R.color.blue500, null))
                     } else {
                         btOk.isEnabled = false
+                        btOk.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.gray200))
                         etNickname.setBackgroundResource(R.drawable.shape_round_gray_line_red_500)
                         tvSubTitle.setTextColor(resources.getColor(R.color.gray500, null))
                     }
@@ -119,5 +121,4 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
     private fun setToken(key: String, value: String) {
         PrefUtil.setStringValue(key, value)
     }
-
 }

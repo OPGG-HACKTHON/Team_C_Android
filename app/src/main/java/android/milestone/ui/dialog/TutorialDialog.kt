@@ -5,7 +5,6 @@ import android.milestone.base.BaseDialogFragment
 import android.milestone.databinding.DialogTutorialBinding
 import android.milestone.util.PrefUtil
 import android.os.Bundle
-import android.view.View
 
 class TutorialDialog : BaseDialogFragment<DialogTutorialBinding>(R.layout.dialog_tutorial) {
 

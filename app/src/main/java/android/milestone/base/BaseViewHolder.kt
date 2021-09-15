@@ -30,5 +30,5 @@ abstract class BaseViewHolder<B : ViewDataBinding, T>(
         }
     }
 
-    open fun setSingleSelectPosition(selectPosition : Int){}
+    open fun setSingleSelectPosition(selectPosition: Int) {}
 }

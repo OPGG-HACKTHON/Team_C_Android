@@ -1,27 +1,18 @@
 package android.milestone.ui.dialog
 
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.milestone.R
 import android.milestone.base.BaseDialogFragment
 import android.milestone.databinding.DialogWriteTinderBinding
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.DialogFragment
 
 class WriteTinderDialog(private val onSendAction: (String) -> Unit) :
     BaseDialogFragment<DialogWriteTinderBinding>(R.layout.dialog_write_tinder) {
 
     override fun initViews() {
-        val imm =
-            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
         binding.run {
             ivSend.isEnabled = false

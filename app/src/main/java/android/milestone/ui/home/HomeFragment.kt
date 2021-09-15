@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.CardStackListener
@@ -54,7 +55,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
         initViewModels()
         binding.run {
             cvTinder.apply {
-                layoutManager = cardStackLayoutManager
+                if (layoutManager == null) {
+                    layoutManager = cardStackLayoutManager
+                }
                 adapter = homeAdapter
             }
             lvPass.setOnClickListener {
@@ -86,6 +89,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home), 
                 } else {
                     toastShort("진행중인 경기가 없습니다.")
                 }
+            }
+            ivMy.setOnClickListener {
+                findNavController().navigate(HomeFragmentDirections.actionFragmentMypage())
             }
             pager.adapter = POGListTabAdapter(this@HomeFragment)
         }

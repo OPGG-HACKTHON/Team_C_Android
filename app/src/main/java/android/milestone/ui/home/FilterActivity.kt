@@ -6,7 +6,6 @@ import android.milestone.ui.home.adapter.FilterAdapter
 import android.milestone.ui.home.viewmodel.FilterViewModel
 import android.milestone.util.PrefUtil
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil

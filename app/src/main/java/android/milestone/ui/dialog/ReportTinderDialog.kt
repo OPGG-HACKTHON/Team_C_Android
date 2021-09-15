@@ -4,12 +4,9 @@ import android.milestone.R
 import android.milestone.base.BaseDialogFragment
 import android.milestone.databinding.DialogReportTinderBinding
 import android.milestone.network.request.CreateReportRequest
-import android.milestone.toastShort
 import android.milestone.ui.home.viewmodel.HomeViewModel
 import android.milestone.util.EventObserver
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 

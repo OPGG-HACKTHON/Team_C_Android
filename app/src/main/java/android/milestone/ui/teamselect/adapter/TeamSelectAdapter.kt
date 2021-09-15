@@ -27,6 +27,7 @@ class TeamSelectAdapter(
     ) {
         super.onBindViewHolder(holder, position)
         holder.itemView.setOnClickListener {
+            onClick(getItem(position))
             notifyItemChanged(holder.adapterPosition)
             notifyItemChanged(selectPosition)
             selectPosition = holder.adapterPosition

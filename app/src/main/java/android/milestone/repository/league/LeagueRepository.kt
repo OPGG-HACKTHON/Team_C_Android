@@ -1,4 +1,4 @@
-package android.milestone.repository
+package android.milestone.repository.league
 
 import android.milestone.network.response.match_detail.PlayerOfGameResponse
 import android.milestone.network.response.ranking.PlayerRankingResponse
@@ -15,5 +15,5 @@ interface LeagueRepository {
 
     fun getPlayerOfGame(gameId: Int): Flow<Response<PlayerOfGameResponse>>
 
-    fun loadSchedule(month: Int): Flow<Response<MonthlyScheduleResponse>>
+    fun loadSchedule(year: Int, month: Int): Flow<Response<MonthlyScheduleResponse>>
 }

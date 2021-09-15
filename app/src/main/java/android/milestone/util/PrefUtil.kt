@@ -30,6 +30,4 @@ object PrefUtil {
 
     fun getBooleanValue(name: String, defValue: Boolean): Boolean =
         prefUtil.getBoolean(name, defValue)
-
-
 }

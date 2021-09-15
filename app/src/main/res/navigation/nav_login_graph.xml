@@ -28,31 +28,31 @@
             android:id="@+id/action_team_select_to_login"
             app:destination="@id/login" />
     </fragment>
-
+    
     <fragment
         android:id="@+id/nickname"
         android:name="android.milestone.ui.nickname.NicknameFragment"
         android:label="@string/nickname"
         tools:layout="@layout/fragment_nickname">
-
+        
         <action
             android:id="@+id/action_nickname_to_team_select"
             app:destination="@id/team_select" />
         <action
             android:id="@+id/action_nickname_to_complete"
             app:destination="@id/complete" />
-
+    
     </fragment>
-
+    
     <fragment
         android:id="@+id/complete"
         android:name="android.milestone.ui.login.SignUpCompleteFragment"
         android:label="@string/sign_up_complete"
         tools:layout="@layout/fragment_sign_up_complete">
-
+        
         <argument
             android:name="nickname"
-            app:argType="string"
-            android:defaultValue=""/>
+            android:defaultValue=""
+            app:argType="string" />
     </fragment>
 </navigation>

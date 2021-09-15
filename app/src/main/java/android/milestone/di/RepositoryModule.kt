@@ -1,11 +1,15 @@
 package android.milestone.di
 
-import android.milestone.repository.LeagueRepository
-import android.milestone.repository.LeagueRepositoryImpl
-import android.milestone.repository.login.LoginRepository
-import android.milestone.repository.login.LoginRepositoryImpl
+import android.milestone.repository.history.HistoryRepository
+import android.milestone.repository.history.HistoryRepositoryImpl
 import android.milestone.repository.home.HomeRepository
 import android.milestone.repository.home.HomeRepositoryImpl
+import android.milestone.repository.league.LeagueRepository
+import android.milestone.repository.league.LeagueRepositoryImpl
+import android.milestone.repository.login.LoginRepository
+import android.milestone.repository.login.LoginRepositoryImpl
+import android.milestone.repository.user.UserRepository
+import android.milestone.repository.user.UserRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -26,5 +30,13 @@ abstract class RepositoryModule {
 
     @Singleton
     @Binds
+    abstract fun bindHistoryRepository(impl: HistoryRepositoryImpl): HistoryRepository
+
+    @Singleton
+    @Binds
     abstract fun bindHomeRepository(impl: HomeRepositoryImpl): HomeRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindUserRepository(impl: UserRepositoryImpl): UserRepository
 }

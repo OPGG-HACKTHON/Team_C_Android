@@ -67,4 +67,13 @@
     <string name="previous_minute">%d분 전</string>
     <string name="dialog_report_complete_title">신고가 정상적으로 접수되었습니다</string>
     <string name="no_game">경기가 없어요 :(</string>
+    <string name="my_activity">나의 스윕 활동</string>
+    <string name="my_tinder">작성한 메세지카드</string>
+    <string name="my_like">받은 공감</string>
+    <string name="my_player">관심 선수</string>
+    <string name="edit_profile">프로필 수정</string>
+    <string name="setting">설정</string>
+    <string name="policy">개인정보처리방침</string>
+    <string name="logout">로그아웃</string>
+    <string name="delete_account">회원탈퇴</string>
 </resources>

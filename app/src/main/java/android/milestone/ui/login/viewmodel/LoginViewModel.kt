@@ -90,5 +90,4 @@ constructor(private val loginRepository: LoginRepository) : BaseViewModel() {
     fun setKakaoId(id: Int) {
         kakaoId.value = id
     }
-
 }

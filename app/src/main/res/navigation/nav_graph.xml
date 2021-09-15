@@ -10,6 +10,13 @@
         android:label="@string/home"
         tools:layout="@layout/fragment_home">
     
+        <action
+            android:id="@+id/action_fragment_mypage"
+            app:destination="@id/fragment_mypage"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
     </fragment>
     
     <fragment
@@ -45,4 +52,41 @@
             android:defaultValue="0"
             app:argType="integer" />
     </fragment>
+    
+    <fragment
+        android:id="@+id/fragment_mypage"
+        android:name="android.milestone.ui.setting.UserSettingFragment"
+        tools:layout="@layout/fragment_mypage">
+        
+        <action
+            android:id="@+id/action_fragment_edit_nickname"
+            app:destination="@id/fragment_edit_nickname"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
+        
+        <action
+            android:id="@+id/action_fragment_setting"
+            app:destination="@id/fragment_setting"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
+    </fragment>
+    
+    <fragment
+        android:id="@+id/fragment_my_players"
+        android:name="android.milestone.ui.setting.UserSettingFragment"
+        tools:layout="@layout/fragment_mypage" />
+    
+    <fragment
+        android:id="@+id/fragment_edit_nickname"
+        android:name="android.milestone.ui.setting.EditNicknameFragment"
+        tools:layout="@layout/fragment_edit_nickname" />
+    
+    <fragment
+        android:id="@+id/fragment_setting"
+        android:name="android.milestone.ui.setting.SettingFragment"
+        tools:layout="@layout/fragment_setting" />
 </navigation>

@@ -3,7 +3,7 @@ package android.milestone.ui.ranking
 import android.milestone.base.BaseViewModel
 import android.milestone.network.response.ranking.Player
 import android.milestone.network.response.ranking.TeamRanking
-import android.milestone.repository.LeagueRepository
+import android.milestone.repository.league.LeagueRepository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope

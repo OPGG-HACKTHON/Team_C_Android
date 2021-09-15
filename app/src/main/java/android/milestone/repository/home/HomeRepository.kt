@@ -12,7 +12,6 @@ import android.milestone.network.response.match_detail.PlayerOfGameResponse
 import android.milestone.network.response.tinder.TopTinderResponse
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
-import retrofit2.http.Body
 
 interface HomeRepository {
 
@@ -28,7 +27,7 @@ interface HomeRepository {
 
     fun getTopTinder(gameId: Int): Flow<Response<TopTinderResponse>>
 
-    fun getPogOfGame(gameId: Int?) : Flow<Response<PlayerOfGameResponse>>
+    fun getPogOfGame(gameId: Int?): Flow<Response<PlayerOfGameResponse>>
 
     fun getPogList(): Flow<Response<PogListResponse>>
 
