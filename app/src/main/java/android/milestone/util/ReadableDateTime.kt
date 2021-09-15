@@ -1,15 +1,20 @@
 package android.milestone.util
 
+import java.time.Duration
 import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.ZoneId
-import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.*
 
 
 class ReadableDateTime constructor(private val localDateTime: LocalDateTime) {
+
+    private object TimeMaximum {
+        const val MIN = 60
+        const val HOUR = 24
+        const val DAY = 30
+        const val MONTH = 12
+    }
 
     companion object {
 
@@ -18,17 +23,35 @@ class ReadableDateTime constructor(private val localDateTime: LocalDateTime) {
         }
 
         private fun to(dateTimeString: String): LocalDateTime {
-            val localDateTime = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ISO_DATE_TIME)
-            return ZonedDateTime.of(localDateTime, ZoneId.of("Asia/Seoul")).toLocalDateTime()
+            return LocalDateTime.parse(dateTimeString, DateTimeFormatter.ISO_DATE_TIME).plusHours(9)
         }
     }
 
-    fun toMinuteDifference(): Int {
-        val currentTime = LocalTime.now()
-        val currentMinute = (24 - currentTime.hour) * 60 + currentTime.minute
-        val minute = (24 - localDateTime.hour) * 60 + currentTime.minute
+    fun toMinuteDifference(): String {
+        return formatTimeString(Duration.between(localDateTime, LocalDateTime.now()).toMinutes())
+    }
 
-        return currentMinute - minute
+    private fun formatTimeString(diffMinute: Long): String {
+        var diffTime = diffMinute
+        var msg: String? = null
+        when {
+            diffTime < TimeMaximum.MIN -> {
+                msg = diffTime.toString() + "분 전"
+            }
+            TimeMaximum.MIN.let { diffTime /= it; diffTime } < TimeMaximum.HOUR -> {
+                msg = diffTime.toString() + "시간 전"
+            }
+            TimeMaximum.HOUR.let { diffTime /= it; diffTime } < TimeMaximum.DAY -> {
+                msg = diffTime.toString() + "일 전"
+            }
+            TimeMaximum.DAY.let { diffTime /= it; diffTime } < TimeMaximum.MONTH -> {
+                msg = diffTime.toString() + "달 전"
+            }
+            else -> {
+                msg = diffTime.toString() + "년 전"
+            }
+        }
+        return msg ?: ""
     }
 
     fun toHHmm(): String {
