@@ -46,6 +46,7 @@
             
             <TextView
                 android:id="@+id/tv_date"
+                setCreatedAt="@{item.tinder.createdAt}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"

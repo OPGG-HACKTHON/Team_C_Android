@@ -12,8 +12,7 @@ class WriteTinderDialog(private val onSendAction: (String) -> Unit) :
     BaseDialogFragment<DialogWriteTinderBinding>(R.layout.dialog_write_tinder) {
 
     override fun initViews() {
-        val imm =
-            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
         binding.run {
             ivSend.isEnabled = false
