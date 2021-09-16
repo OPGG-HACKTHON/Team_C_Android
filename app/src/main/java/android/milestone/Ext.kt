@@ -1,6 +1,9 @@
 package android.milestone
 
 import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import java.util.regex.Pattern
@@ -24,4 +27,8 @@ fun Fragment.toastShort(message: String) {
 
 fun Activity.toastShort(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+}
+
+fun Context.goToWebsite(url: String) {
+    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
 }

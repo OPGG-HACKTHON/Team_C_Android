@@ -5,22 +5,23 @@
         
         <variable
             name="item"
-            type="String" />
+            type="android.milestone.network.model.auth.TeamInfoModel" />
     </data>
     
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="36dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/shape_rect_radius8"
         android:backgroundTint="@color/blue200"
         android:gravity="center"
         android:minWidth="64dp">
-        
+    
         <TextView
             android:id="@+id/tv_team_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="8dp"
-            android:text="@{item}" />
+            android:text="@{item.name}" />
     </LinearLayout>
 </layout>

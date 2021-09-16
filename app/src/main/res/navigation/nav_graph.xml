@@ -55,7 +55,7 @@
     
     <fragment
         android:id="@+id/fragment_mypage"
-        android:name="android.milestone.ui.setting.UserSettingFragment"
+        android:name="android.milestone.ui.setting.MyPageFragment"
         tools:layout="@layout/fragment_mypage">
         
         <action
@@ -65,10 +65,18 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_out" />
-        
+    
         <action
             android:id="@+id/action_fragment_setting"
             app:destination="@id/fragment_setting"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
+    
+        <action
+            android:id="@+id/action_fragment_preference"
+            app:destination="@id/fragment_preference"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
@@ -77,7 +85,7 @@
     
     <fragment
         android:id="@+id/fragment_my_players"
-        android:name="android.milestone.ui.setting.UserSettingFragment"
+        android:name="android.milestone.ui.setting.MyPageFragment"
         tools:layout="@layout/fragment_mypage" />
     
     <fragment
@@ -89,4 +97,9 @@
         android:id="@+id/fragment_setting"
         android:name="android.milestone.ui.setting.SettingFragment"
         tools:layout="@layout/fragment_setting" />
+    
+    <fragment
+        android:id="@+id/fragment_preference"
+        android:name="android.milestone.ui.setting.UserPreferenceFragment"
+        tools:layout="@layout/fragment_user_preference" />
 </navigation>

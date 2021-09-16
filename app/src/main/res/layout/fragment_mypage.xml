@@ -85,7 +85,7 @@
                             android:id="@+id/tv_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{viewModel.userData.user.nickname}"
+                            android:text="@{viewModel.userData.nickname}"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
                         
@@ -94,7 +94,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
-                            android:text="@{viewModel.userData.team.name}"
+                            android:text="@{viewModel.userData.teamName}"
                             android:textColor="@color/gray600"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -164,7 +164,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@{viewModel.userData.tinderCount}"
+                        android:text="@{String.valueOf(viewModel.countData.tinders)}"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="@id/tv_card"
                         app:layout_constraintStart_toStartOf="@id/tv_card"
@@ -174,7 +174,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@{viewModel.userData.likeCount}"
+                        android:text="@{String.valueOf(viewModel.countData.count)}"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="@id/tv_count"
                         app:layout_constraintStart_toStartOf="@id/tv_count"
@@ -205,6 +205,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
                     
                     <ImageView
+                        android:id="@+id/iv_my_players"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="24dp"

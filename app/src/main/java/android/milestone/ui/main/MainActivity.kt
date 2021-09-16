@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity(), StartDestination {
                 R.id.fragment_mypage,
                 R.id.fragment_edit_nickname,
                 R.id.fragment_setting,
+                R.id.fragment_preference,
             )
 
             if (!binding.navigation.isVisible) {

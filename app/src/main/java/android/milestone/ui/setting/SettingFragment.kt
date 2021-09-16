@@ -5,10 +5,12 @@ import android.milestone.Naming
 import android.milestone.R
 import android.milestone.base.BaseFragment
 import android.milestone.databinding.FragmentSettingBinding
-import android.milestone.toastShort
+import android.milestone.goToWebsite
 import android.milestone.ui.login.LoginActivity
 import android.milestone.util.PrefUtil
+import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,11 +27,17 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_s
             requireActivity().finish()
         }
         binding.btnPrivacy.setOnClickListener {
-            toastShort("개인정보 처리방침")
+            requireContext().goToWebsite(getString(R.string.policy_url))
         }
         binding.btnDeleteAccount.setOnClickListener {
             PrefUtil.setStringValue(Naming.ACCESS_TOKEN, "")
             requireActivity().finish()
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            findNavController().navigateUp()
+        }
+        binding.ivBack.setOnClickListener {
+            findNavController().navigateUp()
         }
     }
 }

@@ -67,7 +67,8 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                tools:listitem="@layout/item_preference_team" />
             
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_player"
@@ -76,12 +77,14 @@
                 android:layout_marginTop="8dp"
                 android:orientation="vertical"
                 android:overScrollMode="never"
+                android:paddingHorizontal="24dp"
                 android:paddingBottom="16dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:listitem="@layout/item_pog_player" />
+                app:spanCount="3"
+                tools:listitem="@layout/item_preference_player" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
