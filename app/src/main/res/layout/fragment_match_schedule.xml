@@ -23,10 +23,12 @@
             
             <ImageButton
                 android:id="@+id/btn_schedule_before"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:background="?attr/actionBarItemBackground"
                 android:onClick="@{() -> viewModel.changeSearchRange(-1)}"
+                android:paddingVertical="6dp"
+                android:paddingStart="12dp"
                 android:src="@drawable/ic_left"
                 app:layout_constraintBottom_toBottomOf="@id/tv_selected_month"
                 app:layout_constraintEnd_toStartOf="@id/tv_selected_month"
@@ -45,13 +47,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="2020.02" />
-            
+    
             <ImageButton
                 android:id="@+id/btn_schedule_after"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:background="?attr/actionBarItemBackground"
                 android:onClick="@{() -> viewModel.changeSearchRange(1)}"
+                android:paddingVertical="6dp"
+                android:paddingEnd="12dp"
                 android:src="@drawable/ic_arrow_right"
                 app:layout_constraintBottom_toBottomOf="@id/tv_selected_month"
                 app:layout_constraintStart_toEndOf="@+id/tv_selected_month"
