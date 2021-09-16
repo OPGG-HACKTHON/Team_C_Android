@@ -4,13 +4,16 @@ import android.milestone.network.request.UpdateNicknameRequest
 import android.milestone.network.request.UpdatePreferenceRequest
 import android.milestone.network.request.UpdateTeamIdRequest
 import android.milestone.network.response.RootResponse
-import android.milestone.network.response.auth.MyPageInfo
+import android.milestone.network.response.user.TinderCountResponse
+import android.milestone.network.response.user.UserProfileResponse
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
 interface UserRepository {
 
-    fun getUserData(): Flow<MyPageInfo?>
+    suspend fun getCount(): Response<TinderCountResponse>
+
+    suspend fun getProfile(): Response<UserProfileResponse>
 
     fun updateNickname(nicknameRequest: UpdateNicknameRequest): Flow<Response<RootResponse>>
 

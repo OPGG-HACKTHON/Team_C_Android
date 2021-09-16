@@ -8,32 +8,21 @@ import android.milestone.network.response.RootResponse
 import android.milestone.network.response.auth.MyPageInfo
 import android.milestone.network.response.auth.TeamInfoResponse
 import android.milestone.network.response.auth.UserDataResponse
+import android.milestone.network.response.user.TinderCountResponse
+import android.milestone.network.response.user.UserProfileResponse
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(private val api: Api) : UserRepository {
 
-    override fun getUserData(): Flow<MyPageInfo?> {
-        return flow { emit(api.getUserData()) }
-            .combine(flow { emit(api.getTeamInfo()) }) { user, team ->
-                combineUserData(user, team)
-            }.combine(
-                flow {
-                    val likeCount = api.totalLikeCount().body()?.data
-                    val tinderCount = api.totalTinderCount().body()?.data
-                    emit(Pair(likeCount, tinderCount))
-                }
-            ) { myInfo, count ->
-                MyPageInfo(
-                    myInfo?.user,
-                    myInfo?.team,
-                    count.first,
-                    count.second,
-                )
-            }
+    override suspend fun getCount(): Response<TinderCountResponse> {
+        return api.totalTinderCount()
+    }
+
+    override suspend fun getProfile(): Response<UserProfileResponse> {
+        return api.getProfile()
     }
 
     private fun combineUserData(user: Response<UserDataResponse>, team: TeamInfoResponse) =

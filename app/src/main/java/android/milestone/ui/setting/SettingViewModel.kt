@@ -2,13 +2,13 @@ package android.milestone.ui.setting
 
 import android.milestone.base.BaseViewModel
 import android.milestone.isValidName
+import android.milestone.network.model.auth.TeamInfoModel
 import android.milestone.network.request.UpdateNicknameRequest
-import android.milestone.network.response.auth.MyPageInfo
+import android.milestone.network.response.user.Profile
+import android.milestone.network.response.user.TinderCount
 import android.milestone.repository.login.LoginRepository
 import android.milestone.repository.user.UserRepository
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -21,14 +21,19 @@ class SettingViewModel @Inject constructor(
     private val loginRepository: LoginRepository
 ) : BaseViewModel() {
 
-    private val _userData: MutableLiveData<MyPageInfo?> = MutableLiveData()
-    val userData: LiveData<MyPageInfo?> = _userData
+    private val _userData: MutableLiveData<Profile?> = MutableLiveData()
+    val userData: LiveData<Profile?> = _userData
+
+    private val _countData: MutableLiveData<TinderCount?> = MutableLiveData()
+    val countData: LiveData<TinderCount?> = _countData
+
+    val teamList: LiveData<List<TeamInfoModel>> = loginRepository.getTeamInfo().asLiveData().map { it.data }
 
     fun updateUserData() {
         viewModelScope.launch(coroutineExceptionHandler + Dispatchers.IO) {
-            repository.getUserData().collect {
-                _userData.postValue(it)
-            }
+            val profile = repository.getProfile()
+            _userData.postValue(profile.body()?.profile)
+            _countData.postValue(countData.value)
         }
     }
 

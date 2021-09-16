@@ -4,7 +4,6 @@ import android.milestone.network.request.*
 import android.milestone.network.response.RootResponse
 import android.milestone.network.response.auth.LoginResponse
 import android.milestone.network.response.auth.TeamInfoResponse
-import android.milestone.network.response.auth.UserDataResponse
 import android.milestone.network.response.history.BestHistoryResponse
 import android.milestone.network.response.history.LatestHistoryResponse
 import android.milestone.network.response.home.CurrentGameResponse
@@ -15,6 +14,8 @@ import android.milestone.network.response.ranking.PlayerRankingResponse
 import android.milestone.network.response.ranking.TeamRankingResponse
 import android.milestone.network.response.schedule.MonthlyScheduleResponse
 import android.milestone.network.response.tinder.TopTinderResponse
+import android.milestone.network.response.user.TinderCountResponse
+import android.milestone.network.response.user.UserProfileResponse
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -27,11 +28,7 @@ interface Api {
     @POST("/auth/signup")
     suspend fun postSignUp(@Body signUpRequest: SignUpRequest): Response<RootResponse>
 
-    @GET("/auth/read")
-    suspend fun getUserData(): Response<UserDataResponse>
-
     // info
-
     @GET("/info/teamInfo")
     suspend fun getTeamInfo(): TeamInfoResponse
 
@@ -55,10 +52,7 @@ interface Api {
     suspend fun createTinder(@Body createTinderRequest: CreateTinderRequest): Response<RootResponse>
 
     @GET("/tinder/totalTinder")
-    suspend fun totalTinderCount(): Response<RootResponse>
-
-    @GET("/tinder/totalLike")
-    suspend fun totalLikeCount(): Response<RootResponse>
+    suspend fun totalTinderCount(): Response<TinderCountResponse>
 
     @GET("/tinder")
     suspend fun getTinder(
@@ -82,7 +76,6 @@ interface Api {
     ): Response<TopTinderResponse>
 
     // pog
-
     @GET("/pog/result")
     suspend fun getPogOfGame(@Query("gameId") gameId: Int?): Response<PlayerOfGameResponse>
 
@@ -106,4 +99,7 @@ interface Api {
 
     @PUT("/userSetting/preference")
     suspend fun updatePreference(@Body updatePreferenceRequest: UpdatePreferenceRequest): Response<RootResponse>
+
+    @GET("/userSetting/profile")
+    suspend fun getProfile(): Response<UserProfileResponse>
 }
